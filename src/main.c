@@ -6,14 +6,16 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/03 20:24:12 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:14:21 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "cub3d.h"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	printf("oi");
+	if (ft_pre_verifications(argc, argv))
+		return (1);
+	printf("Map extension is valid.\n");
 	return (0);
 }

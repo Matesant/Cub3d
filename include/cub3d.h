@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/03 21:13:48 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/03 22:13:16 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include "../libft/libft.h"
 
+t_bool	ft_pre_verifications(int argc, char **argv);
 #endif

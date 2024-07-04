@@ -11,7 +11,7 @@ LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
-SOURCE      := main.c
+SOURCE      := main.c pre_verifications.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 
@@ -45,11 +45,17 @@ $(BIN)%.o: ./src/%.c $(HEADER)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
+$(BIN)%.o: ./src/verifications/%.c $(HEADER)
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+
 $(NAME): $(OBJECTS) $(HEADER)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $(NAME)...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
-	@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) $(LIBS)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(42LIBS) $(LIBS) -o $(NAME) 
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(GREEN)--$(NAME) compiled!-$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
