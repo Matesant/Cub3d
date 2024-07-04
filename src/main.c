@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/04 17:41:09 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:47:27 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 void	ft_put_player(mlx_image_t *img, t_player_position *player)
 {
-	mlx_put_pixel(img, player->x, player->y, 0x00FF0000);
-	mlx_put_pixel(img, player->x + 1, player->y, 0x00FF0000);
-	mlx_put_pixel(img, player->x - 1, player->y, 0x00FF0000);
-	mlx_put_pixel(img, player->x, player->y + 1, 0x00FF0000);
-	mlx_put_pixel(img, player->x, player->y - 1, 0x00FF0000);
+	int x;
+	int y;
+	int player_size = 5;
+
+	x = player->x - player_size;
+	while (x <= player->x + player_size)
+	{
+		y = player->y - player_size;
+		while (y <= player->y + player_size)
+		{
+			mlx_put_pixel(img, x, y, 0x00FF0000);
+			y++;
+		}
+		x++;
+	}
 }
+
 
 void	ft_color_background(mlx_t *mlx, int color, mlx_image_t *img)
 {
