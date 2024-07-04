@@ -6,7 +6,7 @@ MLX_REPO    := https://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@github.com/Mates
 TOKEN       := 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
 MLX         := $(LIBMLX)/build/libmlx42.a
 BIN         := ./bin/
-HEADER      := ./include/ -I $(LIBMLX)/include
+HEADER      := ./include/ $(LIBMLX)/include
 LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
@@ -19,6 +19,8 @@ BLUE        := \033[1;34m
 RED         := \033[0;31m
 GREEN       := \033[0;32m
 END         := \033[0m
+
+.PHONY: all clean fclean re val mlx
 
 all: $(42LIBS) $(BIN) $(NAME)
 
@@ -37,13 +39,13 @@ $(PRINTF):
 $(BIN):
 	@mkdir -p $(BIN)
 
-$(BIN)%.o: ./src/%.c $(HEADER)cub3d.h
+$(BIN)%.o: ./src/%.c $(HEADER)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
-$(NAME): $(OBJECTS) $(HEADER)cub3d.h
+$(NAME): $(OBJECTS) $(HEADER)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $(NAME)...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
@@ -69,7 +71,6 @@ clean:
 	@make -C ./libft/Printf clean --no-print-directory
 	@make -C ./libft clean --no-print-directory
 	@rm -rf $(BIN)
-	@make -C $(LIBMLX) clean --no-print-directory
 
 fclean: clean
 	@printf "$(RED)Cleaning...$(END)\n"
@@ -82,5 +83,3 @@ fclean: clean
 re: fclean all
 
 val:
-
-.PHONY: all clean fclean re val mlx
