@@ -3,3 +3,5 @@ MLX42
 cub3d
 obj
 *.a
+libftprintf.a
+libft.a
