@@ -2,11 +2,10 @@ CC          := cc
 NAME        := cub3d
 CFLAGS      := -Wall -Werror -Wextra -g3 -O0
 LIBMLX      := MLX42
-MLX_REPO    := https://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@github.com/Matesant/MLX.git
-TOKEN       := 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
+MLX_REPO    := https://github.com/Matesant/MLX
 MLX         := $(LIBMLX)/build/libmlx42.a
 BIN         := ./bin/
-HEADER      := ./include/ $(LIBMLX)/include
+INCLUDES    := -I./include -I$(LIBMLX)/include
 LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
@@ -22,7 +21,7 @@ END         := \033[0m
 
 .PHONY: all clean fclean re val mlx
 
-all: $(42LIBS) $(BIN) $(NAME)
+all: mlx $(42LIBS) $(BIN) $(NAME)
 
 $(LIBFT):
 	@printf "$(BLUE)----------------------$(END)\n"
@@ -39,23 +38,23 @@ $(PRINTF):
 $(BIN):
 	@mkdir -p $(BIN)
 
-$(BIN)%.o: ./src/%.c $(HEADER)
+$(BIN)%.o: ./src/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/verifications/%.c $(HEADER)
+$(BIN)%.o: ./src/verifications/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(NAME): $(OBJECTS) $(HEADER)
+$(NAME): $(OBJECTS)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $(NAME)...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
-	@$(CC) $(CFLAGS) $(OBJECTS) $(42LIBS) $(LIBS) -o $(NAME) 
+	@$(CC) $(CFLAGS) $(OBJECTS) $(42LIBS) $(LIBS) -o $(NAME)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(GREEN)--$(NAME) compiled!-$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
