@@ -6,11 +6,20 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/04 16:11:13 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:41:09 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_put_player(mlx_image_t *img, t_player_position *player)
+{
+	mlx_put_pixel(img, player->x, player->y, 0x00FF0000);
+	mlx_put_pixel(img, player->x + 1, player->y, 0x00FF0000);
+	mlx_put_pixel(img, player->x - 1, player->y, 0x00FF0000);
+	mlx_put_pixel(img, player->x, player->y + 1, 0x00FF0000);
+	mlx_put_pixel(img, player->x, player->y - 1, 0x00FF0000);
+}
 
 void	ft_color_background(mlx_t *mlx, int color, mlx_image_t *img)
 {
@@ -30,27 +39,49 @@ void	ft_color_background(mlx_t *mlx, int color, mlx_image_t *img)
 	}
 }
 
+void ft_key_hooks(mlx_key_data_t key, void *param)
+{
+	t_mlx_essentials	*ptr;
+
+	ptr = (t_mlx_essentials *)param;
+	if (key.key == KEY_ESC)
+		mlx_terminate(ptr->mlx);
+	if (key.key == KEY_W)
+		ptr->player->y -= 5;
+	if (key.key == KEY_S)
+		ptr->player->y += 5;
+	if (key.key == KEY_A)
+		ptr->player->x -= 5;
+	if (key.key== KEY_D)
+		ptr->player->x += 5;
+}
+
 static void	ft_hook(void *param)
 {
-	const mlx_t	*mlx;
+	t_mlx_essentials	*ptr;
 
-	mlx = param;
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+	ptr = (t_mlx_essentials *)param;
+	ft_color_background(ptr->mlx, 0xFF0000FF, ptr->img);
+	ft_put_player(ptr->img, ptr->player);
+	printf("WIDTH: %d | HEIGHT: %d\n", ptr->mlx->width, ptr->mlx->height);
 }
 
 int	main(int argc, char *argv[])
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	t_mlx_essentials	ptr = {0};
 
+	ptr.mlx = NULL;
 	if (ft_pre_verifications(argc, argv))
 		return (1);
-	mlx = mlx_init(HEIGHT, WIDTH, "eae", true);
-	img = mlx_new_image(mlx, HEIGHT, WIDTH);
-	mlx_image_to_window(mlx, img, 0, 0);
-	ft_color_background(mlx, 0xFF0000FF, img);
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	ptr.mlx = mlx_init(HEIGHT, WIDTH, "eae", true);
+	ptr.img = mlx_new_image(ptr.mlx, HEIGHT, WIDTH);
+	mlx_image_to_window(ptr.mlx, ptr.img, 0, 0);
+	ptr.player = malloc(sizeof(t_player_position));
+	ptr.player->x = 400;
+	ptr.player->y = 300;
+	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
+	mlx_key_hook(ptr.mlx, ft_key_hooks, &ptr);
+	mlx_loop(ptr.mlx);
+	mlx_terminate(ptr.mlx);
 	return (0);
 }
