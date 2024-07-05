@@ -6,16 +6,20 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/04 17:36:23 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:20:23 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
-# include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include <fcntl.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # define KEY_ESC MLX_KEY_ESCAPE
 # define KEY_W MLX_KEY_W
@@ -27,16 +31,19 @@
 
 typedef struct s_player_position
 {
-	float	x;
-	float	y;
-}				t_player_position;
+	float				x;
+	float				y;
+}						t_player_position;
 
-typedef struct s_mlx_essentials
+typedef struct s_game_essentials
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	mlx_t				*mlx;
+	mlx_image_t			*img;
 	t_player_position	*player;
-}				t_mlx_essentials;
+	char				**map_matrice;
+	int					fd;
+}						t_game_essentials;
 
-t_bool	ft_pre_verifications(int argc, char **argv);
+t_bool					ft_pre_verifications(int argc, char **argv);
+t_bool ft_set_game_configs(char *map, t_game_essentials *game);
 #endif

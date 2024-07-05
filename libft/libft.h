@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 14:52:28 by matesant          #+#    #+#             */
-/*   Updated: 2024/04/16 17:12:56 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:32:32 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void				ft_free_char(char **ptr);
 int					ft_has_alpha(char *str);
 char				*ft_strjoin_three(char *one, char *two, char *three,
 						t_bool to_free);
+char				*ft_strjoin_free(char const *s1, char const *s2);
 
 // GNL
 # ifndef BUFFER_SIZE

@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/04 17:47:27 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:59:05 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	ft_put_player(mlx_image_t *img, t_player_position *player)
 {
-	int x;
-	int y;
-	int player_size = 5;
+	int	x;
+	int	y;
+	int	player_size;
 
+	player_size = 20;
 	x = player->x - player_size;
 	while (x <= player->x + player_size)
 	{
@@ -30,7 +31,6 @@ void	ft_put_player(mlx_image_t *img, t_player_position *player)
 		x++;
 	}
 }
-
 
 void	ft_color_background(mlx_t *mlx, int color, mlx_image_t *img)
 {
@@ -50,40 +50,43 @@ void	ft_color_background(mlx_t *mlx, int color, mlx_image_t *img)
 	}
 }
 
-void ft_key_hooks(mlx_key_data_t key, void *param)
+void	ft_key_hooks(mlx_key_data_t key, void *param)
 {
-	t_mlx_essentials	*ptr;
+	t_game_essentials	*ptr;
 
-	ptr = (t_mlx_essentials *)param;
+	ptr = (t_game_essentials *)param;
 	if (key.key == KEY_ESC)
+	{
 		mlx_terminate(ptr->mlx);
+		exit (0);
+	}
 	if (key.key == KEY_W)
 		ptr->player->y -= 5;
 	if (key.key == KEY_S)
 		ptr->player->y += 5;
 	if (key.key == KEY_A)
 		ptr->player->x -= 5;
-	if (key.key== KEY_D)
+	if (key.key == KEY_D)
 		ptr->player->x += 5;
 }
 
 static void	ft_hook(void *param)
 {
-	t_mlx_essentials	*ptr;
+	t_game_essentials	*ptr;
 
-	ptr = (t_mlx_essentials *)param;
+	ptr = (t_game_essentials *)param;
 	ft_color_background(ptr->mlx, 0xFF0000FF, ptr->img);
 	ft_put_player(ptr->img, ptr->player);
-	printf("WIDTH: %d | HEIGHT: %d\n", ptr->mlx->width, ptr->mlx->height);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_mlx_essentials	ptr = {0};
+	t_game_essentials	ptr = {0};
 
 	ptr.mlx = NULL;
 	if (ft_pre_verifications(argc, argv))
 		return (1);
+	ft_set_game_configs(argv[1], &ptr);
 	ptr.mlx = mlx_init(HEIGHT, WIDTH, "eae", true);
 	ptr.img = mlx_new_image(ptr.mlx, HEIGHT, WIDTH);
 	mlx_image_to_window(ptr.mlx, ptr.img, 0, 0);
