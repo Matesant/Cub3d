@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/05 14:59:05 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:21:29 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ void	ft_color_background(mlx_t *mlx, int color, mlx_image_t *img)
 	}
 }
 
+void	ft_resize_hook(int width, int height, void *param)
+{
+	t_game_essentials	*ptr;
+
+	ptr = (t_game_essentials *)param;
+	if (ptr->img)
+		mlx_delete_image(ptr->mlx, ptr->img);
+	ptr->img = mlx_new_image(ptr->mlx, width, height);
+	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
+	ptr->mlx->width = width;
+	ptr->mlx->height = height;
+}
+
 void	ft_key_hooks(mlx_key_data_t key, void *param)
 {
 	t_game_essentials	*ptr;
@@ -58,7 +71,7 @@ void	ft_key_hooks(mlx_key_data_t key, void *param)
 	if (key.key == KEY_ESC)
 	{
 		mlx_terminate(ptr->mlx);
-		exit (0);
+		exit(0);
 	}
 	if (key.key == KEY_W)
 		ptr->player->y -= 5;
@@ -90,11 +103,13 @@ int	main(int argc, char *argv[])
 	ptr.mlx = mlx_init(HEIGHT, WIDTH, "eae", true);
 	ptr.img = mlx_new_image(ptr.mlx, HEIGHT, WIDTH);
 	mlx_image_to_window(ptr.mlx, ptr.img, 0, 0);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	ptr.player = malloc(sizeof(t_player_position));
 	ptr.player->x = 400;
 	ptr.player->y = 300;
 	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
 	mlx_key_hook(ptr.mlx, ft_key_hooks, &ptr);
+	mlx_resize_hook(ptr.mlx, ft_resize_hook, &ptr);
 	mlx_loop(ptr.mlx);
 	mlx_terminate(ptr.mlx);
 	return (0);

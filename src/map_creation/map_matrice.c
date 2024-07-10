@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   map_matrice.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:22:05 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/05 14:57:22 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:23:14 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_create_map(char **map, int fd);
+char	**ft_create_map(int fd);
 
-void ft_print_matrice(char **matrice)
+void	ft_print_matrice(char **matrice)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (matrice[i])
@@ -33,28 +33,31 @@ void ft_print_matrice(char **matrice)
 	}
 }
 
-t_bool ft_set_game_configs(char *map, t_game_essentials *game)
+t_bool	ft_set_game_configs(char *map, t_game_essentials *game)
 {
-	int fd;
-	
+	int	fd;
+
 	fd = open(map, O_RDONLY);
-	ft_create_map(game->map_matrice, fd);
+	game->map = (t_map *)malloc(sizeof(t_map));
+	game->map->map_matrice = ft_create_map(fd);
+	close(fd);
 	return (TRUE);
 }
 
-void ft_create_map(char **map, int fd)
+char	**ft_create_map(int fd)
 {
-	char *line;
-	char *tmp_map;
+	char	*line;
+	char	*tmp_map;
+	char	**finished_map;
 
-	get_next_line(-1);
 	line = get_next_line(fd);
-	tmp_map = NULL;
-	while(line)
+	tmp_map = ft_strdup("");
+	while (line)
 	{
-		tmp_map = ft_strjoin(tmp_map, line);
+		tmp_map = ft_strjoin_free(tmp_map, line);
+		free(line);
 		line = get_next_line(fd);
 	}
-	map = ft_split(tmp_map, '\n');
-	ft_print_matrice(map);
+	finished_map = ft_split(tmp_map, '\n');
+	return (finished_map);
 }

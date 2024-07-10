@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/05 14:20:23 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:07:20 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 # define HEIGHT 1024
 # define WIDTH 512
 
+typedef struct s_map
+{
+	int					width;
+	int					height;
+	char				**map_matrice;
+}						t_map;
+
 typedef struct s_player_position
 {
 	float				x;
@@ -40,10 +47,10 @@ typedef struct s_game_essentials
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	t_player_position	*player;
-	char				**map_matrice;
+	t_map				*map;
 	int					fd;
 }						t_game_essentials;
 
 t_bool					ft_pre_verifications(int argc, char **argv);
-t_bool ft_set_game_configs(char *map, t_game_essentials *game);
+t_bool					ft_set_game_configs(char *map, t_game_essentials *game);
 #endif
