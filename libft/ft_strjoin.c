@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 19:51:59 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/10 16:18:47 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:28:53 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ char	*ft_strjoin_free(char *s1, const char *s2)
 	if (s1 == NULL)
 		len1 = 0;
 	else
-		len1 = strlen(s1);
+		len1 = ft_strlen(s1);
 	if (s2 == NULL)
 		len2 = 0;
 	else
-		len2 = strlen(s2);
+		len2 = ft_strlen(s2);
 	joined = malloc(len1 + len2 + 1);
 	if (!joined)
 		return (NULL);
 	if (s1)
-		strcpy(joined, s1);
+		ft_strcpy(joined, s1);
 	if (s2)
-		strcpy(joined + len1, s2);
+		ft_strcpy(joined + len1, s2);
 	free(s1);
 	return (joined);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 14:52:28 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/05 14:32:32 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/11 00:43:24 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ void				ft_free_char(char **ptr);
 int					ft_has_alpha(char *str);
 char				*ft_strjoin_three(char *one, char *two, char *three,
 						t_bool to_free);
-char				*ft_strjoin_free(char const *s1, char const *s2);
+char				*ft_strjoin_free(char *s1, const char *s2);
+size_t				ft_strcpy(char *dst, const char *src);
+void				jorge(void);
 
 // GNL
 # ifndef BUFFER_SIZE
