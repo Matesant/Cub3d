@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:24:34 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:59:36 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,12 @@ void					ft_hook(void *param);
 void					ft_resize_hook(int width, int height, void *param);
 void					ft_color_background(t_game_essentials *ptr, int color);
 void					ft_put_player(mlx_image_t *img,
-							t_player_position *player, t_map *map);
+							t_player_position *player);
 void					ft_draw_map(t_game_essentials *game, int block_size);
 void					ft_update_map(t_game_essentials *game, int block_size);
 int						ft_return_y(char character, t_map *map);
 int						ft_return_x(char character, t_map *map);
+void					ft_init_mlx(t_game_essentials *ptr, char *map);
+void					ft_player_configs(t_game_essentials *ptr);
 
 #endif

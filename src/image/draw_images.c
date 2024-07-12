@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:22:43 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:52:46 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_return_y(char character, t_map *map)
 	return (-1);
 }
 
-void	ft_put_player(mlx_image_t *img, t_player_position *player, t_map *map)
+void	ft_put_player(mlx_image_t *img, t_player_position *player)
 {
 	int	x;
 	int	y;

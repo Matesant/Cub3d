@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:23:50 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:59:46 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,13 @@ int	main(int argc, char *argv[])
 {
 	t_game_essentials	ptr = {0};
 
-	ptr.mlx = NULL;
 	if (ft_pre_verifications(argc, argv))
-		return (1);
-	ft_set_game_configs(argv[1], &ptr);
-	ptr.mlx = mlx_init(HEIGHT, WIDTH, "eae", true);
-	ptr.img = mlx_new_image(ptr.mlx, HEIGHT, WIDTH);
-	mlx_image_to_window(ptr.mlx, ptr.img, 0, 0);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	ptr.player = malloc(sizeof(t_player_position));
-	ptr.player->x = ft_return_x('P', ptr.map) + ptr.map->block_size / 2;
-	ptr.player->y = ft_return_y('P', ptr.map) + ptr.map->block_size / 2;
+		return (0);
+	ft_init_mlx(&ptr, argv[1]);
+	ft_player_configs(&ptr);
 	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
 	mlx_key_hook(ptr.mlx, ft_key_hooks, &ptr);
 	mlx_resize_hook(ptr.mlx, ft_resize_hook, &ptr);
 	mlx_loop(ptr.mlx);
-	mlx_terminate(ptr.mlx);
 	return (0);
 }
