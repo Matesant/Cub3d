@@ -6,24 +6,69 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/11 00:45:58 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/12 00:59:36 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdbool.h>
+#include <stdio.h>
 
-void	ft_put_player(mlx_image_t *img, t_player_position *player)
+int	ft_return_x(char character, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			jorge();
+			if (map->map_matrice[i][j] == character)
+				return (j * map->block_size);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
+
+int	ft_return_y(char character, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->map_matrice[i][j] == character)
+				return (i * map->block_size);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
+
+void	ft_put_player(mlx_image_t *img, t_player_position *player, t_map *map)
 {
 	int	x;
 	int	y;
 	int	player_size;
 
-	player_size = 20;
-	x = player->x - player_size;
-	while (x <= player->x + player_size)
+	player_size = 10;
+	player->x = ft_return_x('P', map);
+	player->y = ft_return_y('P', map);
+	x = player->x - player_size / 2;
+	while (x <= player->x + player_size / 2)
 	{
-		y = player->y - player_size;
-		while (y <= player->y + player_size)
+		y = player->y - player_size / 2;
+		while (y <= player->y + player_size / 2)
 		{
 			mlx_put_pixel(img, x, y, 0x00FFAAA0);
 			y++;
@@ -38,10 +83,10 @@ void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
 	int	yo;
 
 	xo = 0;
-	while (xo < game->map->block_size)
+	while (xo < game->map->block_size - 1)
 	{
 		yo = 0;
-		while (yo < game->map->block_size)
+		while (yo < game->map->block_size - 1)
 		{
 			mlx_put_pixel(game->img, x + xo, y + yo, color);
 			yo++;
@@ -61,14 +106,14 @@ void	ft_draw_map(t_game_essentials *game, int block_size)
 		j = 0;
 		while (j < game->map->width)
 		{
-			game->map->draw_block_x = j * block_size;
-			game->map->draw_block_y = i * block_size;
+			game->map->block_x = (j * block_size);
+			game->map->block_y = (i * block_size);
 			if (game->map->map_matrice[i][j] == '1')
-				ft_put_rectangle(game, game->map->draw_block_x,
-					game->map->draw_block_y, 0x00FF00FF);
+				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
+					0x00FF00FF);
 			else if (game->map->map_matrice[i][j] == '0')
-				ft_put_rectangle(game, game->map->draw_block_x,
-					game->map->draw_block_y, 0x000000FF);
+				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
+					0x000000FF);
 			j++;
 		}
 		i++;

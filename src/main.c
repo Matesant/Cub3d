@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/11 00:24:11 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/11 19:38:11 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	main(int argc, char *argv[])
 	mlx_image_to_window(ptr.mlx, ptr.img, 0, 0);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	ptr.player = malloc(sizeof(t_player_position));
-	ptr.player->x = 600;
-	ptr.player->y = 300;
 	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
 	mlx_key_hook(ptr.mlx, ft_key_hooks, &ptr);
 	mlx_resize_hook(ptr.mlx, ft_resize_hook, &ptr);
