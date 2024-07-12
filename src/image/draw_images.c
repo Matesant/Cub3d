@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 00:59:36 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:22:43 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_return_x(char character, t_map *map)
 		j = 0;
 		while (j < map->width)
 		{
-			jorge();
 			if (map->map_matrice[i][j] == character)
 				return (j * map->block_size);
 			j++;
@@ -61,9 +60,7 @@ void	ft_put_player(mlx_image_t *img, t_player_position *player, t_map *map)
 	int	y;
 	int	player_size;
 
-	player_size = 10;
-	player->x = ft_return_x('P', map);
-	player->y = ft_return_y('P', map);
+	player_size = 16;
 	x = player->x - player_size / 2;
 	while (x <= player->x + player_size / 2)
 	{
@@ -111,12 +108,11 @@ void	ft_draw_map(t_game_essentials *game, int block_size)
 			if (game->map->map_matrice[i][j] == '1')
 				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
 					0x00FF00FF);
-			else if (game->map->map_matrice[i][j] == '0')
+			else
 				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
 					0x000000FF);
 			j++;
 		}
 		i++;
-		game->map->width = ft_strlen(game->map->map_matrice[i]);
 	}
 }

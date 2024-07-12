@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/11 19:30:28 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/12 01:25:14 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_key_hooks(mlx_key_data_t key, void *param)
 		exit(0);
 	}
 	if (key.key == KEY_W)
-		ptr->player->y -= ptr->map->block_size;
+		ptr->player->y -= 2;
 	if (key.key == KEY_S)
 		ptr->player->y += ptr->map->block_size;
 	if (key.key == KEY_A)
