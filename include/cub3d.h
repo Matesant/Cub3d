@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:59:36 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:13:24 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define KEY_D MLX_KEY_D
 # define HEIGHT 1024
 # define WIDTH 512
+# define PI 3.14159265359
 
 typedef struct s_map
 {
@@ -43,6 +44,12 @@ typedef struct s_player_position
 {
 	float				x;
 	float				y;
+	int					size;
+	int					delta_x;
+	int					delta_y;
+	int					line_x;
+	int					line_y;
+	float				angle;
 }						t_player_position;
 
 typedef struct s_game_essentials

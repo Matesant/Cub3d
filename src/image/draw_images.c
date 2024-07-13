@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:52:46 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:14:28 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,73 @@ int	ft_return_y(char character, t_map *map)
 	}
 	return (-1);
 }
+void	print_cordinates_sx_xy_err_e2(int x0, int y0, int sx, int sy, int err,
+		int e2)
+{
+	printf("x0: %d\n", x0);
+	printf("y0: %d\n", y0);
+	printf("sx: %d\n", sx);
+	printf("sy: %d\n", sy);
+	printf("err: %d\n", err);
+	printf("e2: %d\n", e2);
+}
+
+void	ft_put_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color)
+{
+	int	dx;
+	int	sx;
+	int	dy;
+	int	sy;
+	int	err;
+	int	e2;
+
+	dx = ft_abs(x1 - x0);
+	sx = x0 < x1 ? 1 : -1;
+	dy = -ft_abs(y1 - y0);
+	sy = y0 < y1 ? 1 : -1;
+	err = dx + dy;
+	while (1)
+	{
+		mlx_put_pixel(img, x0, y0, color);
+		if (x0 == x1 && y0 == y1)
+			break ;
+		e2 = 2 * err;
+		if (e2 >= dy)
+		{
+			err += dy;
+			x0 += sx;
+		}
+		if (e2 <= dx)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+}
 
 void	ft_put_player(mlx_image_t *img, t_player_position *player)
 {
 	int	x;
 	int	y;
-	int	player_size;
+	int	line_x;
+	int	line_y;
+	int	line_length;
 
-	player_size = 16;
-	x = player->x - player_size / 2;
-	while (x <= player->x + player_size / 2)
+	x = player->x - player->size / 2;
+	while (x <= player->x + player->size / 2)
 	{
-		y = player->y - player_size / 2;
-		while (y <= player->y + player_size / 2)
+		y = player->y - player->size / 2;
+		while (y <= player->y + player->size / 2)
 		{
 			mlx_put_pixel(img, x, y, 0x00FFAAA0);
 			y++;
 		}
 		x++;
 	}
+	line_length = 100;
+	line_x = player->x + line_length * cos(player->angle);
+	line_y = player->y + line_length * sin(player->angle);
+	ft_put_line(img, player->x, player->y, line_x, line_y, 0xFF0000FF);
 }
 
 void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)

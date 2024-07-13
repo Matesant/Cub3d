@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 01:36:16 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:58:51 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/13 01:14:50 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ void	ft_player_configs(t_game_essentials *ptr)
 	ptr->player = malloc(sizeof(t_player_position));
 	ptr->player->x = ft_return_x('P', ptr->map) + ptr->map->block_size / 2;
 	ptr->player->y = ft_return_y('P', ptr->map) + ptr->map->block_size / 2;
+	ptr->player->size = 16;
+	ptr->player->angle = 0;
 }
