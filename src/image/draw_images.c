@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/13 01:14:28 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/14 12:52:02 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,51 +53,47 @@ int	ft_return_y(char character, t_map *map)
 	}
 	return (-1);
 }
-void	print_cordinates_sx_xy_err_e2(int x0, int y0, int sx, int sy, int err,
-		int e2)
+
+void	ft_init_cordinates(t_line *cordinates, int endx, int endy,
+		t_player_pos *player)
 {
-	printf("x0: %d\n", x0);
-	printf("y0: %d\n", y0);
-	printf("sx: %d\n", sx);
-	printf("sy: %d\n", sy);
-	printf("err: %d\n", err);
-	printf("e2: %d\n", e2);
+	cordinates->deltax = ft_abs(endx - player->x);
+	cordinates->deltay = -ft_abs(endy - player->y);
+	cordinates->step_x = ft_compare_number(player->x, endx, 1);
+	cordinates->step_y = ft_compare_number(player->y, endy, 1);
+	cordinates->error_accumulated = cordinates->deltax + cordinates->deltay;
+	cordinates->double_error = 0;
 }
 
-void	ft_put_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color)
+void	ft_put_line(mlx_image_t *img, int endx, int endy, t_player_pos *player)
 {
-	int	dx;
-	int	sx;
-	int	dy;
-	int	sy;
-	int	err;
-	int	e2;
+	t_line	cordinates;
+	int		x_initial;
+	int		y_initial;
 
-	dx = ft_abs(x1 - x0);
-	sx = x0 < x1 ? 1 : -1;
-	dy = -ft_abs(y1 - y0);
-	sy = y0 < y1 ? 1 : -1;
-	err = dx + dy;
+	ft_init_cordinates(&cordinates, endx, endy, player);
+	x_initial = player->x;
+	y_initial = player->y;
 	while (1)
 	{
-		mlx_put_pixel(img, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
+		mlx_put_pixel(img, x_initial, y_initial, 0xAAAAAAAF);
+		if (x_initial == endx && y_initial == endy)
 			break ;
-		e2 = 2 * err;
-		if (e2 >= dy)
+		cordinates.double_error = 2 * cordinates.error_accumulated;
+		if (cordinates.double_error >= cordinates.deltay)
 		{
-			err += dy;
-			x0 += sx;
+			cordinates.error_accumulated += cordinates.deltay;
+			x_initial += cordinates.step_x;
 		}
-		if (e2 <= dx)
+		if (cordinates.double_error <= cordinates.deltax)
 		{
-			err += dx;
-			y0 += sy;
+			cordinates.error_accumulated += cordinates.deltax;
+			y_initial += cordinates.step_y;
 		}
 	}
 }
 
-void	ft_put_player(mlx_image_t *img, t_player_position *player)
+void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 {
 	int	x;
 	int	y;
@@ -116,10 +112,10 @@ void	ft_put_player(mlx_image_t *img, t_player_position *player)
 		}
 		x++;
 	}
-	line_length = 100;
+	line_length = 10;
 	line_x = player->x + line_length * cos(player->angle);
 	line_y = player->y + line_length * sin(player->angle);
-	ft_put_line(img, player->x, player->y, line_x, line_y, 0xFF0000FF);
+	ft_put_line(img, line_x, line_y, player);
 }
 
 void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)

@@ -5,3 +5,4 @@ obj
 *.a
 libftprintf.a
 libft.a
+a.out

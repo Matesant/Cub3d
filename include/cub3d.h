@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/13 01:13:24 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/14 11:38:05 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,23 @@ typedef struct s_player_position
 	int					line_x;
 	int					line_y;
 	float				angle;
-}						t_player_position;
+}						t_player_pos;
+
+typedef struct s_line
+{
+	int					deltax;
+	int					step_x;
+	int					deltay;
+	int					step_y;
+	int					error_accumulated;
+	int					double_error;
+}						t_line;
 
 typedef struct s_game_essentials
 {
 	mlx_t				*mlx;
 	mlx_image_t			*img;
-	t_player_position	*player;
+	t_player_pos	*player;
 	t_map				*map;
 	int					fd;
 }						t_game_essentials;
@@ -69,7 +79,7 @@ void					ft_hook(void *param);
 void					ft_resize_hook(int width, int height, void *param);
 void					ft_color_background(t_game_essentials *ptr, int color);
 void					ft_put_player(mlx_image_t *img,
-							t_player_position *player);
+							t_player_pos *player);
 void					ft_draw_map(t_game_essentials *game, int block_size);
 void					ft_update_map(t_game_essentials *game, int block_size);
 int						ft_return_y(char character, t_map *map);
