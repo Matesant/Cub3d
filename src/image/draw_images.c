@@ -6,13 +6,42 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/14 12:52:02 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:39:57 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdbool.h>
 #include <stdio.h>
+
+void	ft_draw_background(mlx_image_t *img, int width, int height)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < width)
+	{
+		y = 0;
+		while (y < height / 2)
+		{
+			mlx_put_pixel(img, x, y, 0x00000000);
+			y++;
+		}
+		x++;
+	}
+	x = 0;
+	while (x < width)
+	{
+		y = height / 2;
+		while (y < height)
+		{
+			mlx_put_pixel(img, x, y, 0x000000FF);
+			y++;
+		}
+		x++;
+	}
+}
 
 int	ft_return_x(char character, t_map *map)
 {
@@ -112,7 +141,7 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 		}
 		x++;
 	}
-	line_length = 10;
+	line_length = 20;
 	line_x = player->x + line_length * cos(player->angle);
 	line_y = player->y + line_length * sin(player->angle);
 	ft_put_line(img, line_x, line_y, player);

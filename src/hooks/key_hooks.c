@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/12 01:25:14 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/14 13:28:04 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,29 @@ void	ft_key_hooks(mlx_key_data_t key, void *param)
 		exit(0);
 	}
 	if (key.key == KEY_W)
-		ptr->player->y -= 2;
+	{
+		ptr->player->x += ptr->player->delta_x;
+		ptr->player->y += ptr->player->delta_y;
+	}
 	if (key.key == KEY_S)
-		ptr->player->y += ptr->map->block_size;
+	{
+		ptr->player->x -= ptr->player->delta_x;
+		ptr->player->y -= ptr->player->delta_y;
+	}
 	if (key.key == KEY_A)
-		ptr->player->x -= ptr->map->block_size;
+	{
+		ptr->player->angle -= 0.1;
+		if (ptr->player->angle < 0)
+			ptr->player->angle += 2 * PI;
+		ptr->player->delta_x = cos(ptr->player->angle) * 5;
+		ptr->player->delta_y = sin(ptr->player->angle) * 5;
+	}
 	if (key.key == KEY_D)
-		ptr->player->x += ptr->map->block_size;
+	{
+		ptr->player->angle += 0.1;
+		if (ptr->player->angle > 2 * PI)
+			ptr->player->angle -= 2 * PI;
+		ptr->player->delta_x = cos(ptr->player->angle) * 5;
+		ptr->player->delta_y = sin(ptr->player->angle) * 5;
+	}
 }
