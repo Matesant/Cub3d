@@ -71,7 +71,7 @@ typedef struct s_game_essentials
 	int				fd;
 }					t_game_essentials;
 
-t_bool				ft_pre_verifications(int argc, char **argv);
+void				ft_pre_verifications(int argc, char **argv);
 t_bool				ft_set_game_configs(char *map, t_game_essentials *game);
 void				ft_color_background(t_game_essentials *ptr, int color);
 void				ft_key_hooks(mlx_key_data_t key, void *param);

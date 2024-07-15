@@ -12,34 +12,21 @@
 
 #include "cub3d.h"
 
-t_bool	ft_check_map_extension(char **map);
-
-t_bool	ft_pre_verifications(int argc, char **argv)
+void	ft_pre_verifications(int argc, char **argv)
 {
+	char *dot_position;
+	
 	if (argc != 2)
 	{
-		printf("Error\nInvalid number of arguments.\n");
-		return (TRUE);
+		ft_putstr_fd("Error\nPlease provide a map file\n", 2);
+		exit(EXIT_FAILURE);
 	}
-	if (ft_check_map_extension(argv))
-		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	ft_check_map_extension(char **map)
-{
-	int	argv_index;
-	int	map_name_size;
-
-	argv_index = 1;
-	map_name_size = ft_strlen(map[argv_index]);
-	if (map[argv_index][map_name_size - 1] != 'b'
-		|| map[argv_index][map_name_size - 2] != 'u'
-		|| map[argv_index][map_name_size - 3] != 'c'
-		|| map[argv_index][map_name_size - 4] != '.')
+	dot_position = ft_strrchr(argv[1], '.');
+	if (dot_position != NULL && ft_strcmp(dot_position + 1, "cub") == 0)
+		return ;
+	else
 	{
-		printf("Error\nMap extension is not valid.\n");
-		return (TRUE);
+		ft_putstr_fd("Error\nInvalid map extension\n", 2);
+		exit(EXIT_FAILURE);
 	}
-	return (FALSE);
 }

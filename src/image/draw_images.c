@@ -131,10 +131,10 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 	int	line_length;
 
 	x = player->x - player->size / 2;
-	while (x <= player->x + player->size / 2)
+	while (x < player->x + player->size / 2)
 	{
 		y = player->y - player->size / 2;
-		while (y <= player->y + player->size / 2)
+		while (y < player->y + player->size / 2)
 		{
 			mlx_put_pixel(img, x, y, 0x00FFAAA0);
 			y++;

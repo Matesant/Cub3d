@@ -93,7 +93,8 @@ mlx:
 	@printf "$(BLUE)----------------------$(END)\n"
 	@printf "$(BLUE)--Building MLX...-$(END)\n"
 	@printf "$(BLUE)----------------------$(END)\n"
-	cd $(LIBMLX) && cmake -B build && cmake --build build -j4
+	cd $(LIBMLX) && cmake -B build -DDEBUG=1
+	cd $(LIBMLX) && cmake --build build -j4
 
 clean:
 	@printf "$(RED)Cleaning...$(END)\n"

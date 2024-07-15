@@ -14,15 +14,15 @@
 
 int	main(int argc, char *argv[])
 {
-	t_game_essentials	ptr = {0};
+	t_game_essentials	game;
 
-	if (ft_pre_verifications(argc, argv))
-		return (0);
-	ft_init_mlx(&ptr, argv[1]);
-	ft_player_configs(&ptr);
-	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
-	mlx_key_hook(ptr.mlx, ft_key_hooks, &ptr);
-	mlx_resize_hook(ptr.mlx, ft_resize_hook, &ptr);
-	mlx_loop(ptr.mlx);
+	game = (t_game_essentials) {0};
+	ft_pre_verifications(argc, argv);
+	ft_init_mlx(&game, argv[1]);
+	ft_player_configs(&game);
+	mlx_loop_hook(game.mlx, ft_hook, &game);
+	mlx_key_hook(game.mlx, ft_key_hooks, &game);
+	mlx_resize_hook(game.mlx, ft_resize_hook, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }
