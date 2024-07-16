@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:37:43 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/14 13:39:15 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:04:50 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_hook(void *param)
 	ft_draw_background(ptr->img, ptr->mlx->width, ptr->mlx->height);
 	ft_draw_map(ptr, ptr->map->block_size);
 	ft_put_player(ptr->img, ptr->player);
+	ft_cast_2d_rays(ptr);
 }
 
 void	ft_resize_hook(int width, int height, void *param)

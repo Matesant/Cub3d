@@ -34,5 +34,6 @@
                 "traceResponse": true
             }
         }
-    ]
+    ],
+    "workbench.colorCustomizations": {}
 }

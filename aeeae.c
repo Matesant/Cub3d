@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   aeeae.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/16 17:49:02 by matesant         ###   ########.fr       */
+/*   Created: 2024/07/16 16:56:55 by matesant          #+#    #+#             */
+/*   Updated: 2024/07/16 17:05:09 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <stdio.h>
+#include <math.h>
 
-int	main(int argc, char *argv[])
+int main(void)
 {
-	t_game_essentials	ptr = {0};
+	float ra;
+	float rrr;
+	float atana;
 
-	mlx_texture_t		textures[5];
+	rrr = 1.0;
 
-	if (ft_pre_verifications(argc, argv))
-		return (0);
-	ft_init_mlx(&ptr, argv[1]);
-	ft_player_configs(&ptr);
-	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
-	mlx_key_hook(ptr.mlx, ft_key_hooks, &ptr);
-	mlx_resize_hook(ptr.mlx, ft_resize_hook, &ptr);
-	mlx_loop(ptr.mlx);
+	ra = atan(rrr);
+	atana = -1 / tan(rrr);
+	printf("tan(%.2f) = %.2f\n", rrr, ra);
+	printf("atan(%.2f) = %.2f\n", rrr, atana);
 	return (0);
 }

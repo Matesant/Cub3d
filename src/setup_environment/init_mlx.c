@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 01:36:16 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/14 13:38:27 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:22:51 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	ft_player_configs(t_game_essentials *ptr)
 	ptr->player->delta_x = cos(ptr->player->angle) * 5;
 	ptr->player->delta_y = sin(ptr->player->angle) * 5;
 	ptr->player->size = 16;
-	ptr->player->angle = 0;
+	ptr->player->angle = 1;
 }

@@ -1,3 +1,4 @@
 t_map on map_creation
 line on gnl
 ptr.player
+mlx on makefile

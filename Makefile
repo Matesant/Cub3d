@@ -10,7 +10,7 @@ LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
-SOURCE      := main.c pre_verifications.c map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c
+SOURCE      := main.c pre_verifications.c map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c rays.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 
@@ -19,9 +19,9 @@ RED         := \033[0;31m
 GREEN       := \033[0;32m
 END         := \033[0m
 
-.PHONY: all clean fclean re val mlx
+.PHONY: all clean fclean re val
 
-all: mlx $(42LIBS) $(BIN) $(NAME)
+all: $(42LIBS) $(BIN) $(NAME)
 
 $(LIBFT):
 	@printf "$(BLUE)----------------------$(END)\n"
@@ -74,6 +74,12 @@ $(BIN)%.o: ./src/setup_environment/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
+$(BIN)%.o: ./src/rays/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
 $(NAME): $(OBJECTS)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $(NAME)...$(END)\n"
@@ -106,7 +112,6 @@ fclean: clean
 	@make -C ./libft/Printf --no-print-directory fclean
 	@make -C ./libft --no-print-directory fclean
 	@rm -rf $(NAME)
-	@rm -rf $(LIBMLX)
 	@printf "$(GREEN)All cleaned!$(END)\n"
 
 re: fclean all

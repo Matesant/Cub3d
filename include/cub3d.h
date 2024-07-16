@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/14 13:33:48 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:50:41 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define KEY_D MLX_KEY_D
 # define HEIGHT 1024
 # define WIDTH 512
+# define NUM_RAYS 1080
+# define FOV 0
 # define PI 3.14159265359
 
 typedef struct s_map
@@ -86,5 +88,8 @@ int					ft_return_x(char character, t_map *map);
 void				ft_init_mlx(t_game_essentials *ptr, char *map);
 void				ft_player_configs(t_game_essentials *ptr);
 void				ft_draw_background(mlx_image_t *img, int width, int height);
+void				ft_cast_2d_rays(t_game_essentials *ptr);
+void				ft_put_line(mlx_image_t *img, int endx, int endy,
+						t_player_pos *player);
 
 #endif
