@@ -40,6 +40,10 @@ void	get_textures(t_game_essentials *game, char **raw_data)
 		else if (is_this_texture("WE", raw_data[line]))
 			 count += get_texture(raw_data[line], &game->map->texture_path_WE);
 	}
-	if (count != 4)
+	if (count != 4 ||
+		game->map->texture_path_EA == NULL ||
+		game->map->texture_path_NO == NULL ||
+		game->map->texture_path_SO == NULL ||
+		game->map->texture_path_WE == NULL)
 		error("Invalid number of textures\n");
 }

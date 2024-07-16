@@ -17,16 +17,10 @@ void	ft_pre_verifications(int argc, char **argv)
 	char *dot_position;
 	
 	if (argc != 2)
-	{
-		ft_putstr_fd("Error\nPlease provide a map file\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		error("Please provide only a map file\n");
 	dot_position = ft_strrchr(argv[1], '.');
 	if (dot_position != NULL && ft_strcmp(dot_position + 1, "cub") == 0)
 		return ;
 	else
-	{
-		ft_putstr_fd("Error\nInvalid map extension\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		error("Invalid map extension\n");
 }

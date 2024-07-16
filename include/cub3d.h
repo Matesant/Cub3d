@@ -94,5 +94,7 @@ void				ft_player_configs(t_game_essentials *ptr);
 void				ft_draw_background(mlx_image_t *img, int width, int height);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
+void				error(char *error_msg);
+void	get_colors(t_game_essentials *game, char **raw_data);
 
 #endif
