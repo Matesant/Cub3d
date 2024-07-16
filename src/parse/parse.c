@@ -12,42 +12,24 @@
 
 #include "cub3d.h"
 
-char	**ft_create_map(int fd);
+static char	*replace(char *line);
+static int	count_tabs(char *line);
+static char	**ft_create_map(int fd);
+static void	replace_tabs_for_spaces(char *raw_data[]);
 
-void	ft_print_matrice(char **matrice)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (matrice[i])
-	{
-		j = 0;
-		while (matrice[i][j])
-		{
-			write(1, &matrice[i][j], 1);
-			j++;
-		}
-		write(1, "\n", 1);
-		i++;
-	}
-}
-
-t_bool	ft_set_game_configs(char *map, t_game_essentials *game)
+void	parse(t_game_essentials *game, char *map)
 {
 	int	fd;
 
 	fd = open(map, O_RDONLY);
-	game->map = (t_map *)malloc(sizeof(t_map));
-	game->map->map_matrice = ft_create_map(fd);
-	game->map->width = 8;
-	game->map->height = 8;
-	game->map->block_size = 26;
+	game->map = ft_calloc(1, sizeof (t_map));
+	game->map->raw_data = ft_create_map(fd);
 	close(fd);
-	return (TRUE);
+	replace_tabs_for_spaces(game->map->raw_data);
+	get_textures(game, game->map->raw_data);
 }
 
-char	**ft_create_map(int fd)
+static char	**ft_create_map(int fd)
 {
 	char	*line;
 	char	*tmp_map;
@@ -63,4 +45,57 @@ char	**ft_create_map(int fd)
 	}
 	finished_map = ft_split(tmp_map, '\n');
 	return (finished_map);
+}
+
+static int	count_tabs(char *line)
+{
+	int count;
+
+	count = 0;
+	while (*line)
+	{
+		if (*line == '\t')
+			count++;
+		line++;
+	}
+	return (count);
+}
+
+static void	replace_tabs_for_spaces(char *raw_data[])
+{
+	int	line;
+
+	line = -1;
+	while (raw_data[++line])
+	{
+		if (count_tabs(raw_data[line]) > 0)
+			raw_data[line] = replace(raw_data[line]);
+	}
+}
+
+static char	*replace(char *line)
+{
+	int		replaced_len;
+	char	*replaced;
+	int		i;
+	int		j;
+
+	replaced_len = ft_strlen(line) + (count_tabs(line) * 4);
+	replaced = ft_calloc(replaced_len, sizeof (char *));
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+		{
+			ft_memset(replaced + j, ' ', 4);
+			j += 4;
+			i++;
+			continue ;
+		}
+		replaced[j] = line[i];
+		i++;
+		j++;
+	}
+	return (replaced);
 }

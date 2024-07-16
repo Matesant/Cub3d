@@ -37,7 +37,13 @@ typedef struct s_map
 	int				block_x;
 	int				block_y;
 	int				block_size;
-	char			**map_matrice;
+	char			**raw_data;
+	char			*texture_path_NO;
+	char			*texture_path_SO;
+	char			*texture_path_WE;
+	char			*texture_path_EA;
+	uint32_t		ceiling_color; 
+	uint32_t		floor_color; 
 }					t_map;
 
 typedef struct s_player_position
@@ -86,5 +92,7 @@ int					ft_return_x(char character, t_map *map);
 void				ft_init_mlx(t_game_essentials *ptr, char *map);
 void				ft_player_configs(t_game_essentials *ptr);
 void				ft_draw_background(mlx_image_t *img, int width, int height);
+void				parse(t_game_essentials *game, char *map);
+void				get_textures(t_game_essentials *game, char **raw_data);
 
 #endif

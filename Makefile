@@ -10,7 +10,7 @@ LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
-SOURCE      := main.c pre_verifications.c map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c
+SOURCE      := main.c pre_verifications.c parse.c utils.c textures.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 
@@ -50,7 +50,7 @@ $(BIN)%.o: ./src/verifications/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/map_creation/%.c
+$(BIN)%.o: ./src/parse/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
