@@ -22,12 +22,17 @@ void	parse(t_game_essentials *game, char *map)
 	int	fd;
 
 	fd = open(map, O_RDONLY);
-	game->map = ft_calloc(1, sizeof (t_map));
-	game->map->raw_data = ft_create_map(fd);
+	game->map = ft_calloc(1, sizeof(t_map));
+	game->map->map_matrice = ft_create_map(fd);
+	game->map->width = 8;
+	game->map->height = 8;
+	game->map->block_size = 26;
 	close(fd);
-	replace_tabs_for_spaces(game->map->raw_data);
-	get_textures(game, game->map->raw_data);
-	get_colors(game, game->map->raw_data);
+	// game->map = ft_calloc(1, sizeof (t_map));
+	// game->map->raw_data = ft_create_map(fd);
+	// replace_tabs_for_spaces(game->map->raw_data);
+	// get_textures(game, game->map->raw_data);
+	// get_colors(game, game->map->raw_data);
 
 }
 

@@ -1,11 +1,3 @@
-SO assets/textures/bomberman/bomberman_wall_desert.png
-WE assets/textures/bomberman/bomberman_wall_ice.png
-EA assets/textures/bomberman/bomberman_wall_lava.png
-NO assets/textures/bomberman/bomberman_wall_normal.png
-
-C 162,5,77
-F 2,255,177
-
 11111111
 10000001
 10000001
