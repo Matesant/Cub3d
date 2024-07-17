@@ -19,7 +19,6 @@ void	ft_init_mlx(t_game_essentials *ptr, char *map)
 	ptr->mlx = mlx_init(WIDTH, HEIGHT, "eae", false);
 	ptr->img = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	ft_set_game_configs(map, ptr);
 }
 
