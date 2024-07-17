@@ -26,8 +26,8 @@
 # define KEY_A MLX_KEY_A
 # define KEY_S MLX_KEY_S
 # define KEY_D MLX_KEY_D
-# define HEIGHT 1024
-# define WIDTH 512
+# define WIDTH 1200
+# define HEIGHT 800
 # define PI 3.14159265359
 
 typedef struct s_map
