@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/17 21:26:53 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 00:26:04 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@
 # define NUM_RAYS 1080
 # define FOV 0
 # define PI 3.14159265359
+# define EPSILON 1e-6
 
 typedef struct s_rays
 {
 	int				amount;
 	int				mapx;
 	int				mapy;
-	int				dof;
+	int				steps_to_obstacle;
 	float			a_tan;
 	float			x;
 	float			y;
@@ -102,7 +103,7 @@ int					ft_return_x(char character, t_map *map);
 void				ft_init_mlx(t_game_essentials *ptr, char *map);
 void				ft_player_configs(t_game_essentials *ptr);
 void				ft_draw_background(mlx_image_t *img, int width, int height);
-void				ft_cast_2d_rays(t_game_essentials *ptr);
+void				ft_cast_2d_horizontal_rays(t_game_essentials *ptr);
 void				ft_put_line(mlx_image_t *img, int endx, int endy,
 						t_player_pos *player);
 

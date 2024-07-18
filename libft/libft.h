@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 14:52:28 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/14 11:54:51 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 00:44:32 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char				*ft_strjoin_free(char *s1, const char *s2);
 size_t				ft_strcpy(char *dst, const char *src);
 void				jorge(void);
 int					ft_compare_number(int a, int b, int steps);
+float				ft_fabs(float x);
 
 // GNL
 # ifndef BUFFER_SIZE
