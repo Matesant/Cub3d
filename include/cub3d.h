@@ -38,6 +38,7 @@ typedef struct s_map
 	int				block_y;
 	int				block_size;
 	char			**raw_data;
+	char			**map_matrice;
 	char			*texture_path_NO;
 	char			*texture_path_SO;
 	char			*texture_path_WE;
