@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 	t_game_essentials	game;
 
 	game = (t_game_essentials) {0};
-	ft_pre_verifications(argc, argv);
+	ft_pre_verifications(&game, argc, argv);
 	parse(&game, argv[1]);
 	printf("%s\n", game.map->texture_path_NO);
 	printf("%s\n", game.map->texture_path_SO);
@@ -36,6 +36,7 @@ int	main(int argc, char *argv[])
 	// mlx_key_hook(game.mlx, ft_key_hooks, &game);
 	// mlx_resize_hook(game.mlx, ft_resize_hook, &game);
 	// mlx_loop(game.mlx);
+	clear(&game);
 	return (0);
 }
 

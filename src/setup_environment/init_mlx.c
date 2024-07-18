@@ -14,7 +14,7 @@
 
 void	ft_player_configs(t_game_essentials *ptr);
 
-void	ft_init_mlx(t_game_essentials *ptr, char *map)
+void	ft_init_mlx(t_game_essentials *ptr)
 {
 	ptr->mlx = mlx_init(HEIGHT, WIDTH, "eae", true);
 	ptr->img = mlx_new_image(ptr->mlx, HEIGHT, WIDTH);

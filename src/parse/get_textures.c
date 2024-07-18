@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static int	get_texture(char *line, char **dest_to_put)
+static int	get_texture(t_game_essentials *game, char *line, char **dest_to_put)
 {
 	while (ft_isspace(*line))
 		line++;
@@ -8,7 +8,7 @@ static int	get_texture(char *line, char **dest_to_put)
 	while (ft_isspace(*line))
 		line++;
 	if (*line == '\0')
-		error("You not provide path for some texture\n");
+		error(game, "You not provide path for some texture\n");
 	*dest_to_put = ft_strdup(line);
 	return (1);
 }
@@ -32,19 +32,19 @@ void	get_textures(t_game_essentials *game, char **raw_data)
 	while (raw_data[++line])
 	{
 		if (is_this_texture("NO ", raw_data[line]))
-			 count += get_texture(raw_data[line], &game->map->texture_path_NO);
+			 count += get_texture(game, raw_data[line], &game->map->texture_path_NO);
 		else if (is_this_texture("SO ", raw_data[line]))
-			 count += get_texture(raw_data[line], &game->map->texture_path_SO);
+			 count += get_texture(game, raw_data[line], &game->map->texture_path_SO);
 		else if (is_this_texture("EA ", raw_data[line]))
-			 count += get_texture(raw_data[line], &game->map->texture_path_EA);
+			 count += get_texture(game, raw_data[line], &game->map->texture_path_EA);
 		else if (is_this_texture("WE ", raw_data[line]))
-			 count += get_texture(raw_data[line], &game->map->texture_path_WE);
+			 count += get_texture(game, raw_data[line], &game->map->texture_path_WE);
 	}
 	if (count != 4 ||
 		game->map->texture_path_EA == NULL ||
 		game->map->texture_path_NO == NULL ||
 		game->map->texture_path_SO == NULL ||
 		game->map->texture_path_WE == NULL)
-		error("Invalid number of textures\n");
+		error(game, "Invalid number of textures\n");
 	game->map->textures_obtained = TRUE;
 }

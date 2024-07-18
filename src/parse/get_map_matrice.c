@@ -27,14 +27,14 @@ void	copy_map(t_game_essentials *game, char **raw_data)
 	int		lines_count;
 
 	lines_count = count_lines(raw_data);
-	map_matrice = ft_calloc(lines_count, sizeof (char *));
+	map_matrice = ft_calloc(lines_count + 1, sizeof (char *));
 	line_index = -1;
 	while (raw_data[++line_index])
 		map_matrice[line_index] = ft_strdup(raw_data[line_index]);
 	game->map->map_matrice = map_matrice;
 }
 
-t_bool validade_map_matrice(t_game_essentials *game, char **raw_data)
+t_bool validade_map_matrice(char **raw_data)
 {
 	int		line_index;
 	int		column_index;;
@@ -74,7 +74,6 @@ void	get_matrice_dimensions(t_map *map)
 void	get_map_matrice(t_game_essentials *game, char **raw_data)
 {
 	int	line;
-	int	lines_count;
 
 	line = -1;
 	while (raw_data[++line])
@@ -86,8 +85,8 @@ void	get_map_matrice(t_game_essentials *game, char **raw_data)
 		}
 	}
 	if (game->map->map_matrice == NULL)
-		error("Please provide a map matrice in your file\n");
-	if (!validade_map_matrice(game, game->map->map_matrice))
-		error("Invalid chars in your map matrice\n");
+		error(game, "Please provide a map matrice in your file\n");
+	if (!validade_map_matrice(game->map->map_matrice))
+		error(game, "Invalid chars in your map matrice\n");
 	get_matrice_dimensions(game->map);
 }
