@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:44:01 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 20:08:24 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ float	ft_normalize_angle(float angle)
 	return (angle);
 }
 
-
 void	ft_cast_rays(t_game_essentials *ptr)
 {
 	t_rays	*ray;
@@ -112,7 +111,7 @@ void	ft_cast_rays(t_game_essentials *ptr)
 	ft_initiate_rays(ray);
 	ray->angle = ptr->player->angle - RAD * 30;
 	ray->angle = ft_normalize_angle(ray->angle);
-	while (ray->amount++ < 10)
+	while (ray->amount++ < 100)
 	{
 		ft_cast_2d_horizontal_rays(ptr, ray);
 		ft_cast_2d_vertical_rays(ptr, ray);
@@ -127,7 +126,7 @@ void	ft_cast_rays(t_game_essentials *ptr)
 			ray->y = ray->distance_y_vertical;
 		}
 		ft_put_line(ptr->img, ray->x, ray->y, ptr->player);
-		ray->angle += RAD * 30;
+		ray->angle += RAD;
 	}
 	free(ray);
 }

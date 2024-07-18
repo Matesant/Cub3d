@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:35:46 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:57:03 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define KEY_A MLX_KEY_A
 # define KEY_S MLX_KEY_S
 # define KEY_D MLX_KEY_D
-# define HEIGHT 1080
-# define WIDTH 1920
+# define HEIGHT 500
+# define WIDTH 500
 # define MOVE_SPEED 3.0
 # define NUM_RAYS 500
 # define FOV 0

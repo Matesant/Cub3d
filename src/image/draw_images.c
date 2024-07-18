@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:18:04 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:46:16 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,10 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 		}
 		x++;
 	}
-	// line_length = 20;
-	// line_x = player->x + line_length * cos(player->angle);
-	// line_y = player->y + line_length * sin(player->angle);
-	// ft_put_line(img, line_x, line_y, player);
+	line_length = 20;
+	line_x = player->x + line_length * cos(player->angle);
+	line_y = player->y + line_length * sin(player->angle);
+	ft_put_line(img, line_x, line_y, player);
 }
 
 void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
