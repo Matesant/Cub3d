@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 13:20:16 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:49:39 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 void	ft_key_hooks(void *param)
 {
 	t_game_essentials	*ptr;
-	float move_speed;
-	float rot_speed;
-
-	move_speed = 2.0;
-	rot_speed = 0.05;
+	float				move_speed;
+	float				rot_speed;
 
 	ptr = (t_game_essentials *)param;
 	if (mlx_is_key_down(ptr->mlx, KEY_ESC))
@@ -39,18 +36,18 @@ void	ft_key_hooks(void *param)
 	}
 	if (mlx_is_key_down(ptr->mlx, KEY_A))
 	{
-		ptr->player->angle -= rot_speed;
+		ptr->player->angle -= 0.05;
 		if (ptr->player->angle < 0)
 			ptr->player->angle += 2 * PI;
-		ptr->player->delta_x = cos(ptr->player->angle) * move_speed;
-		ptr->player->delta_y = sin(ptr->player->angle) * move_speed;
+		ptr->player->delta_x = cos(ptr->player->angle) * MOVE_SPEED;
+		ptr->player->delta_y = sin(ptr->player->angle) * MOVE_SPEED;
 	}
 	if (mlx_is_key_down(ptr->mlx, KEY_D))
 	{
-		ptr->player->angle += rot_speed;
+		ptr->player->angle += 0.05;
 		if (ptr->player->angle > 2 * PI)
 			ptr->player->angle -= 2 * PI;
-		ptr->player->delta_x = cos(ptr->player->angle) * move_speed;
-		ptr->player->delta_y = sin(ptr->player->angle) * move_speed;
+		ptr->player->delta_x = cos(ptr->player->angle) * MOVE_SPEED;
+		ptr->player->delta_y = sin(ptr->player->angle) * MOVE_SPEED;
 	}
 }

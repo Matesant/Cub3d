@@ -10,7 +10,7 @@ LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
-SOURCE      := main.c pre_verifications.c map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c rays.c
+SOURCE      := main.c pre_verifications.c map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c horizontal_rays.c vertical_rays.c rays_utils.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 

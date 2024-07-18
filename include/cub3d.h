@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 13:16:28 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 19:35:46 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@
 # define KEY_D MLX_KEY_D
 # define HEIGHT 1080
 # define WIDTH 1920
-# define NUM_RAYS 1080
+# define MOVE_SPEED 3.0
+# define NUM_RAYS 500
 # define FOV 0
 # define PI 3.14159265359
+# define P2 PI / 2
+# define P3 3 * PI / 2
 # define EPSILON 1e-6
+# define RAD 0.0174533
 
 typedef struct s_rays
 {
@@ -45,6 +49,12 @@ typedef struct s_rays
 	float			angle;
 	float			xoffset;
 	float			yoffset;
+	float			distance_horizontal;
+	float			distance_vertical;
+	float			distance_y_horizontal;
+	float			distance_x_horizontal;
+	float			distance_x_vertical;
+	float			distance_y_vertical;
 }					t_rays;
 
 typedef struct s_map
@@ -83,6 +93,7 @@ typedef struct s_game_essentials
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
+	mlx_image_t		*img_background;
 	t_player_pos	*player;
 	t_map			*map;
 	int				fd;
@@ -103,8 +114,20 @@ int					ft_return_x(char character, t_map *map);
 void				ft_init_mlx(t_game_essentials *ptr, char *map);
 void				ft_player_configs(t_game_essentials *ptr);
 void				ft_draw_background(mlx_image_t *img, int width, int height);
-void				ft_cast_2d_horizontal_rays(t_game_essentials *ptr);
 void				ft_put_line(mlx_image_t *img, int endx, int endy,
 						t_player_pos *player);
+void				ft_initiate_rays(t_rays *rays);
+float				ft_normalize_angle(float angle);
+void				ft_cast_2d_horizontal_rays(t_game_essentials *ptr,
+						t_rays *ray);
+void				ft_cast_2d_vertical_rays(t_game_essentials *ptr,
+						t_rays *ray);
+void				ft_set_ray_x_y_vertical(t_rays *ray,
+						t_game_essentials *ptr);
+void				ft_set_ray_x_y_horizontal(t_rays *ray,
+						t_game_essentials *ptr);
+float				calculate_distance_to_wall(float player_x, float player_y,
+						float wall_x, float wall_y, float angle);
+void				ft_cast_rays(t_game_essentials *ptr);
 
 #endif
