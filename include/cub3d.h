@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 00:26:04 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:16:28 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define KEY_A MLX_KEY_A
 # define KEY_S MLX_KEY_S
 # define KEY_D MLX_KEY_D
-# define HEIGHT 1024
-# define WIDTH 512
+# define HEIGHT 1080
+# define WIDTH 1920
 # define NUM_RAYS 1080
 # define FOV 0
 # define PI 3.14159265359
@@ -91,7 +91,7 @@ typedef struct s_game_essentials
 t_bool				ft_pre_verifications(int argc, char **argv);
 t_bool				ft_set_game_configs(char *map, t_game_essentials *game);
 void				ft_color_background(t_game_essentials *ptr, int color);
-void				ft_key_hooks(mlx_key_data_t key, void *param);
+void				ft_key_hooks(void *param);
 void				ft_hook(void *param);
 void				ft_resize_hook(int width, int height, void *param);
 void				ft_color_background(t_game_essentials *ptr, int color);

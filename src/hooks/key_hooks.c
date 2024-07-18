@@ -3,49 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/17 20:43:44 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:20:16 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_key_hooks(mlx_key_data_t key, void *param)
+void	ft_key_hooks(void *param)
 {
 	t_game_essentials	*ptr;
+	float move_speed;
+	float rot_speed;
+
+	move_speed = 2.0;
+	rot_speed = 0.05;
 
 	ptr = (t_game_essentials *)param;
-	if (key.key == KEY_ESC)
+	if (mlx_is_key_down(ptr->mlx, KEY_ESC))
 	{
 		mlx_terminate(ptr->mlx);
 		exit(0);
 	}
-	if (key.key == KEY_W)
+	if (mlx_is_key_down(ptr->mlx, KEY_W))
 	{
 		ptr->player->x += ptr->player->delta_x;
 		ptr->player->y += ptr->player->delta_y;
 	}
-	if (key.key == KEY_S)
+	if (mlx_is_key_down(ptr->mlx, KEY_S))
 	{
 		ptr->player->x -= ptr->player->delta_x;
 		ptr->player->y -= ptr->player->delta_y;
 	}
-	if (key.key == KEY_A)
+	if (mlx_is_key_down(ptr->mlx, KEY_A))
 	{
-		ptr->player->angle -= 0.1;
+		ptr->player->angle -= rot_speed;
 		if (ptr->player->angle < 0)
 			ptr->player->angle += 2 * PI;
-		ptr->player->delta_x = cos(ptr->player->angle) * 5;
-		ptr->player->delta_y = sin(ptr->player->angle) * 5;
+		ptr->player->delta_x = cos(ptr->player->angle) * move_speed;
+		ptr->player->delta_y = sin(ptr->player->angle) * move_speed;
 	}
-	if (key.key == KEY_D)
+	if (mlx_is_key_down(ptr->mlx, KEY_D))
 	{
-		ptr->player->angle += 0.1;
+		ptr->player->angle += rot_speed;
 		if (ptr->player->angle > 2 * PI)
 			ptr->player->angle -= 2 * PI;
-		ptr->player->delta_x = cos(ptr->player->angle) * 5;
-		ptr->player->delta_y = sin(ptr->player->angle) * 5;
+		ptr->player->delta_x = cos(ptr->player->angle) * move_speed;
+		ptr->player->delta_y = sin(ptr->player->angle) * move_speed;
 	}
 }

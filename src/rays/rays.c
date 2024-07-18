@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:11:36 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 00:43:40 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:15:49 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,6 @@ void	ft_initiate_rays(t_rays *rays)
 	rays->angle = 0;
 	rays->xoffset = 0;
 	rays->yoffset = 0;
-}
-
-float	ft_fabs(float x)
-{
-	if (x < 0)
-		return (-x);
-	return (x);
 }
 
 void	ft_cast_2d_horizontal_rays(t_game_essentials *ptr)
