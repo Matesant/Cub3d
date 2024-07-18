@@ -25,6 +25,11 @@ int	main(int argc, char *argv[])
 	printf("%s\n", game.map->texture_path_EA);
 	printf("%u\n", game.map->ceiling_color);
 	printf("%u\n", game.map->floor_color);
+	int i = -1;
+	while (game.map->map_matrice[++i])
+		printf("%s\n", game.map->map_matrice[i]);
+	printf("%d\n", game.map->width);
+	printf("%d\n", game.map->height);
 	// ft_init_mlx(&game, argv[1]);
 	// ft_player_configs(&game);
 	// mlx_loop_hook(game.mlx, ft_hook, &game);

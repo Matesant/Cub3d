@@ -28,7 +28,7 @@ void	parse(t_game_essentials *game, char *map)
 	replace_tabs_for_spaces(game->map->raw_data);
 	get_textures(game, game->map->raw_data);
 	get_colors(game, game->map->raw_data);
-
+	get_map_matrice(game, game->map->raw_data);
 }
 
 static char	**ft_create_map(int fd)

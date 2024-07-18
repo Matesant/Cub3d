@@ -45,6 +45,8 @@ typedef struct s_map
 	char			*texture_path_EA;
 	uint32_t		ceiling_color; 
 	uint32_t		floor_color; 
+	t_bool			textures_obtained;
+	t_bool			colors_obtained;
 }					t_map;
 
 typedef struct s_player_position
@@ -96,6 +98,8 @@ void				ft_draw_background(mlx_image_t *img, int width, int height);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
 void				error(char *error_msg);
-void	get_colors(t_game_essentials *game, char **raw_data);
+void				get_colors(t_game_essentials *game, char **raw_data);
+void				get_map_matrice(t_game_essentials *game, char **raw_data);
+
 
 #endif
