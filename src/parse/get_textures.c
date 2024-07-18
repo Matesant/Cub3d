@@ -7,8 +7,8 @@ static int	get_texture(t_game_essentials *game, char *line, char **dest_to_put)
 	line += 2;
 	while (ft_isspace(*line))
 		line++;
-	if (*line == '\0')
-		error(game, "You not provide path for some texture\n");
+	if (*line == '\0' || *dest_to_put != NULL)
+		error(game, "You not provide path for some texture or have duplicate textures\n");
 	*dest_to_put = ft_strdup(line);
 	return (1);
 }
@@ -40,11 +40,7 @@ void	get_textures(t_game_essentials *game, char **raw_data)
 		else if (is_this_texture("WE ", raw_data[line]))
 			 count += get_texture(game, raw_data[line], &game->map->texture_path_WE);
 	}
-	if (count != 4 ||
-		game->map->texture_path_EA == NULL ||
-		game->map->texture_path_NO == NULL ||
-		game->map->texture_path_SO == NULL ||
-		game->map->texture_path_WE == NULL)
+	if (count != 4) 
 		error(game, "Invalid number of textures\n");
 	game->map->textures_obtained = TRUE;
 }
