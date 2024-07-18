@@ -1,0 +1,7 @@
+t_map on map_creation
+line on gnl
+ptr.player
+mlx on makefile
+WALL WEXTRA WERROR ON MAKEFILE
+segfault when angle hits 0 or bigger than 6.28
+grid not printing with block 64

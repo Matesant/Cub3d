@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/16 17:49:02 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:09:22 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	main(int argc, char *argv[])
 {
 	t_game_essentials	ptr = {0};
-
-	mlx_texture_t		textures[5];
 
 	if (ft_pre_verifications(argc, argv))
 		return (0);

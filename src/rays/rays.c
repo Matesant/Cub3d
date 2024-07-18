@@ -3,57 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:11:36 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/16 18:07:40 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/17 21:27:14 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1,
-		int color)
-{
-	int	dx;
-	int	sx;
-	int	dy;
-	int	sy;
-	int	err;
-	int	e2;
-
-	dx = abs(x1 - x0);
-	sx = x0 < x1 ? 1 : -1;
-	dy = -abs(y1 - y0);
-	sy = y0 < y1 ? 1 : -1;
-	err = dx + dy;
-	while (1)
-	{
-		mlx_put_pixel(img, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
-			break ;
-		e2 = 2 * err;
-		if (e2 >= dy)
-		{
-			err += dy;
-			x0 += sx;
-		}
-		if (e2 <= dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-	}
-}
-
 void	ft_cast_2d_rays(t_game_essentials *ptr)
 {
-	float	aTan;
+	t_rays	*ray;
 
-	int r, mx, my, mp, dof;
-	float rx, ry, ra, xo, yo;
-	ra = ptr->player->angle;
-	if (ra < 0)
+	ray->angle = ptr->player->angle;
+	if (ray->amount < 0)
 		ra += 2 * PI;
 	if (ra > 2 * PI)
 		ra -= 2 * PI;
@@ -61,21 +25,23 @@ void	ft_cast_2d_rays(t_game_essentials *ptr)
 	{
 		dof = 0;
 		aTan = -1 / tan(ra);
-		if (ra > PI)
+		if (ra > PI) // Raio aponta para cima
 		{
-			ry = (((int)ptr->player->y >> 6) << 6) - 0.0001;
+			ry = (((int)ptr->player->y / ptr->map->block_size)
+					* ptr->map->block_size) - 0.0001;
 			rx = (ptr->player->y - ry) * aTan + ptr->player->x;
-			yo = -64;
+			yo = -ptr->map->block_size;
 			xo = -yo * aTan;
 		}
-		else if (ra < PI)
+		else if (ra < PI) // Raio aponta para baixo
 		{
-			ry = (((int)ptr->player->y >> 6) << 6) + 64;
+			ry = (((int)ptr->player->y / ptr->map->block_size)
+					* ptr->map->block_size) + ptr->map->block_size;
 			rx = (ptr->player->y - ry) * aTan + ptr->player->x;
-			yo = 64;
+			yo = ptr->map->block_size;
 			xo = -yo * aTan;
 		}
-		else
+		else // Raio horizontal (direita ou esquerda)
 		{
 			rx = ptr->player->x;
 			ry = ptr->player->y;
@@ -83,15 +49,14 @@ void	ft_cast_2d_rays(t_game_essentials *ptr)
 		}
 		while (dof < 8)
 		{
-			mx = (int)(rx) >> 6;
-			my = (int)(ry) >> 6;
+			mx = (int)(rx) / ptr->map->block_size;
+			my = (int)(ry) / ptr->map->block_size;
 			if (my >= 0 && my < ptr->map->height && mx >= 0
 				&& mx < ptr->map->width)
 			{
-				mp = my * ptr->map->width + mx;
 				if (ptr->map->map_matrice[my][mx] == '1')
 				{
-					dof = 8;
+					dof = 8; // Pare quando encontrar uma parede
 				}
 				else
 				{
@@ -102,11 +67,10 @@ void	ft_cast_2d_rays(t_game_essentials *ptr)
 			}
 			else
 			{
-				break ; // Saída do loop se o índice estiver fora dos limites
+				break ; // Saia do loop se sair dos limites do mapa
 			}
 		}
 		// Desenhar o raio no mapa (opcional)
-		ft_draw_line(ptr->img, ptr->player->x, ptr->player->y, rx, ry,
-			0xFFFFFF00);
+		ft_put_line(ptr->img, rx, ry, ptr->player);
 	}
 }

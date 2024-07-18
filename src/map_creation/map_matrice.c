@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_matrice.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:22:05 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/16 17:34:49 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:10:31 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool	ft_set_game_configs(char *map, t_game_essentials *game)
 	game->map->map_matrice = ft_create_map(fd);
 	game->map->width = 8;
 	game->map->height = 8;
-	game->map->block_size = 64;
+	game->map->block_size = 12;
 	close(fd);
 	return (TRUE);
 }
