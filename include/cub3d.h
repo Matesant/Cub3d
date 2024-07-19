@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define CLEAR_STATIC -1
 # define KEY_ESC MLX_KEY_ESCAPE
 # define KEY_W MLX_KEY_W
 # define KEY_A MLX_KEY_A
@@ -45,6 +46,8 @@ typedef struct s_map
 	char			*texture_path_EA;
 	uint32_t		ceiling_color; 
 	uint32_t		floor_color; 
+	t_bool			textures_obtained;
+	t_bool			colors_obtained;
 }					t_map;
 
 typedef struct s_player_position
@@ -78,7 +81,7 @@ typedef struct s_game_essentials
 	int				fd;
 }					t_game_essentials;
 
-void				ft_pre_verifications(int argc, char **argv);
+void				ft_pre_verifications(t_game_essentials *game, int argc, char **argv);
 t_bool				ft_set_game_configs(char *map, t_game_essentials *game);
 void				ft_color_background(t_game_essentials *ptr, int color);
 void				ft_key_hooks(mlx_key_data_t key, void *param);
@@ -90,12 +93,14 @@ void				ft_draw_map(t_game_essentials *game, int block_size);
 void				ft_update_map(t_game_essentials *game, int block_size);
 int					ft_return_y(char character, t_map *map);
 int					ft_return_x(char character, t_map *map);
-void				ft_init_mlx(t_game_essentials *ptr, char *map);
+void				ft_init_mlx(t_game_essentials *ptr);
 void				ft_player_configs(t_game_essentials *ptr);
 void				ft_draw_background(mlx_image_t *img, int width, int height);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
-void				error(char *error_msg);
-void	get_colors(t_game_essentials *game, char **raw_data);
+void				error(t_game_essentials *game, char *error_msg);
+void				get_colors(t_game_essentials *game, char **raw_data);
+void				get_map_matrice(t_game_essentials *game, char **raw_data);
+void				clear(t_game_essentials *game);
 
 #endif

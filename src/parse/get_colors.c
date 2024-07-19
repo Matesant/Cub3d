@@ -20,7 +20,8 @@ void	get_colors(t_game_essentials *game, char **raw_data)
 		}
 	}
 	if (count != 2)
-		error("Wrong number of colors in map.\n");
+		error(game, "Wrong number of colors in map.\n");
+	game->map->colors_obtained = TRUE;
 }
 
 t_bool is_color(char *line)
@@ -45,12 +46,12 @@ void	save_color(t_game_essentials *game, char *line)
 		line++;
 	rgb = ft_split(line, ',');
 	if (ft_matrice_len(rgb) != 3)
-		error("Invalid color format\n");
+		error(game, "Invalid color format\n");
 	tmp = rgb;
 	while (*tmp)
 	{
 		if (ft_atoi(*tmp) > 255 || ft_atoi(*tmp) < 0)
-		error("Invalid color range\n");
+		error(game, "Invalid color range\n");
 		tmp++;
 	}
 	if (color_id == 'F')

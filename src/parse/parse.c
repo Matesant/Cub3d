@@ -23,17 +23,12 @@ void	parse(t_game_essentials *game, char *map)
 
 	fd = open(map, O_RDONLY);
 	game->map = ft_calloc(1, sizeof(t_map));
-	game->map->map_matrice = ft_create_map(fd);
-	game->map->width = 8;
-	game->map->height = 8;
-	game->map->block_size = 26;
+	game->map->raw_data = ft_create_map(fd);
 	close(fd);
-	// game->map = ft_calloc(1, sizeof (t_map));
-	// game->map->raw_data = ft_create_map(fd);
-	// replace_tabs_for_spaces(game->map->raw_data);
-	// get_textures(game, game->map->raw_data);
-	// get_colors(game, game->map->raw_data);
-
+	replace_tabs_for_spaces(game->map->raw_data);
+	get_textures(game,	 game->map->raw_data);
+	get_colors(game, game->map->raw_data);
+	get_map_matrice(game, game->map->raw_data);
 }
 
 static char	**ft_create_map(int fd)
@@ -51,6 +46,8 @@ static char	**ft_create_map(int fd)
 		line = get_next_line(fd);
 	}
 	finished_map = ft_split(tmp_map, '\n');
+	free(tmp_map);
+	get_next_line(CLEAR_STATIC);
 	return (finished_map);
 }
 
@@ -70,13 +67,18 @@ static int	count_tabs(char *line)
 
 static void	replace_tabs_for_spaces(char *raw_data[])
 {
-	int	line;
+	int		line;
+	char	*to_free;
 
 	line = -1;
 	while (raw_data[++line])
 	{
 		if (count_tabs(raw_data[line]) > 0)
+		{
+			to_free = raw_data[line];
 			raw_data[line] = replace(raw_data[line]);
+			free(to_free);
+		}
 	}
 }
 
