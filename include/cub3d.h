@@ -72,6 +72,23 @@ typedef struct s_line
 	int				double_error;
 }					t_line;
 
+typedef struct s_point
+{
+	float		x;
+	float		y;
+	float		z;
+	uint32_t	color;
+}				t_point;
+
+typedef struct s_line_drawing_data
+{
+	int			dx;
+	int			dy;
+	int			control;
+	int			inc_x;
+	int			inc_y;
+}				t_line_drawing_data;
+
 typedef struct s_game_essentials
 {
 	mlx_t			*mlx;
@@ -102,5 +119,8 @@ void				error(t_game_essentials *game, char *error_msg);
 void				get_colors(t_game_essentials *game, char **raw_data);
 void				get_map_matrice(t_game_essentials *game, char **raw_data);
 void				clear(t_game_essentials *game);
+void				draw_line(mlx_image_t *img, t_point start, t_point end);
+void				put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+void				new_line_data(t_line_drawing_data *line_data, t_point start, t_point end);
 
 #endif

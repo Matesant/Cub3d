@@ -10,7 +10,9 @@ LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
-SOURCE      := main.c pre_verifications.c parse.c utils.c get_textures.c get_colors.c get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c
+SOURCE      := main.c pre_verifications.c parse.c utils.c get_textures.c get_colors.c \
+				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c \
+				draw_line.c draw_line_utils.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 
@@ -63,6 +65,12 @@ $(BIN)%.o: ./src/hooks/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 $(BIN)%.o: ./src/image/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./src/draw_line/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
