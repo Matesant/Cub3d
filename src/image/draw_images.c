@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 15:50:43 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:28:03 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_draw_background(mlx_image_t *img, int width, int height)
 		y = 0;
 		while (y < height / 2)
 		{
-			mlx_put_pixel(img, x, y, 0x00000000);
+			mlx_put_pixel(img, x, y, 0x00CCCCCC);
 			y++;
 		}
 		x++;
@@ -158,10 +158,10 @@ void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
 	int	yo;
 
 	xo = 0;
-	while (xo < game->map->block_size - 1)
+	while (xo < game->map->block_size)
 	{
 		yo = 0;
-		while (yo < game->map->block_size - 1)
+		while (yo < game->map->block_size)
 		{
 			mlx_put_pixel(game->img, x + xo, y + yo, color);
 			yo++;

@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 01:36:16 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:05:22 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:20:36 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_init_mlx(t_game_essentials *ptr, char *map)
 	ptr->img_background = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
 	mlx_image_to_window(ptr->mlx, ptr->img_background, 0, 0);
-	ptr->img_background->instances[0].z = -1;
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	ft_set_game_configs(map, ptr);
 }
