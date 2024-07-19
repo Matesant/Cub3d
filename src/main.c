@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:52:50 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:36:13 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char *argv[])
 		return (0);
 	ft_init_mlx(&ptr, argv[1]);
 	ft_player_configs(&ptr);
-	ft_draw_background(ptr.img_background, ptr.mlx->width, ptr.mlx->height);
 	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
 	mlx_loop_hook(ptr.mlx, ft_key_hooks, &ptr);
 	mlx_resize_hook(ptr.mlx, ft_resize_hook, &ptr);

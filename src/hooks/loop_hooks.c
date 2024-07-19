@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:37:43 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:52:44 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:01:43 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_hook(void *param)
 	t_game_essentials	*ptr;
 
 	ptr = (t_game_essentials *)param;
+	ft_draw_background(ptr->img_background, ptr->mlx->width, ptr->mlx->height);
 	ft_draw_map(ptr, ptr->map->block_size);
 	ft_put_player(ptr->img, ptr->player);
 	ft_cast_rays(ptr);

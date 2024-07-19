@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:01:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:51:24 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:03:02 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,21 @@ int	main(void)
 	mlx_image_to_window(mlx, img2, 0, 0);
 	img->instances[0].z = 1;
 	img2->instances[0].z = -1;
-	// for (int i = 0; i < 500; i++)
-	// {
-	// 	for (int j = 0; j < 250; j++) // Metade superior
-	// 	{
-	// 		mlx_put_pixel(img, i, j, 0xBBBBBBBB); // Branco
-	// 	}
-	// 	for (int j = 200; j < 500; j++) // Metade inferior
-	// 	{
-	// 		mlx_put_pixel(img2, i, j, 0x00FF0FFF); // Vermelho
-	// 	}
-	// }
+	for (int i = 0; i < 500; i++)
+	{
+		for (int j = 0; j < 250; j++) // Metade superior
+		{
+			mlx_put_pixel(img, i, j, 0xBBBBBBBB); // Branco
+		}
+		for (int j = 200; j < 500; j++) // Metade inferior
+		{
+			mlx_put_pixel(img2, i, j, 0x00FF0FFF); // Vermelho
+		}
+		for (int j = 0; j < 250; j++) // Metade superior
+		{
+			mlx_put_pixel(img, i, j, 0xBBBDDDB); // Branco
+		}
+	}
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, img);
 	mlx_terminate(mlx);

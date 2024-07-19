@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:46:16 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:50:43 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,12 @@ void	ft_put_line(mlx_image_t *img, int endx, int endy, t_player_pos *player)
 	y_initial = player->y;
 	while (1)
 	{
-		mlx_put_pixel(img, x_initial, y_initial, 0xAAAAAAAF);
+		if ((x_initial >= 0 && x_initial < WIDTH && y_initial >= 0
+				&& y_initial < HEIGHT) && (endx >= 0 && endx < WIDTH
+				&& endy >= 0 && endy < HEIGHT))
+		{
+			mlx_put_pixel(img, x_initial, y_initial, 0xAAAAAAAF);
+		}
 		if (x_initial == endx && y_initial == endy)
 			break ;
 		cordinates.double_error = 2 * cordinates.error_accumulated;
@@ -144,7 +149,7 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 	line_length = 20;
 	line_x = player->x + line_length * cos(player->angle);
 	line_y = player->y + line_length * sin(player->angle);
-	ft_put_line(img, line_x, line_y, player);
+	// ft_put_line(img, line_x, line_y, player);
 }
 
 void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)

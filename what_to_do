@@ -5,3 +5,4 @@ mlx on makefile
 WALL WEXTRA WERROR ON MAKEFILE
 segfault when angle hits 0 or bigger than 6.28
 grid not printing with block 64
+if dist > screen size

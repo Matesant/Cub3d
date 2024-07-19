@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:11:36 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 19:49:44 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 15:56:51 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	ft_set_if_angle_is_looking_up(t_rays *ray, t_game_essentials *ptr,
 {
 	if (ray->angle > PI)
 	{
-		ray->y = (((int)ptr->player->y / ptr->map->block_size)
-			* ptr->map->block_size) - 0.0001;
+		ray->y = (((int)ptr->player->y >> 4) << 4) - 0.0001;
 		ray->x = (ptr->player->y - ray->y) * a_tan + ptr->player->x;
 		ray->yoffset = -ptr->map->block_size;
 		ray->xoffset = -ray->yoffset * a_tan;
@@ -30,8 +29,7 @@ void	ft_set_if_angle_is_looking_down(t_rays *ray, t_game_essentials *ptr,
 {
 	if (ray->angle < PI)
 	{
-		ray->y = (((int)ptr->player->y / ptr->map->block_size)
-			* ptr->map->block_size) + ptr->map->block_size;
+		ray->y = (((int)ptr->player->y >> 4) << 4) + ptr->map->block_size;
 		ray->x = (ptr->player->y - ray->y) * a_tan + ptr->player->x;
 		ray->yoffset = ptr->map->block_size;
 		ray->xoffset = -ray->yoffset * a_tan;
@@ -49,7 +47,7 @@ void	ft_cast_2d_horizontal_rays(t_game_essentials *ptr, t_rays *ray)
 	a_tan = -1 / tan(ray->angle);
 	ft_set_if_angle_is_looking_up(ray, ptr, a_tan);
 	ft_set_if_angle_is_looking_down(ray, ptr, a_tan);
-	if (ft_fabs(ray->angle) < EPSILON || ft_fabs(ray->angle - PI) < EPSILON)
+	if (ray->angle == 2 * PI || ray->angle == PI)
 	{
 		ray->x = ptr->player->x;
 		ray->y = ptr->player->y;
