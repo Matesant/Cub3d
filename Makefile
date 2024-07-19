@@ -14,7 +14,6 @@ LIBFT       := ./libft/libft.a
 SOURCE      := main.c pre_verifications.c parse.c utils.c get_textures.c get_colors.c \
 				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c \
 				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
-				map_matrice.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 

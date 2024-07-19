@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:07:17 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:00:48 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_initiate_rays(t_rays *rays)
 }
 
 float	calculate_distance_to_wall(float player_x, float player_y, float wall_x,
-		float wall_y, float angle)
+		float wall_y)
 {
 	return (sqrt((wall_x - player_x) * (wall_x - player_x)) + (wall_y
 			- player_y) * (wall_y - player_y));
@@ -46,7 +46,7 @@ void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
 				ray->distance_x_horizontal = ray->x;
 				ray->distance_y_horizontal = ray->y;
 				ray->distance_horizontal = calculate_distance_to_wall(ptr->player->x,
-					ptr->player->y, ray->x, ray->y, ray->angle);
+					ptr->player->y, ray->x, ray->y);
 				return ;
 			}
 			else
@@ -77,7 +77,7 @@ void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *ptr)
 				ray->distance_x_vertical = ray->x;
 				ray->distance_y_vertical = ray->y;
 				ray->distance_vertical = calculate_distance_to_wall(ptr->player->x,
-					ptr->player->y, ray->x, ray->y, ray->angle);
+					ptr->player->y, ray->x, ray->y);
 				return ;
 			}
 			else
@@ -126,8 +126,8 @@ void	ft_cast_rays(t_game_essentials *ptr)
 			ray->y = ray->distance_y_vertical;
 		}
 		ft_put_line(ptr->img, ray->x, ray->y, ptr->player);
-		if (ray->angle > 2*PI)
-			ray->angle -= 2*PI;
+		if (ray->angle > 2 * PI)
+			ray->angle -= 2 * PI;
 		else
 			ray->angle += RAD;
 	}

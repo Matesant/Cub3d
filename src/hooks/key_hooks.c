@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/18 13:49:39 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/19 16:57:50 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	ft_key_hooks(void *param)
 {
 	t_game_essentials	*ptr;
-	float				move_speed;
-	float				rot_speed;
 
 	ptr = (t_game_essentials *)param;
 	if (mlx_is_key_down(ptr->mlx, KEY_ESC))
