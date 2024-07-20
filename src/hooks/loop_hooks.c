@@ -17,21 +17,7 @@ void	ft_hook(void *param)
 	t_game_essentials	*ptr;
 
 	ptr = (t_game_essentials *)param;
-	//ft_draw_background(ptr->img_background, ptr->mlx->width, ptr->mlx->height);
 	ft_draw_map(ptr, ptr->map->block_size);
 	ft_put_player(ptr->img, ptr->player);
 	ft_cast_rays(ptr);
-}
-
-void	ft_resize_hook(int width, int height, void *param)
-{
-	t_game_essentials	*ptr;
-
-	ptr = (t_game_essentials *)param;
-	if (ptr->img)
-		mlx_delete_image(ptr->mlx, ptr->img);
-	ptr->img = mlx_new_image(ptr->mlx, width, height);
-	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
-	ptr->mlx->width = width;
-	ptr->mlx->height = height;
 }

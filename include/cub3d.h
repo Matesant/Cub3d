@@ -120,11 +120,9 @@ typedef struct s_game_essentials {
 }		t_game_essentials;
 
 void	ft_pre_verifications(t_game_essentials *game, int argc, char **argv);
-t_bool	ft_set_game_configs(char *map, t_game_essentials *game);
 void	ft_color_background(t_game_essentials *ptr, int color);
 void	ft_key_hooks(void *param);
 void	ft_hook(void *param);
-void	ft_resize_hook(int width, int height, void *param);
 void	ft_color_background(t_game_essentials *ptr, int color);
 void	ft_put_player(mlx_image_t *img, t_player_pos *player);
 void	ft_draw_map(t_game_essentials *game, int block_size);
