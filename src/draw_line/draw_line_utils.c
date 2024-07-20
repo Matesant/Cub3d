@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color)
+void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color)
 {
-	if (x <= 0 || x >= WIDTH || y <= 0 || y >= HEIGHT)
+	if (x <= 0 || x >= img->width || y <= 0 || y >= img->height)
 		return ;
 	mlx_put_pixel(img, x, y, color);
 }

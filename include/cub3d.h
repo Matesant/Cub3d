@@ -151,7 +151,7 @@ void	get_colors(t_game_essentials *game, char **raw_data);
 void	get_map_matrice(t_game_essentials *game, char **raw_data);
 void	clear(t_game_essentials *game);
 void	draw_line(mlx_image_t *img, t_point start, t_point end);
-void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+void  put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 void	new_line_data(t_line_drawing_data *line_data, t_point start,
 			t_point end);
 
