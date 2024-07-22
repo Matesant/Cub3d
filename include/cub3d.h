@@ -37,6 +37,8 @@
 # define P3 3 * PI / 2
 # define EPSILON 1e-6
 # define RAD 0.0174533
+# define MAP_CELL_X 64
+# define MAP_CELL_Y 64
 
 typedef struct s_rays {
   int amount;
@@ -56,6 +58,12 @@ typedef struct s_rays {
   float distance_x_vertical;
   float distance_y_vertical;
 }		t_rays;
+
+typedef struct s_vector
+{
+  double  x;
+  double  y;
+} t_vector ;
 
 typedef struct s_map {
   int width;
