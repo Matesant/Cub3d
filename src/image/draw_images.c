@@ -131,9 +131,6 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 {
 	int	x;
 	int	y;
-	int	line_x;
-	int	line_y;
-	int	line_length;
 
 	x = player->x - player->size / 2;
 	while (x < player->x + player->size / 2)
@@ -146,9 +143,6 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 		}
 		x++;
 	}
-	line_length = 20;
-	line_x = player->x + line_length * cos(player->angle);
-	line_y = player->y + line_length * sin(player->angle);
 	// ft_put_line(img, line_x, line_y, player);
 }
 
