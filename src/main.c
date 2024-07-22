@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 	t_game_essentials	ptr = {0};
 
 	ft_pre_verifications(&ptr, argc, argv);
-	ft_init_mlx(&ptr);
 	parse(&ptr, argv[1]);
+	ft_init_mlx(&ptr);
 	ft_player_configs(&ptr);
 	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
 	mlx_loop_hook(ptr.mlx, ft_key_hooks, &ptr);

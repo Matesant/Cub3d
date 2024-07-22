@@ -71,6 +71,44 @@ void	get_matrice_dimensions(t_map *map)
 
 }
 
+t_bool	is_open(t_game_essentials *game, char **matrice, int line, int column)
+{
+	if (matrice[line][column] == '0' || ft_strchr("NSEW", matrice[line][column]))
+	{
+		if (line == 0 || line == game->map->height - 1)
+			return (TRUE);
+		else if (column == 0 || column == game->map->width - 1)
+			return (TRUE);
+		else if (matrice[line - 1][column] == ' ' || (int) ft_strlen(matrice[line - 1]) < column)
+			return (TRUE);
+		else if (matrice[line + 1][column] == ' ' || (int) ft_strlen(matrice[line + 1]) < column)
+			return (TRUE);
+		else if (matrice[line][column - 1] == ' ' || matrice[line][column + 1] == ' ')
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+t_bool	check_closed_map(t_game_essentials *game)
+{
+	int		line;
+	int		column;
+	char	**matrice;
+
+	line = -1;
+	matrice = game->map->map_matrice;
+	while (matrice[++line])
+	{
+		column = -1;
+		while (matrice[line][++column])
+		{
+			if (is_open(game, matrice, line, column))
+				return (TRUE);
+		}
+	}
+	return (FALSE);
+}
+
 void	get_map_matrice(t_game_essentials *game, char **raw_data)
 {
 	int	line;
@@ -84,9 +122,11 @@ void	get_map_matrice(t_game_essentials *game, char **raw_data)
 			break ;
 		}
 	}
+	get_matrice_dimensions(game->map);
 	if (game->map->map_matrice == NULL)
 		error(game, "Please provide a map matrice in your file\n");
 	if (!validade_map_matrice(game->map->map_matrice))
 		error(game, "Invalid chars in your map matrice\n");
-	get_matrice_dimensions(game->map);
+	if (check_closed_map(game))
+		error(game, "Map is not closed\n");
 }

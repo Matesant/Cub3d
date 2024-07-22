@@ -14,17 +14,14 @@
 
 static char	*replace(char *line);
 static int	count_tabs(char *line);
-static char	**ft_create_map(int fd);
+static char	**read_map(char *map);
+static int	count_lines(char *map);
 static void	replace_tabs_for_spaces(char *raw_data[]);
 
 void	parse(t_game_essentials *game, char *map)
 {
-	int	fd;
-
-	fd = open(map, O_RDONLY);
 	game->map = ft_calloc(1, sizeof(t_map));
-	game->map->raw_data = ft_create_map(fd);
-	close(fd);
+	game->map->raw_data = read_map(map);
 	replace_tabs_for_spaces(game->map->raw_data);
 	get_textures(game,	 game->map->raw_data);
 	get_colors(game, game->map->raw_data);
@@ -32,24 +29,53 @@ void	parse(t_game_essentials *game, char *map)
 	game->map->block_size = 16;
 }
 
-static char	**ft_create_map(int fd)
+static int	count_lines(char *map)
 {
 	char	*line;
-	char	*tmp_map;
-	char	**finished_map;
+	int		count;
+	int		fd;
 
-	line = get_next_line(fd);
-	tmp_map = ft_strdup("");
-	while (line)
+	fd = open(map, O_RDONLY);
+	count = 0;
+	while (1)
 	{
-		tmp_map = ft_strjoin_free(tmp_map, line);
-		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
+		count++;
+		free(line);
 	}
-	finished_map = ft_split(tmp_map, '\n');
-	free(tmp_map);
+	close(fd);
 	get_next_line(CLEAR_STATIC);
-	return (finished_map);
+	return (count);
+}
+
+static char	**read_map(char *map)
+{
+	char	**matrice;
+	int		count;
+	char	*line;
+	int		index;
+	int		fd;
+
+	count = count_lines(map);
+	matrice = ft_calloc(count + 1, sizeof (char *));
+	fd = open(map, O_RDONLY);
+	index = -1;
+	while (++index < count)
+	{
+		line = get_next_line(fd);
+		if (line[0] == '\n')
+			matrice[index] = line;
+		else
+		{
+			matrice[index] = ft_strtrim(line, "\n");
+			free(line);
+		}
+	}
+	close(fd);
+	get_next_line(CLEAR_STATIC);
+	return (matrice);
 }
 
 static int	count_tabs(char *line)
