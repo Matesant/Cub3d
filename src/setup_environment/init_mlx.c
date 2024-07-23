@@ -14,12 +14,11 @@
 
 void	ft_init_mlx(t_game_essentials *ptr)
 {
-	ptr->mlx = mlx_init(WIDTH, HEIGHT, "eae", true);
+	ptr->mlx = mlx_init(WIDTH, HEIGHT, "eae", false);
 	ptr->img = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
 	ptr->img_background = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
 	mlx_image_to_window(ptr->mlx, ptr->img_background, 0, 0);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 }
 
 void	ft_player_configs(t_game_essentials *ptr)
