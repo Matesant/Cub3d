@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/23 12:27:43 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:44:51 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	ft_cast_rays(t_game_essentials *ptr)
 			ray->y = ray->distance_y_vertical;
 		}
 		ft_put_line(ptr->img, ray->x, ray->y, ptr->player);
-		printf("ray->angle: %f\n", ray->angle);
 		ray->angle += RAD;
 		line_height = (ptr->map->block_size * HEIGHT) / final_distace;
 		if (line_height > HEIGHT)
