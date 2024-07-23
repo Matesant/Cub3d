@@ -38,6 +38,14 @@
 # define EPSILON 1e-6
 # define RAD 0.0174533
 
+typedef enum e_orientation
+{
+  NORTH,
+  SOUTH,
+  EAST,
+  WEST
+} t_orientation;
+
 typedef struct s_rays {
   int amount;
   int mapx;
