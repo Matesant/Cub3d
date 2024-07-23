@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:11:36 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 15:56:51 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:25:20 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_cast_2d_horizontal_rays(t_game_essentials *ptr, t_rays *ray)
 	{
 		ray->x = ptr->player->x;
 		ray->y = ptr->player->y;
-		ray->steps_to_obstacle = 8;
 	}
 	ft_set_ray_x_y_horizontal(ray, ptr);
 }
