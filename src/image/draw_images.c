@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:28:03 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:57:08 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_draw_background(mlx_image_t *img, int width, int height)
 		y = 0;
 		while (y < height / 2)
 		{
-			mlx_put_pixel(img, x, y, 0x00CCCCCC);
+			mlx_put_pixel(img, x, y, 0x00FAAAAFC);
 			y++;
 		}
 		x++;
@@ -129,38 +129,53 @@ void	ft_put_line(mlx_image_t *img, int endx, int endy, t_player_pos *player)
 
 void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 {
-	int	x;
-	int	y;
+	t_point	start;
+	t_point	end;
+	int		line_length;
 
-	x = player->x - player->size / 2;
-	while (x < player->x + player->size / 2)
+	start.x = player->x - player->size / 2;
+	while (start.x < player->x + player->size / 2)
 	{
-		y = player->y - player->size / 2;
-		while (y < player->y + player->size / 2)
+		start.y = player->y - player->size / 2;
+		while (start.y < player->y + player->size / 2)
 		{
-			mlx_put_pixel(img, x, y, 0x00FFAAA0);
-			y++;
+			end.x = player->x + player->size / 2;
+			end.y = player->y + player->size / 2;
+			draw_line(img, start, end);
+			start.y++;
 		}
-		x++;
+		start.x++;
 	}
-	// ft_put_line(img, line_x, line_y, player);
+	start.x = player->x;
+	start.y = player->y;
+	start.color = 0x00FFFFFF;
+	end.color = 0x00CCCCCC;
+	line_length = 100;
+	end.x = player->x + line_length * cos(player->angle);
+	end.y = player->y + line_length * sin(player->angle);
+	draw_line(img, start, end);
 }
+// line_x = player->x + line_length * cos(player->angle);
+// line_y = player->y + line_length * sin(player->angle);
+// ft_put_line(img, line_x, line_y, player);
 
 void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
 {
-	int	xo;
-	int	yo;
+	t_point	start;
+	t_point	end;
+	int		yo;
 
-	xo = 0;
-	while (xo < game->map->block_size)
+	yo = 0;
+	while (yo < game->map->block_size)
 	{
-		yo = 0;
-		while (yo < game->map->block_size)
-		{
-			mlx_put_pixel(game->img, x + xo, y + yo, color);
-			yo++;
-		}
-		xo++;
+		start.x = x;
+		start.y = y + yo;
+		start.color = color;
+		end.x = x + game->map->block_size;
+		end.y = y + yo;
+		end.color = color;
+		draw_line(game->img, start, end);
+		yo++;
 	}
 }
 
