@@ -14,20 +14,6 @@
 
 void	ft_player_configs(t_game_essentials *ptr);
 
-// t_bool	ft_set_game_configs(char *map, t_game_essentials *game)
-// {
-// 	int	fd;
-
-// 	fd = open(map, O_RDONLY);
-// 	game->map = (t_map *)malloc(sizeof(t_map));
-// 	game->map->map_matrice = ft_create_map(fd);
-// 	game->map->width = 19;
-// 	game->map->height = 8;
-// 	game->map->block_size = 16;
-// 	close(fd);
-// 	return (TRUE);
-// }
-
 void	ft_init_mlx(t_game_essentials *ptr)
 {
 	ptr->mlx = mlx_init(WIDTH, HEIGHT, "eae", true);
@@ -36,7 +22,6 @@ void	ft_init_mlx(t_game_essentials *ptr)
 	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
 	mlx_image_to_window(ptr->mlx, ptr->img_background, 0, 0);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	//ft_set_game_configs(map, ptr);
 }
 
 void	ft_player_configs(t_game_essentials *ptr)
