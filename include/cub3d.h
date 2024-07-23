@@ -46,6 +46,12 @@ typedef enum e_orientation
   WEST
 } t_orientation;
 
+typedef struct s_vector
+{
+  double  x;
+  double  y;
+} t_vector; 
+
 typedef struct s_rays {
   int amount;
   int mapx;
@@ -84,14 +90,15 @@ typedef struct s_map {
 }		t_map;
 
 typedef struct s_player_position {
-  float x;
-  float y;
-  int size;
-  int delta_x;
-  int delta_y;
-  int line_x;
-  int line_y;
-  float angle;
+  float         x;
+  float         y;
+  int           size;
+  int           delta_x;
+  int           delta_y;
+  int           line_x;
+  int           line_y;
+  float         angle;
+  t_vector      pos;
 }		t_player_pos;
 
 typedef struct s_line {
