@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-void	ft_player_configs(t_game_essentials *ptr);
-
 void	ft_init_mlx(t_game_essentials *ptr)
 {
 	ptr->mlx = mlx_init(WIDTH, HEIGHT, "eae", true);
