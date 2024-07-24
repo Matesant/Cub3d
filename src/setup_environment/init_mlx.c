@@ -16,9 +16,10 @@ void	ft_init_mlx(t_game_essentials *ptr)
 {
 	ptr->mlx = mlx_init(WIDTH, HEIGHT, "eae", false);
 	ptr->img = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
-	ptr->img_background = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
+	ptr->img_map = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(ptr->mlx, ptr->img, 0, 0);
-	mlx_image_to_window(ptr->mlx, ptr->img_background, 0, 0);
+	mlx_image_to_window(ptr->mlx, ptr->img_map, 0, 0);
+	ptr->img_map->instances[0].z = 2;
 }
 
 t_vector	get_start_position(t_game_essentials *game)

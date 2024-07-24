@@ -14,7 +14,22 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void	ft_draw_background(mlx_image_t *img, int width, int height)
+// void	ft_draw_background(t_game_essentials *game, mlx_image_t *img)
+// {
+// 	uint32_t	*pixel;
+// 	uint32_t	index;
+// 	uint32_t	middle;
+
+// 	pixel = (uint32_t *) img->pixels;
+// 	index = img->height * img->width;
+// 	middle = index / 2;
+// 	while (--index > middle)
+// 		pixel[index] = game->map->floor_color;
+// 	while (--index)
+// 		pixel[index] = game->map->ceiling_color;
+// }
+
+void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width, int height)
 {
 	int	x;
 	int	y;
@@ -25,7 +40,7 @@ void	ft_draw_background(mlx_image_t *img, int width, int height)
 		y = 0;
 		while (y < height / 2)
 		{
-			mlx_put_pixel(img, x, y, 0x00FAAAAFC);
+			mlx_put_pixel(img, x, y, game->map->ceiling_color);
 			y++;
 		}
 		x++;
@@ -36,7 +51,7 @@ void	ft_draw_background(mlx_image_t *img, int width, int height)
 		y = height / 2;
 		while (y < height)
 		{
-			mlx_put_pixel(img, x, y, 0x000000FF);
+			mlx_put_pixel(img, x, y, game->map->floor_color);
 			y++;
 		}
 		x++;
@@ -133,14 +148,15 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 	t_point	end;
 	int		line_length;
 
-	start.x = player->x - player->size / 2;
-	while (start.x < player->x + player->size / 2)
+	start.color = 0xff0000ff;
+	start.x = player->x - (player->size / 2);
+	while (start.x < player->x + (player->size / 2))
 	{
-		start.y = player->y - player->size / 2;
-		while (start.y < player->y + player->size / 2)
+		start.y = player->y - (player->size / 2);
+		while (start.y < player->y + (player->size / 2))
 		{
-			end.x = player->x + player->size / 2;
-			end.y = player->y + player->size / 2;
+			end.x = player->x + (player->size / 2) -1;
+			end.y = player->y + (player->size / 2) -1;
 			draw_line(img, start, end);
 			start.y++;
 		}
@@ -149,15 +165,11 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 	start.x = player->x;
 	start.y = player->y;
 	start.color = 0x00FFFFFF;
-	end.color = 0x00CCCCCC;
-	line_length = 100;
+	line_length = 18;
 	end.x = player->x + line_length * cos(player->angle);
 	end.y = player->y + line_length * sin(player->angle);
 	draw_line(img, start, end);
 }
-// line_x = player->x + line_length * cos(player->angle);
-// line_y = player->y + line_length * sin(player->angle);
-// ft_put_line(img, line_x, line_y, player);
 
 void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
 {
@@ -174,7 +186,7 @@ void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
 		end.x = x + game->map->block_size;
 		end.y = y + yo;
 		end.color = color;
-		draw_line(game->img, start, end);
+		draw_line(game->img_map, start, end);
 		yo++;
 	}
 }

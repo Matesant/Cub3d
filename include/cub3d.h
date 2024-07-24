@@ -27,8 +27,8 @@
 # define KEY_A MLX_KEY_A
 # define KEY_S MLX_KEY_S
 # define KEY_D MLX_KEY_D
-# define HEIGHT 1080
-# define WIDTH 1920
+# define HEIGHT 720
+# define WIDTH 1280
 # define MOVE_SPEED 3.0
 # define NUM_RAYS 500
 # define FOV 0
@@ -65,7 +65,8 @@ typedef struct s_rays
 	float			angle;
 	float			xoffset;
 	float			yoffset;
-	float			*distances;
+	float			distances[WIDTH + 1];
+	int cardial[WIDTH + 1];
 	float			distance_horizontal;
 	float			distance_vertical;
 	float			distance_y_horizontal;
@@ -76,6 +77,7 @@ typedef struct s_rays
 
 typedef struct s_map
 {
+	t_bool		draw_map;
 	int				width;
 	int				height;
 	int				block_x;
@@ -137,7 +139,7 @@ typedef struct s_game_essentials
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	mlx_image_t		*img_background;
+	mlx_image_t		*img_map;
 	t_player_pos	*player;
 	t_map			*map;
 	int				fd;
@@ -158,7 +160,8 @@ int					ft_return_y(char character, t_map *map);
 int					ft_return_x(char character, t_map *map);
 void				ft_init_mlx(t_game_essentials *ptr);
 void				ft_player_configs(t_game_essentials *ptr);
-void				ft_draw_background(mlx_image_t *img, int width, int height);
+//void				ft_draw_background(t_game_essentials *game, mlx_image_t *img);
+void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width, int height);
 void				ft_put_line(mlx_image_t *img, int endx, int endy,
 						t_player_pos *player);
 void				ft_initiate_rays(t_rays *rays);
@@ -184,5 +187,7 @@ void				draw_line(mlx_image_t *img, t_point start, t_point end);
 void				put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
 void				new_line_data(t_line_drawing_data *line_data, t_point start,
 						t_point end);
+t_bool			is_wall(t_game_essentials *game, int key);
+void			 	toggle_minimap(mlx_key_data_t keydata, void* param);
 
 #endif

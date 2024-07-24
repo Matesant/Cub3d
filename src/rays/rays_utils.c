@@ -12,19 +12,6 @@
 
 #include "cub3d.h"
 
-void	ft_initiate_rays(t_rays *rays)
-{
-	rays->amount = 0;
-	rays->mapx = 0;
-	rays->mapy = 0;
-	rays->steps_to_obstacle = 0;
-	rays->a_tan = 0;
-	rays->x = 0;
-	rays->y = 0;
-	rays->angle = 0;
-	rays->xoffset = 0;
-	rays->yoffset = 0;
-}
 void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
 {
 	while (1)
@@ -117,7 +104,9 @@ void ft_draw_wall(t_game_essentials *ptr, t_rays *ray)
     int line_end;
     uint32_t wall_color = 0xAAAAAAFF; // Cor da parede
 
-    for (x = 0; x < WIDTH; x++)
+    line_height = 0;
+    x = -1;
+    while (++x < WIDTH)
     {
         final_distance = ray->distances[x];
         line_height = (ptr->map->block_size * HEIGHT) / final_distance;
@@ -126,7 +115,10 @@ void ft_draw_wall(t_game_essentials *ptr, t_rays *ray)
         line_start = (HEIGHT / 2) - (line_height / 2);
         line_end = (HEIGHT / 2) + (line_height / 2);
 
-        draw_vertical_line(ptr->img, x, line_start, line_end, wall_color);
+        if (ray->cardial[x] == 1)
+        	draw_vertical_line(ptr->img, x, line_start, line_end, wall_color);
+        else
+        	draw_vertical_line(ptr->img, x, line_start, line_end, wall_color / 2);
     }
 }
 
@@ -135,7 +127,6 @@ void	ft_cast_rays(t_game_essentials *ptr, t_rays *ray)
 {
 	float	angle_diff;
 
-	ray->angle = ptr->player->angle - RAD * 30;
 	while (ray->amount++ < WIDTH)
 	{
 		ray->angle = ft_normalize_angle(ray->angle);
@@ -146,12 +137,14 @@ void	ft_cast_rays(t_game_essentials *ptr, t_rays *ray)
 			ray->x = ray->distance_x_horizontal;
 			ray->y = ray->distance_y_horizontal;
 			ray->distances[ray->amount] = ray->distance_horizontal;
+			ray->cardial[ray->amount] = 1;
 		}
 		else if (ray->distance_horizontal > ray->distance_vertical)
 		{
 			ray->x = ray->distance_x_vertical;
 			ray->y = ray->distance_y_vertical;
 			ray->distances[ray->amount] = ray->distance_vertical;
+			ray->cardial[ray->amount] = 2;
 		}
 		//ft_put_line(ptr->img, ray->x, ray->y, ptr->player);
 		angle_diff = cos(ptr->player->angle - ray->angle);
@@ -162,11 +155,10 @@ void	ft_cast_rays(t_game_essentials *ptr, t_rays *ray)
 
 void	ft_make_game(t_game_essentials *ptr)
 {
-	t_rays *ray;
+	t_rays ray;
 
-	ray = malloc(sizeof(t_rays));
-	ft_initiate_rays(ray);
-	ft_cast_rays(ptr, ray);
-	ft_draw_wall(ptr, ray);
-	free(ray);
+	ray = (t_rays) {0};
+	ray.angle = ptr->player->angle - RAD * 30;
+	ft_cast_rays(ptr, &ray);
+	ft_draw_wall(ptr, &ray);
 }

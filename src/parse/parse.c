@@ -20,13 +20,15 @@ static void	replace_tabs_for_spaces(char *raw_data[]);
 
 void	parse(t_game_essentials *game, char *map)
 {
-	game->map = ft_calloc(1, sizeof(t_map));
+	game->map = malloc(sizeof(t_map));
 	game->map->raw_data = read_map(map);
 	replace_tabs_for_spaces(game->map->raw_data);
 	get_textures(game,	 game->map->raw_data);
 	get_colors(game, game->map->raw_data);
 	get_map_matrice(game, game->map->raw_data);
 	game->map->block_size = 16;
+	printf("c: %d\n", game->map->ceiling_color);
+	printf("f: %d\n", game->map->floor_color);
 }
 
 static int	count_lines(char *map)

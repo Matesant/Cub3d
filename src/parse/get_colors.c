@@ -56,12 +56,19 @@ void	save_color(t_game_essentials *game, char *line)
 	}
 	if (color_id == 'F')
 		game->map->floor_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
-	else
+	if (color_id == 'C')
 		game->map->ceiling_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
 	ft_delete_matrice(rgb);
 }
 
 uint32_t	get_rgba(int r, int g, int b, int a)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	uint32_t	color;
+
+	color = 0x000000;
+	color |= r << 24;
+	color |= g << 16;
+	color |= b << 8;
+	color |= 0b11111111;
+    return (color);
 }

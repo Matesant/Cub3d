@@ -17,9 +17,10 @@ void	ft_hook(void *param)
 	t_game_essentials	*ptr;
 
 	ptr = (t_game_essentials *)param;
-	ft_draw_background(ptr->img, ptr->mlx->width, ptr->mlx->height);
+	ft_draw_background(ptr, ptr->img, WIDTH, HEIGHT);
 	ft_draw_map(ptr, ptr->map->block_size);
-	ft_put_player(ptr->img, ptr->player);
+	ft_put_player(ptr->img_map, ptr->player);
+
 	ft_make_game(ptr);
 }
 
