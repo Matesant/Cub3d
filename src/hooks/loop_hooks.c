@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:37:43 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/23 12:35:05 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:36:35 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_hook(void *param)
 	ft_draw_background(ptr->img, ptr->mlx->width, ptr->mlx->height);
 	ft_draw_map(ptr, ptr->map->block_size);
 	ft_put_player(ptr->img, ptr->player);
-	ft_cast_rays(ptr);
+	ft_make_game(ptr);
 }
 
 void	ft_resize_hook(int width, int height, void *param)

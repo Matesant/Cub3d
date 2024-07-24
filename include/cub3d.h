@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/23 12:58:40 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:37:30 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define P3 3 * PI / 2
 # define EPSILON 1e-6
 # define RAD 0.0174533
+# define STEP 0.000727221
 
 typedef enum e_orientation
 {
@@ -172,7 +173,7 @@ void				ft_set_ray_x_y_horizontal(t_rays *ray,
 						t_game_essentials *ptr);
 float				calculate_distance_to_wall(float player_x, float player_y,
 						float wall_x, float wall_y);
-void				ft_cast_rays(t_game_essentials *ptr);
+void				ft_make_game(t_game_essentials *ptr);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
 void				error(t_game_essentials *game, char *error_msg);
