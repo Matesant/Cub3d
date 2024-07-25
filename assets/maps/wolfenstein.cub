@@ -1,0 +1,19 @@
+NO assets/textures/wolfenstein/purple_stone.png
+SO assets/textures/wolfenstein/mossy.png
+WE assets/textures/wolfenstein/wood.png
+EA assets/textures/wolfenstein/red_brick.png
+
+
+
+F     0,0,0
+C 0,0,0
+
+11111111111111111
+10000000100000001
+10000000000000001
+10000000100000001
+11101111111110111
+10000000100000001
+100000000000S0001
+10000000100000001
+11111111111111111

@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/23 12:57:08 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:06:05 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 	start.x = player->x;
 	start.y = player->y;
 	start.color = 0x00FFFFFF;
-	line_length = 18;
+	line_length = 15;
 	end.x = player->x + line_length * cos(player->angle);
 	end.y = player->y + line_length * sin(player->angle);
 	draw_line(img, start, end);

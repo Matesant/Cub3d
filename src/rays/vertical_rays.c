@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:30:55 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 15:37:41 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:25:07 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_cast_2d_vertical_rays(t_game_essentials *ptr, t_rays *ray)
 	ray->distance_vertical = 100000;
 	ray->distance_x_vertical = ptr->player->x;
 	ray->distance_y_vertical = ptr->player->y;
-	ray->steps_to_obstacle = 0;
 	n_tan = -tan(ray->angle);
 	ft_set_if_angle_is_looking_left(ray, ptr, n_tan);
 	ft_set_if_angle_is_looking_right(ray, ptr, n_tan);
@@ -53,7 +52,6 @@ void	ft_cast_2d_vertical_rays(t_game_essentials *ptr, t_rays *ray)
 	{
 		ray->x = ptr->player->x;
 		ray->y = ptr->player->y;
-		ray->steps_to_obstacle = 8;
 	}
 	ft_set_ray_x_y_vertical(ray, ptr);
 }

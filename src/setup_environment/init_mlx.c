@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 01:36:16 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:51:37 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:48:35 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ float	get_initial_angle(t_game_essentials *game)
 
 void	ft_player_configs(t_game_essentials *ptr)
 {
-	ptr->player = malloc(sizeof(t_player_pos));
+	ptr->player = ft_calloc(1, sizeof(t_player_pos));
 	ptr->player->size = 16;
 	ptr->player->pos = get_start_position(ptr);
 	ptr->player->angle = get_initial_angle(ptr);

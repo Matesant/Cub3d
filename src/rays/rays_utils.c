@@ -6,25 +6,12 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 14:46:00 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:24:53 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_initiate_rays(t_rays *rays)
-{
-	rays->amount = 0;
-	rays->mapx = 0;
-	rays->mapy = 0;
-	rays->steps_to_obstacle = 0;
-	rays->a_tan = 0;
-	rays->x = 0;
-	rays->y = 0;
-	rays->angle = 0;
-	rays->xoffset = 0;
-	rays->yoffset = 0;
-}
 void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
 {
 	while (1)
@@ -76,7 +63,6 @@ void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *ptr)
 			{
 				ray->x += ray->xoffset;
 				ray->y += ray->yoffset;
-				ray->steps_to_obstacle++;
 			}
 		}
 		else
@@ -95,73 +81,109 @@ float	ft_normalize_angle(float angle)
 	return (angle);
 }
 
-void ft_draw_wall(t_game_essentials *ptr, t_rays *ray)
+static uint32_t get_rgb(mlx_texture_t *texture, int x, int y)
 {
-    int x;
-    float final_distance;
-    int line_height;
-    int line_start;
-    int line_end;
-	t_point start;
-	t_point end;
+	uint8_t *rgb;
 
-	start.color = 0xbbbbbbbb;
-	x = 0;
-    while (x < WIDTH)
-    {
-		start.x = x;
-        final_distance = ray->distances[x];
-        line_height = (ptr->map->block_size * HEIGHT) / final_distance;
-        if (line_height > HEIGHT)
-            line_height = HEIGHT;
-        line_start = (HEIGHT / 2) - (line_height / 2);
-		start.y = line_start;
-		end.x = x;
-        line_end = (HEIGHT / 2) + (line_height / 2);
-		end.y = line_end;
-		draw_line(ptr->img, start, end);
-		x++;
-    }
+	rgb = &texture->pixels[(y * texture->width + x) * texture->bytes_per_pixel];
+	return (rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | 255);
 }
 
+void ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture, t_game_essentials *ptr)
+{
+	double increase_factor;
+	double texture_y;
+	double texture_offset;
+	int y_minimum;
+	int y_maximum;
+
+	if (texture == ptr->textures[NORTH] || texture == ptr->textures[WEST])
+		wall.x = (texture->width - 1) - wall.x;
+	increase_factor = (texture->height / wall.height) * 0.5;
+	texture_offset = 0;
+	if (wall.height > HEIGHT)
+	{
+		texture_offset = (wall.height - HEIGHT) / 2;
+		wall.height = HEIGHT;
+	}
+	y_minimum = (HEIGHT / 2) - wall.height;
+	y_maximum = (HEIGHT / 2) + wall.height;
+	texture_y = texture_offset * increase_factor;
+	while (y_minimum < y_maximum)
+	{
+		put_pixel(img, wall.y, y_minimum, get_rgb(texture, wall.x, (int)texture_y));
+		texture_y += increase_factor;
+		y_minimum++;
+	}
+}
+
+void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
+{
+	t_wall			wall;
+	int				line_height;
+	mlx_texture_t	*texture;
+
+	wall.height = (ptr->map->block_size * (HEIGHT)) / ray->distance;
+	wall.y = x;
+	if (wall.height > HEIGHT)
+		wall.height = HEIGHT;
+	if (ray->axis == HORIZONTAL && ft_is_north(ray->angle))
+		texture = ptr->textures[NORTH];
+	else if (ray->axis == HORIZONTAL && ft_is_south(ray->angle))
+		texture = ptr->textures[SOUTH];
+	else if (ray->axis == VERTICAL && ft_is_east(ray->angle))
+		texture = ptr->textures[EAST];
+	else if (ray->axis == VERTICAL && ft_is_west(ray->angle))
+		texture = ptr->textures[WEST];
+	else
+		texture = ptr->textures[NORTH];
+	if (ray->axis == HORIZONTAL)
+		wall.x = ((int)ray->x * ptr->map->block_size / 4) % texture->width;
+	else
+		wall.x = ((int)ray->y * ptr->map->block_size / 4) % texture->width;
+	ft_put_texture(ptr->img, wall, texture, ptr);
+}
 
 void	ft_cast_rays(t_game_essentials *ptr, t_rays *ray)
 {
 	float	angle_diff;
 
-	ray->angle = ptr->player->angle - RAD * 30;
-	while (ray->amount < WIDTH)
+	ray->angle = ft_normalize_angle(ray->angle);
+	ft_cast_2d_horizontal_rays(ptr, ray);
+	ft_cast_2d_vertical_rays(ptr, ray);
+	if (ray->distance_horizontal < ray->distance_vertical)
 	{
-		ray->angle = ft_normalize_angle(ray->angle);
-		ft_cast_2d_horizontal_rays(ptr, ray);
-		ft_cast_2d_vertical_rays(ptr, ray);
-		if (ray->distance_horizontal < ray->distance_vertical)
-		{
-			ray->x = ray->distance_x_horizontal;
-			ray->y = ray->distance_y_horizontal;
-			ray->distances[ray->amount] = ray->distance_horizontal;
-		}
-		else if (ray->distance_horizontal > ray->distance_vertical)
-		{
-			ray->x = ray->distance_x_vertical;
-			ray->y = ray->distance_y_vertical;
-			ray->distances[ray->amount] = ray->distance_vertical;
-		}
-		//ft_put_line(ptr->img, ray->x, ray->y, ptr->player);
-		angle_diff = cos(ptr->player->angle - ray->angle);
-		ray->distances[ray->amount] = ray->distances[ray->amount] * angle_diff;
-		ray->angle += STEP;
-		ray->amount++;
+		ray->x = ray->distance_x_horizontal;
+		ray->y = ray->distance_y_horizontal;
+		ray->distance = ray->distance_horizontal;
+		ray->axis = HORIZONTAL;
 	}
+	else
+	{
+		ray->x = ray->distance_x_vertical;
+		ray->y = ray->distance_y_vertical;
+		ray->distance = ray->distance_vertical;
+		ray->axis = VERTICAL;
+	}
+	ft_put_line(ptr->img_map, ray->x, ray->y, ptr->player);
+	ray->angle = ray->angle;
+	angle_diff = cos(ptr->player->angle - ray->angle);
+	ray->distance *= angle_diff;
 }
 
 void	ft_make_game(t_game_essentials *ptr)
 {
-	t_rays *ray;
+	int x;
+	float angle;
 
-	ray = malloc(sizeof(t_rays));
-	ft_initiate_rays(ray);
-	ft_cast_rays(ptr, ray);
-	ft_draw_wall(ptr, ray);
-	free(ray);
+	x = 0;
+	angle = ptr->player->angle - RAD * 35;
+	while (x < WIDTH)
+	{
+		ptr->rays[x].angle = angle;
+		ft_cast_rays(ptr, &ptr->rays[x]);
+		ft_draw_wall(ptr, &ptr->rays[x], x);
+		angle += STEP;
+		x++;
+	}
 }

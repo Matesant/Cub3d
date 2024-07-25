@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:22:05 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 14:42:32 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:19:34 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	parse(t_game_essentials *game, char *map)
 	get_colors(game, game->map->raw_data);
 	get_map_matrice(game, game->map->raw_data);
 	game->map->block_size = 16;
-	printf("c: %d\n", game->map->ceiling_color);
-	printf("f: %d\n", game->map->floor_color);
+	load_textures(game);
 }
 
 static int	count_lines(char *map)

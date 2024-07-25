@@ -10,7 +10,7 @@ char	*is_map_matrice(char *line)
 		return (NULL);
 }
 
-int	count_lines(char **raw_data)
+int	count_lines(char **raw_data)	
 {
 	int	lines;
 

@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 14:36:04 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:24:36 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define HEIGHT 720
 # define WIDTH 1080
 # define MOVE_SPEED 3.0
-# define NUM_RAYS 500
 # define FOV 0
 # define PI 3.14159265359
 # define P2 PI / 2
@@ -47,6 +46,12 @@ typedef enum e_orientation
 	WEST
 }					t_orientation;
 
+typedef enum e_axis
+{
+	HORIZONTAL,
+	VERTICAL
+}					t_axis;
+
 typedef struct s_vector
 {
 	double			x;
@@ -55,29 +60,27 @@ typedef struct s_vector
 
 typedef struct s_rays
 {
-	int				amount;
 	int				mapx;
 	int				mapy;
-	int				steps_to_obstacle;
 	float			a_tan;
 	float			x;
 	float			y;
 	float			angle;
 	float			xoffset;
 	float			yoffset;
-	float			distances[WIDTH + 1];
-	int cardial[WIDTH + 1];
 	float			distance_horizontal;
 	float			distance_vertical;
 	float			distance_y_horizontal;
 	float			distance_x_horizontal;
 	float			distance_x_vertical;
 	float			distance_y_vertical;
+	float			distance;
+	int				axis;
 }					t_rays;
 
 typedef struct s_map
 {
-	t_bool		draw_map;
+	t_bool			draw_map;
 	int				width;
 	int				height;
 	int				block_x;
@@ -126,6 +129,13 @@ typedef struct s_point
 	uint32_t		color;
 }					t_point;
 
+typedef struct s_wall
+{
+	float			height;
+	float			x;
+	float			y;
+}					t_wall;
+
 typedef struct s_line_drawing_data
 {
 	int				dx;
@@ -140,6 +150,8 @@ typedef struct s_game_essentials
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*img_map;
+	mlx_texture_t	*textures[4];
+	t_rays			rays[WIDTH + 1];
 	t_player_pos	*player;
 	t_map			*map;
 	int				fd;
@@ -160,8 +172,8 @@ int					ft_return_y(char character, t_map *map);
 int					ft_return_x(char character, t_map *map);
 void				ft_init_mlx(t_game_essentials *ptr);
 void				ft_player_configs(t_game_essentials *ptr);
-//void				ft_draw_background(t_game_essentials *game, mlx_image_t *img);
-void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width, int height);
+void				ft_draw_background(t_game_essentials *game,
+						mlx_image_t *img, int width, int height);
 void				ft_put_line(mlx_image_t *img, int endx, int endy,
 						t_player_pos *player);
 void				ft_initiate_rays(t_rays *rays);
@@ -187,7 +199,11 @@ void				draw_line(mlx_image_t *img, t_point start, t_point end);
 void				put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
 void				new_line_data(t_line_drawing_data *line_data, t_point start,
 						t_point end);
-t_bool			is_wall(t_game_essentials *game, int key);
-void			 	toggle_minimap(mlx_key_data_t keydata, void* param);
-
+t_bool				is_wall(t_game_essentials *game, int key);
+void				toggle_minimap(mlx_key_data_t keydata, void *param);
+void				load_textures(t_game_essentials *game);
+t_bool				ft_is_north(float angle);
+t_bool				ft_is_south(float angle);
+t_bool				ft_is_west(float angle);
+t_bool				ft_is_east(float angle);
 #endif

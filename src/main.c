@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:49:46 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:27:09 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_game_essentials	ptr = {0};
+	t_game_essentials	ptr;
 
+	ptr = (t_game_essentials){0};
 	ft_pre_verifications(&ptr, argc, argv);
 	parse(&ptr, argv[1]);
 	ft_init_mlx(&ptr);
