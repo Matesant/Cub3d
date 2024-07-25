@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:22:05 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:44:14 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:42:32 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	replace_tabs_for_spaces(char *raw_data[]);
 
 void	parse(t_game_essentials *game, char *map)
 {
-	game->map = malloc(sizeof(t_map));
+	game->map = ft_calloc(1, sizeof(t_map));
 	game->map->raw_data = read_map(map);
 	replace_tabs_for_spaces(game->map->raw_data);
 	get_textures(game,	 game->map->raw_data);

@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/24 13:37:30 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:36:04 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define KEY_S MLX_KEY_S
 # define KEY_D MLX_KEY_D
 # define HEIGHT 720
-# define WIDTH 1280
+# define WIDTH 1080
 # define MOVE_SPEED 3.0
 # define NUM_RAYS 500
 # define FOV 0
@@ -37,7 +37,7 @@
 # define P3 3 * PI / 2
 # define EPSILON 1e-6
 # define RAD 0.0174533
-# define STEP 0.000727221
+# define STEP 0.0011315221
 
 typedef enum e_orientation
 {

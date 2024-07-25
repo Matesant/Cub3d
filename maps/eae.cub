@@ -3,8 +3,8 @@ NO assets/textures/resident_evil/resident_evil_gaiden_bed_room.png
 EA assets/textures/resident_evil/resident_evil_gaiden_elevator.png
 WE assets/textures/resident_evil/resident_evil_gaiden_elevator.png
 
-C 67,47,87
-F 45,24,50
+C 0,255,0
+F 0,0,255
 
 1111111111111111111
 1000000000000000001
@@ -12,7 +12,7 @@ F 45,24,50
 1000000000000000001
 100000000W000000001
 1000000000000000001
-1000000000000000001
+1000010000000000001
 1000001111111110001
 1000001       10001
 1000001       10001
