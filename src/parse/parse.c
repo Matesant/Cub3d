@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 18:22:05 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 16:19:34 by matesant         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 static char	*replace(char *line);
@@ -23,7 +11,7 @@ void	parse(t_game_essentials *game, char *map)
 	game->map = ft_calloc(1, sizeof(t_map));
 	game->map->raw_data = read_map(map);
 	replace_tabs_for_spaces(game->map->raw_data);
-	get_textures(game,	 game->map->raw_data);
+	get_textures(game, game->map->raw_data);
 	get_colors(game, game->map->raw_data);
 	get_map_matrice(game, game->map->raw_data);
 	game->map->block_size = 16;
@@ -60,7 +48,7 @@ static char	**read_map(char *map)
 	int		fd;
 
 	count = count_lines(map);
-	matrice = ft_calloc(count + 1, sizeof (char *));
+	matrice = ft_calloc(count + 1, sizeof(char *));
 	fd = open(map, O_RDONLY);
 	index = -1;
 	while (++index < count)
@@ -81,7 +69,7 @@ static char	**read_map(char *map)
 
 static int	count_tabs(char *line)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (*line)
@@ -118,7 +106,7 @@ static char	*replace(char *line)
 	int		j;
 
 	replaced_len = ft_strlen(line) + (count_tabs(line) * 4);
-	replaced = ft_calloc(replaced_len, sizeof (char *));
+	replaced = ft_calloc(replaced_len, sizeof(char *));
 	i = 0;
 	j = 0;
 	while (line[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 04:01:23 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 04:01:30 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:24:29 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 
 void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 {
-	t_wall wall;
-	int line_height;
-	mlx_texture_t *texture;
+	t_wall			wall;
+	int				line_height;
+	mlx_texture_t	*texture;
 
 	wall.height = (ptr->map->block_size * (WIDTH * 0.5)) / ray->distance;
 	wall.y = x;

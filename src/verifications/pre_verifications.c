@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:54:23 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/03 22:13:40 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:24:43 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_pre_verifications(t_game_essentials *game, int argc, char **argv)
 {
-	char *dot_position;
-	
+	char	*dot_position;
+
 	if (argc != 2)
 		error(game, "Please provide only a map file\n");
 	dot_position = ft_strrchr(argv[1], '.');

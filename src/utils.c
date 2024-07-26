@@ -2,15 +2,14 @@
 
 void	free_map(t_map *map)
 {
-	free(map->texture_path_NO);
-	free(map->texture_path_SO);
-	free(map->texture_path_WE);
-	free(map->texture_path_EA);
+	free(map->texture_path_no);
+	free(map->texture_path_so);
+	free(map->texture_path_we);
+	free(map->texture_path_ea);
 	ft_delete_matrice(map->raw_data);
 	ft_delete_matrice(map->map_matrice);
 	free(map);
 }
-
 
 void	clear(t_game_essentials *game)
 {

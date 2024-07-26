@@ -56,10 +56,10 @@ void	save_color(t_game_essentials *game, char *line)
 	}
 	if (color_id == 'F')
 		game->map->floor_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
-			ft_atoi(rgb[2]), 255);
+				ft_atoi(rgb[2]), 255);
 	if (color_id == 'C')
 		game->map->ceiling_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
-			ft_atoi(rgb[2]), 255);
+				ft_atoi(rgb[2]), 255);
 	ft_delete_matrice(rgb);
 }
 

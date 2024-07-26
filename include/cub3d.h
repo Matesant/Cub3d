@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 06:39:20 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:21:42 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define MOVE_SPEED 3.0
 # define FOV 0
 # define PI 3.14159265359
-# define P2 PI / 2
-# define P3 3 * PI / 2
+# define P2 1.57079632679
+# define P3 4.71238898038
 # define EPSILON 1e-6
 # define RAD 0.0174533
 # define STEP 0.000818123
@@ -88,10 +88,10 @@ typedef struct s_map
 	int				block_size;
 	char			**raw_data;
 	char			**map_matrice;
-	char			*texture_path_NO;
-	char			*texture_path_SO;
-	char			*texture_path_WE;
-	char			*texture_path_EA;
+	char			*texture_path_no;
+	char			*texture_path_so;
+	char			*texture_path_we;
+	char			*texture_path_ea;
 	uint32_t		ceiling_color;
 	uint32_t		floor_color;
 	t_bool			textures_obtained;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 06:37:20 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:24:15 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
 				ray->distance_x_horizontal = ray->x;
 				ray->distance_y_horizontal = ray->y;
 				ray->distance_horizontal = hypot(ptr->player->x - ray->x,
-					ptr->player->y - ray->y);
+						ptr->player->y - ray->y);
 				return ;
 			}
 			else
@@ -54,7 +54,7 @@ void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *ptr)
 				ray->distance_x_vertical = ray->x;
 				ray->distance_y_vertical = ray->y;
 				ray->distance_vertical = hypot(ptr->player->x - ray->x,
-					ptr->player->y - ray->y);
+						ptr->player->y - ray->y);
 				return ;
 			}
 			else

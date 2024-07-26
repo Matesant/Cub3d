@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_rays.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:30:55 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 17:25:07 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:24:23 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_set_if_angle_is_looking_left(t_rays *ray, t_game_essentials *ptr,
 	if (ray->angle > P2 && ray->angle < P3)
 	{
 		ray->x = (((int)ptr->player->x / ptr->map->block_size)
-			* ptr->map->block_size) - 0.0001;
+				* ptr->map->block_size) - 0.0001;
 		ray->y = (ptr->player->x - ray->x) * n_tan + ptr->player->y;
 		ray->xoffset = -ptr->map->block_size;
 		ray->yoffset = -ray->xoffset * n_tan;
@@ -31,7 +31,7 @@ void	ft_set_if_angle_is_looking_right(t_rays *ray, t_game_essentials *ptr,
 	if (ray->angle < P2 || ray->angle > P3)
 	{
 		ray->x = (((int)ptr->player->x / ptr->map->block_size)
-			* ptr->map->block_size) + ptr->map->block_size;
+				* ptr->map->block_size) + ptr->map->block_size;
 		ray->y = (ptr->player->x - ray->x) * n_tan + ptr->player->y;
 		ray->xoffset = ptr->map->block_size;
 		ray->yoffset = -ray->xoffset * n_tan;

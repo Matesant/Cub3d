@@ -1,10 +1,9 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    char tmp[4];
+	char	tmp[4];
 
-    tmp[0] = 'A';
-
-    printf("%c\n", tmp[0]);
+	tmp[0] = 'A';
+	printf("%c\n", tmp[0]);
 }

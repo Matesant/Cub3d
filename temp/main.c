@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 20:01:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:03:02 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:25:09 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	main(void)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-    mlx_image_t	*img2;
+	mlx_image_t	*img2;
 
 	mlx = mlx_init(500, 500, "eae", true);
 	if (!mlx)
 		return (1);
 	img = mlx_new_image(mlx, 500, 500);
-    img2 = mlx_new_image(mlx, 500, 500);
+	img2 = mlx_new_image(mlx, 500, 500);
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_image_to_window(mlx, img2, 0, 0);
 	img->instances[0].z = 1;

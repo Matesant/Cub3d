@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:37:43 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/24 13:36:35 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:23:49 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_hook(void *param)
 	ft_draw_background(ptr, ptr->img, WIDTH, HEIGHT);
 	ft_draw_map(ptr, ptr->map->block_size);
 	ft_put_player(ptr->img_map, ptr->player);
-
 	ft_make_game(ptr);
 }
 

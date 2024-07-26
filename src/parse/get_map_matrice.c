@@ -39,7 +39,6 @@ t_bool	validade_map_matrice(char **raw_data)
 	int	line_index;
 	int	column_index;
 
-	;
 	line_index = -1;
 	while (raw_data[++line_index])
 	{

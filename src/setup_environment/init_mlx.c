@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 01:36:16 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 03:59:45 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:23:59 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	ft_init_mlx(t_game_essentials *ptr)
 
 t_vector	get_start_position(t_game_essentials *game)
 {
-	char		**matrice;
-	int			line;
-	int			column;
+	char	**matrice;
+	int		line;
+	int		column;
 
 	matrice = game->map->map_matrice;
 	line = -1;
@@ -36,10 +36,10 @@ t_vector	get_start_position(t_game_essentials *game)
 		while (matrice[line][++column])
 		{
 			if (ft_strchr("NSEW", matrice[line][column]))
-				return ((t_vector) {column, line});
+				return ((t_vector){column, line});
 		}
 	}
-	return ((t_vector) {0});
+	return ((t_vector){0});
 }
 
 float	get_initial_angle(t_game_essentials *game)
@@ -51,7 +51,7 @@ float	get_initial_angle(t_game_essentials *game)
 
 	matrice = game->map->map_matrice;
 	start = game->player->pos;
-	c = matrice[(int) start.y][(int)start.x];
+	c = matrice[(int)start.y][(int)start.x];
 	angle = 0;
 	if (c == 'E')
 		angle = 0;
@@ -70,8 +70,10 @@ void	ft_player_configs(t_game_essentials *ptr)
 	ptr->player->size = 16;
 	ptr->player->pos = get_start_position(ptr);
 	ptr->player->angle = get_initial_angle(ptr);
-	ptr->player->x = ptr->player->pos.x * ptr->map->block_size + ptr->map->block_size / 2;
-	ptr->player->y = ptr->player->pos.y * ptr->map->block_size + ptr->map->block_size / 2;
+	ptr->player->x = ptr->player->pos.x * ptr->map->block_size
+		+ ptr->map->block_size / 2;
+	ptr->player->y = ptr->player->pos.y * ptr->map->block_size
+		+ ptr->map->block_size / 2;
 	ptr->player->delta_x = cos(ptr->player->angle) * MOVE_SPEED;
 	ptr->player->delta_y = sin(ptr->player->angle) * MOVE_SPEED;
 }

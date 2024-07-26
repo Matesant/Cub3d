@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:06:15 by almarcos          #+#    #+#             */
-/*   Updated: 2023/11/21 15:46:18 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:23:28 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	draw_vertical_line(mlx_image_t *img, t_point start, t_point end);
 static void	draw_horizontal_line(mlx_image_t *img, t_point start, t_point end);
-static void	draw_line_larger_y_axis(mlx_image_t *img, t_line_drawing_data line_data,
-				t_point start, t_point end);
-static void	draw_line_larger_x_axis(mlx_image_t *img, t_line_drawing_data line_data,
-				t_point start, t_point end);
+static void	draw_line_larger_y_axis(mlx_image_t *img,
+				t_line_drawing_data line_data, t_point start, t_point end);
+static void	draw_line_larger_x_axis(mlx_image_t *img,
+				t_line_drawing_data line_data, t_point start, t_point end);
 
 void	draw_line(mlx_image_t *img, t_point start, t_point end)
 {
@@ -77,8 +77,8 @@ static void	draw_horizontal_line(mlx_image_t *img, t_point start, t_point end)
 	}
 }
 
-static void	draw_line_larger_x_axis(mlx_image_t *img, t_line_drawing_data line_data,
-		t_point start, t_point end)
+static void	draw_line_larger_x_axis(mlx_image_t *img,
+		t_line_drawing_data line_data, t_point start, t_point end)
 {
 	line_data.control = line_data.dx / 2;
 	put_pixel(img, (int)start.x, (int)start.y, (int)start.color);
@@ -95,8 +95,8 @@ static void	draw_line_larger_x_axis(mlx_image_t *img, t_line_drawing_data line_d
 	}
 }
 
-static void	draw_line_larger_y_axis(mlx_image_t *img, t_line_drawing_data line_data,
-		t_point start, t_point end)
+static void	draw_line_larger_y_axis(mlx_image_t *img,
+		t_line_drawing_data line_data, t_point start, t_point end)
 {
 	line_data.control = line_data.dy / 2;
 	put_pixel(img, (int)start.x, (int)start.y, start.color);
