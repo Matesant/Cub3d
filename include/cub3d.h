@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 02:03:30 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 03:29:32 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,11 @@ t_bool				ft_is_north(float angle);
 t_bool				ft_is_south(float angle);
 t_bool				ft_is_west(float angle);
 t_bool				ft_is_east(float angle);
+void				ft_move_right(t_game_essentials *game);
+void				ft_move_left(t_game_essentials *game);
+void				ft_move_d(t_game_essentials *game);
+void				ft_move_a(t_game_essentials *game);
+void				ft_move_s(t_game_essentials *game);
+void				ft_move_w(t_game_essentials *game);
+
 #endif

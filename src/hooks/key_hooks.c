@@ -6,34 +6,46 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/19 16:57:50 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 03:57:14 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+#include "cub3d.h"
+
 t_bool	is_wall(t_game_essentials *game, int key)
 {
-	float	delta_x;
-	float	delta_y;
-	int		mapX;
-	int		mapY;
+    float	delta_x;
+    float	delta_y;
+    int		mapX;
+    int		mapY;
 
-	delta_x = game->player->delta_x;
-	delta_y = game->player->delta_y;
-	if (key == MLX_KEY_W)
-	{
-		mapX = (int) (game->player->x + delta_x) / game->map->block_size;
-		mapY = (int) (game->player->y + delta_y) / game->map->block_size;
-	}
-	else
-	{
-		mapX = (int) (game->player->x - delta_x) / game->map->block_size;
-		mapY = (int) (game->player->y - delta_y) / game->map->block_size;		
-	}
-	if (game->map->map_matrice[mapY][mapX] == '1')
-		return (TRUE);
-	return (FALSE);
+    delta_x = game->player->delta_x * 8;
+    delta_y = game->player->delta_y * 8;
+    if (key == MLX_KEY_W)
+    {
+        mapX = (int) (game->player->x + delta_x) / game->map->block_size;
+        mapY = (int) (game->player->y + delta_y) / game->map->block_size;
+    }
+    else if (key == MLX_KEY_S)
+    {
+        mapX = (int) (game->player->x - delta_x) / game->map->block_size;
+        mapY = (int) (game->player->y - delta_y) / game->map->block_size;		
+    }
+    else if (key == MLX_KEY_A)
+    {
+        mapX = (int) (game->player->x + delta_y) / game->map->block_size;
+        mapY = (int) (game->player->y - delta_x) / game->map->block_size;
+    }
+    else if (key == MLX_KEY_D)
+    {
+        mapX = (int) (game->player->x - delta_y) / game->map->block_size;
+        mapY = (int) (game->player->y + delta_x) / game->map->block_size;
+    }
+    if (game->map->map_matrice[mapY][mapX] == '1')
+        return (TRUE);
+    return (FALSE);
 }
 
 void	ft_key_hooks(void *param)
@@ -47,31 +59,17 @@ void	ft_key_hooks(void *param)
 		exit(0);
 	}
 	if (mlx_is_key_down(ptr->mlx, KEY_W) && !is_wall(ptr, KEY_W))
-	{
-		ptr->player->x += ptr->player->delta_x;
-		ptr->player->y += ptr->player->delta_y;
-	}
+		ft_move_w(ptr);
 	if (mlx_is_key_down(ptr->mlx, KEY_S) && !is_wall(ptr, KEY_S))
-	{
-		ptr->player->x -= ptr->player->delta_x;
-		ptr->player->y -= ptr->player->delta_y;
-	}
-	if (mlx_is_key_down(ptr->mlx, KEY_A))
-	{
-		ptr->player->angle -= 0.05;
-		if (ptr->player->angle < 0)
-			ptr->player->angle += 2 * PI;
-		ptr->player->delta_x = cos(ptr->player->angle) * MOVE_SPEED;
-		ptr->player->delta_y = sin(ptr->player->angle) * MOVE_SPEED;
-	}
-	if (mlx_is_key_down(ptr->mlx, KEY_D))
-	{
-		ptr->player->angle += 0.05;
-		if (ptr->player->angle > 2 * PI)
-			ptr->player->angle -= 2 * PI;
-		ptr->player->delta_x = cos(ptr->player->angle) * MOVE_SPEED;
-		ptr->player->delta_y = sin(ptr->player->angle) * MOVE_SPEED;
-	}
+		ft_move_s(ptr);
+	if (mlx_is_key_down(ptr->mlx, KEY_A) && !is_wall(ptr, KEY_A))
+		ft_move_a(ptr);
+	if (mlx_is_key_down(ptr->mlx, KEY_D) && !is_wall(ptr, KEY_D))
+		ft_move_d(ptr);
+	if (mlx_is_key_down(ptr->mlx, MLX_KEY_LEFT))
+		ft_move_left(ptr);
+	if (mlx_is_key_down(ptr->mlx, MLX_KEY_RIGHT))
+		ft_move_right(ptr);
 }
 
 void toggle_minimap(mlx_key_data_t keydata, void* param)

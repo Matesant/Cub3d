@@ -6,20 +6,20 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:33:48 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 19:07:22 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 02:29:57 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_bool	ft_is_north(float angle)
+t_bool	ft_is_south(float angle)
 {
     if (angle > 0 && angle < PI)
         return (TRUE);
     return (FALSE);
 }
 
-t_bool	ft_is_south(float angle)
+t_bool	ft_is_north(float angle)
 {
     if (angle > PI && angle < (PI * 2))
         return (TRUE);

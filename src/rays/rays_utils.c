@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 00:29:43 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 03:18:15 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture, t_gam
 	int y_minimum;
 	int y_maximum;
 
-	if (texture == ptr->textures[NORTH] || texture == ptr->textures[WEST])
+	if (texture == ptr->textures[SOUTH] || texture == ptr->textures[WEST])
 		wall.x = (texture->width - 1) - wall.x;
 	increase_factor = (texture->height / wall.height) * 0.5;
 	texture_offset = 0;
 	if (wall.height > HEIGHT)
 	{
-		texture_offset = wall.height - (HEIGHT * 0.5);
+		texture_offset = (wall.height - HEIGHT) * 0.5;
 		wall.height = HEIGHT;
 	}
 	y_minimum = (HEIGHT / 2) - wall.height;
@@ -135,8 +135,6 @@ void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 		texture = ptr->textures[EAST];
 	else if (ray->axis == VERTICAL && ft_is_west(ray->angle))
 		texture = ptr->textures[WEST];
-	else
-		texture = ptr->textures[NORTH];
 	if (ray->axis == HORIZONTAL)
 		wall.x = (int)(ray->x * ptr->map->block_size / 4) % texture->width;
 	else
