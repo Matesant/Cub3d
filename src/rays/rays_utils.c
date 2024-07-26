@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 19:24:53 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 00:29:43 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ static uint32_t get_rgb(mlx_texture_t *texture, int x, int y)
 {
 	uint8_t *rgb;
 
-	rgb = &texture->pixels[(y * texture->width + x) * texture->bytes_per_pixel];
-	return (rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | 255);
+	rgb = &texture->pixels[(y * texture->width + x) * 4];
+	return (rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | rgb[3]);
 }
 
 void ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture, t_game_essentials *ptr)
@@ -103,7 +103,7 @@ void ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture, t_gam
 	texture_offset = 0;
 	if (wall.height > HEIGHT)
 	{
-		texture_offset = (wall.height - HEIGHT) / 2;
+		texture_offset = wall.height - (HEIGHT * 0.5);
 		wall.height = HEIGHT;
 	}
 	y_minimum = (HEIGHT / 2) - wall.height;
@@ -123,7 +123,7 @@ void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 	int				line_height;
 	mlx_texture_t	*texture;
 
-	wall.height = (ptr->map->block_size * (HEIGHT)) / ray->distance;
+	wall.height = (ptr->map->block_size * (WIDTH * 0.5)) / ray->distance;
 	wall.y = x;
 	if (wall.height > HEIGHT)
 		wall.height = HEIGHT;
@@ -138,9 +138,9 @@ void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 	else
 		texture = ptr->textures[NORTH];
 	if (ray->axis == HORIZONTAL)
-		wall.x = ((int)ray->x * ptr->map->block_size / 4) % texture->width;
+		wall.x = (int)(ray->x * ptr->map->block_size / 4) % texture->width;
 	else
-		wall.x = ((int)ray->y * ptr->map->block_size / 4) % texture->width;
+		wall.x = (int)(ray->y * ptr->map->block_size / 4) % texture->width;
 	ft_put_texture(ptr->img, wall, texture, ptr);
 }
 
@@ -177,7 +177,7 @@ void	ft_make_game(t_game_essentials *ptr)
 	float angle;
 
 	x = 0;
-	angle = ptr->player->angle - RAD * 35;
+	angle = ptr->player->angle - RAD * 30;
 	while (x < WIDTH)
 	{
 		ptr->rays[x].angle = angle;
