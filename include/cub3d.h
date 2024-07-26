@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 04:02:01 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 06:39:20 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,5 +216,10 @@ void				ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x);
 void				ft_put_texture(mlx_image_t *img, t_wall wall,
 						mlx_texture_t *texture, t_game_essentials *ptr);
 static uint32_t		get_rgb(mlx_texture_t *texture, int x, int y);
+void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
+void				ft_init_cordinates(t_line *cordinates, int endx, int endy,
+						t_player_pos *player);
+int					ft_return_y(char character, t_map *map);
+int					ft_return_x(char character, t_map *map);
 
 #endif

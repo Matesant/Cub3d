@@ -6,30 +6,26 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 17:06:05 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 06:40:22 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdbool.h>
-#include <stdio.h>
 
-// void	ft_draw_background(t_game_essentials *game, mlx_image_t *img)
-// {
-// 	uint32_t	*pixel;
-// 	uint32_t	index;
-// 	uint32_t	middle;
+void	ft_draw_ray(t_game_essentials *game, t_rays *ray)
+{
+	t_point	start;
+	t_point	end;
 
-// 	pixel = (uint32_t *) img->pixels;
-// 	index = img->height * img->width;
-// 	middle = index / 2;
-// 	while (--index > middle)
-// 		pixel[index] = game->map->floor_color;
-// 	while (--index)
-// 		pixel[index] = game->map->ceiling_color;
-// }
+	start.x = game->player->x;
+	start.y = game->player->y;
+	end.x = ray->x;
+	end.y = ray->y;
+	draw_line(game->img_map, start, end);
+}
 
-void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width, int height)
+void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width,
+		int height)
 {
 	int	x;
 	int	y;
@@ -58,90 +54,6 @@ void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width, in
 	}
 }
 
-int	ft_return_x(char character, t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->map_matrice[i][j] == character)
-				return (j * map->block_size);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
-}
-
-int	ft_return_y(char character, t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->map_matrice[i][j] == character)
-				return (i * map->block_size);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
-}
-
-void	ft_init_cordinates(t_line *cordinates, int endx, int endy,
-		t_player_pos *player)
-{
-	cordinates->deltax = ft_abs(endx - player->x);
-	cordinates->deltay = -ft_abs(endy - player->y);
-	cordinates->step_x = ft_compare_number(player->x, endx, 1);
-	cordinates->step_y = ft_compare_number(player->y, endy, 1);
-	cordinates->error_accumulated = cordinates->deltax + cordinates->deltay;
-	cordinates->double_error = 0;
-}
-
-void	ft_put_line(mlx_image_t *img, int endx, int endy, t_player_pos *player)
-{
-	t_line	cordinates;
-	int		x_initial;
-	int		y_initial;
-
-	ft_init_cordinates(&cordinates, endx, endy, player);
-	x_initial = player->x;
-	y_initial = player->y;
-	while (1)
-	{
-		if ((x_initial >= 0 && x_initial < WIDTH && y_initial >= 0
-				&& y_initial < HEIGHT) && (endx >= 0 && endx < WIDTH
-				&& endy >= 0 && endy < HEIGHT))
-		{
-			mlx_put_pixel(img, x_initial, y_initial, 0xAAAAAAAF);
-		}
-		if (x_initial == endx && y_initial == endy)
-			break ;
-		cordinates.double_error = 2 * cordinates.error_accumulated;
-		if (cordinates.double_error >= cordinates.deltay)
-		{
-			cordinates.error_accumulated += cordinates.deltay;
-			x_initial += cordinates.step_x;
-		}
-		if (cordinates.double_error <= cordinates.deltax)
-		{
-			cordinates.error_accumulated += cordinates.deltax;
-			y_initial += cordinates.step_y;
-		}
-	}
-}
-
 void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 {
 	t_point	start;
@@ -155,8 +67,8 @@ void	ft_put_player(mlx_image_t *img, t_player_pos *player)
 		start.y = player->y - (player->size / 2);
 		while (start.y < player->y + (player->size / 2))
 		{
-			end.x = player->x + (player->size / 2) -1;
-			end.y = player->y + (player->size / 2) -1;
+			end.x = player->x + (player->size / 2) - 1;
+			end.y = player->y + (player->size / 2) - 1;
 			draw_line(img, start, end);
 			start.y++;
 		}

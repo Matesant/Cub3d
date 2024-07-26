@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 04:01:21 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/26 06:37:20 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
 			}
 		}
 		else
-		{
 			break ;
-		}
 	}
 }
 
@@ -66,9 +64,7 @@ void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *ptr)
 			}
 		}
 		else
-		{
 			break ;
-		}
 	}
 }
 
@@ -81,39 +77,37 @@ float	ft_normalize_angle(float angle)
 	return (angle);
 }
 
-
-
-void	ft_cast_rays(t_game_essentials *ptr, t_rays *ray)
+void	ft_cast_rays(t_game_essentials *ptr, t_rays *rays)
 {
 	float	angle_diff;
 
-	ray->angle = ft_normalize_angle(ray->angle);
-	ft_cast_2d_horizontal_rays(ptr, ray);
-	ft_cast_2d_vertical_rays(ptr, ray);
-	if (ray->distance_horizontal < ray->distance_vertical)
+	rays->angle = ft_normalize_angle(rays->angle);
+	ft_cast_2d_horizontal_rays(ptr, rays);
+	ft_cast_2d_vertical_rays(ptr, rays);
+	if (rays->distance_horizontal < rays->distance_vertical)
 	{
-		ray->x = ray->distance_x_horizontal;
-		ray->y = ray->distance_y_horizontal;
-		ray->distance = ray->distance_horizontal;
-		ray->axis = HORIZONTAL;
+		rays->x = rays->distance_x_horizontal;
+		rays->y = rays->distance_y_horizontal;
+		rays->distance = rays->distance_horizontal;
+		rays->axis = HORIZONTAL;
 	}
 	else
 	{
-		ray->x = ray->distance_x_vertical;
-		ray->y = ray->distance_y_vertical;
-		ray->distance = ray->distance_vertical;
-		ray->axis = VERTICAL;
+		rays->x = rays->distance_x_vertical;
+		rays->y = rays->distance_y_vertical;
+		rays->distance = rays->distance_vertical;
+		rays->axis = VERTICAL;
 	}
-	ft_put_line(ptr->img_map, ray->x, ray->y, ptr->player);
-	ray->angle = ray->angle;
-	angle_diff = cos(ptr->player->angle - ray->angle);
-	ray->distance *= angle_diff;
+	ft_draw_ray(ptr, rays);
+	rays->angle = rays->angle;
+	angle_diff = cos(ptr->player->angle - rays->angle);
+	rays->distance *= angle_diff;
 }
 
 void	ft_make_game(t_game_essentials *ptr)
 {
-	int x;
-	float angle;
+	int		x;
+	float	angle;
 
 	x = 0;
 	angle = ptr->player->angle - RAD * 30;

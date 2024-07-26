@@ -24,7 +24,7 @@ void	get_colors(t_game_essentials *game, char **raw_data)
 	game->map->colors_obtained = TRUE;
 }
 
-t_bool is_color(char *line)
+t_bool	is_color(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
@@ -51,13 +51,15 @@ void	save_color(t_game_essentials *game, char *line)
 	while (*tmp)
 	{
 		if (ft_atoi(*tmp) > 255 || ft_atoi(*tmp) < 0)
-		error(game, "Invalid color range\n");
+			error(game, "Invalid color range\n");
 		tmp++;
 	}
 	if (color_id == 'F')
-		game->map->floor_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+		game->map->floor_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
+			ft_atoi(rgb[2]), 255);
 	if (color_id == 'C')
-		game->map->ceiling_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+		game->map->ceiling_color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
+			ft_atoi(rgb[2]), 255);
 	ft_delete_matrice(rgb);
 }
 
@@ -70,5 +72,5 @@ uint32_t	get_rgba(int r, int g, int b, int a)
 	color |= g << 16;
 	color |= b << 8;
 	color |= 0b11111111;
-    return (color);
+	return (color);
 }
