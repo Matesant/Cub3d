@@ -61,7 +61,8 @@ void	ft_key_hooks(void *param)
 	if (mlx_is_key_down(ptr->mlx, KEY_ESC))
 	{
 		mlx_terminate(ptr->mlx);
-		exit(0);
+		clear(ptr);
+		exit(EXIT_SUCCESS);
 	}
 	if (mlx_is_key_down(ptr->mlx, KEY_W) && !is_wall(ptr, KEY_W))
 		ft_move_w(ptr);
