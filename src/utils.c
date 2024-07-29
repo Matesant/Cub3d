@@ -15,6 +15,8 @@ void	clear(t_game_essentials *game)
 {
 	if (game->map)
 		free_map(game->map);
+	if (game->player)
+		free(game->player);	
 }
 
 void	error(t_game_essentials *game, char *error_msg)
