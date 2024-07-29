@@ -80,7 +80,6 @@ typedef struct s_rays
 
 typedef struct s_map
 {
-	t_bool			draw_map;
 	int				width;
 	int				height;
 	int				block_x;
