@@ -151,7 +151,7 @@ typedef struct s_game_essentials
 	mlx_image_t		*img;
 	mlx_image_t		*img_map;
 	mlx_texture_t	*textures[4];
-	t_rays			rays[WIDTH + 1];
+	t_rays			rays[WIDTH];
 	t_player_pos	*player;
 	t_map			*map;
 	int				fd;
@@ -215,11 +215,11 @@ void				ft_move_w(t_game_essentials *game);
 void				ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x);
 void				ft_put_texture(mlx_image_t *img, t_wall wall,
 						mlx_texture_t *texture, t_game_essentials *ptr);
-static uint32_t		get_rgb(mlx_texture_t *texture, int x, int y);
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
 void				ft_init_cordinates(t_line *cordinates, int endx, int endy,
 						t_player_pos *player);
 int					ft_return_y(char character, t_map *map);
 int					ft_return_x(char character, t_map *map);
+void				close_hook(void *param);
 
 #endif

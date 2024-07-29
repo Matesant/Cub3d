@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
 	mlx_loop_hook(ptr.mlx, ft_key_hooks, &ptr);
 	mlx_key_hook(ptr.mlx, toggle_minimap, &ptr);
+	mlx_close_hook(ptr.mlx, close_hook, &ptr);
 	mlx_loop(ptr.mlx);
 	return (0);
 }

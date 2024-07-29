@@ -53,9 +53,9 @@ void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 {
 	t_wall			wall;
-	int				line_height;
 	mlx_texture_t	*texture;
 
+	texture = NULL;
 	wall.height = (ptr->map->block_size * (WIDTH * 0.5)) / ray->distance;
 	wall.y = x;
 	if (wall.height > HEIGHT)

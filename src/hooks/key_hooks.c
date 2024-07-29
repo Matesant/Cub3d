@@ -91,3 +91,13 @@ void	toggle_minimap(mlx_key_data_t keydata, void *param)
 			game->img_map->instances[0].enabled = false;
 	}
 }
+
+void	close_hook(void *param)
+{
+	t_game_essentials	*game;
+
+	game = (t_game_essentials *) param;
+	clear(game);
+	mlx_terminate(game->mlx);
+	exit(EXIT_SUCCESS);
+}
