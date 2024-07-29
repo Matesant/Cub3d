@@ -72,5 +72,5 @@ void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 		wall.x = (int)(ray->x * ptr->map->block_size / 4) % texture->width;
 	else
 		wall.x = (int)(ray->y * ptr->map->block_size / 4) % texture->width;
-	ft_put_texture(ptr->img, wall, texture, ptr);
+	ft_put_texture(ptr->walls, wall, texture, ptr);
 }

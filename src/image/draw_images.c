@@ -21,7 +21,7 @@ void	ft_draw_ray(t_game_essentials *game, t_rays *ray)
 	start.y = game->player->y;
 	end.x = ray->x;
 	end.y = ray->y;
-	draw_line(game->img_map, start, end);
+	draw_line(game->mini_map, start, end);
 }
 
 void	ft_draw_background(t_game_essentials *game, mlx_image_t *img, int width,
@@ -98,7 +98,7 @@ void	ft_put_rectangle(t_game_essentials *game, int x, int y, int color)
 		end.x = x + game->map->block_size;
 		end.y = y + yo;
 		end.color = color;
-		draw_line(game->img_map, start, end);
+		draw_line(game->mini_map, start, end);
 		yo++;
 	}
 }

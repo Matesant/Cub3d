@@ -85,10 +85,10 @@ void	toggle_minimap(mlx_key_data_t keydata, void *param)
 	game = (t_game_essentials *)param;
 	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
 	{
-		if (game->img_map->instances[0].enabled == false)
-			game->img_map->instances[0].enabled = true;
+		if (game->mini_map->instances[0].enabled == false)
+			game->mini_map->instances[0].enabled = true;
 		else
-			game->img_map->instances[0].enabled = false;
+			game->mini_map->instances[0].enabled = false;
 	}
 }
 

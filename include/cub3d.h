@@ -148,8 +148,8 @@ typedef struct s_line_drawing_data
 typedef struct s_game_essentials
 {
 	mlx_t			*mlx;
-	mlx_image_t		*img;
-	mlx_image_t		*img_map;
+	mlx_image_t		*walls;
+	mlx_image_t		*mini_map;
 	mlx_texture_t	*textures[4];
 	t_rays			rays[WIDTH];
 	t_player_pos	*player;
