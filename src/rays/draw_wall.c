@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 04:01:23 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 14:10:22 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:01:08 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 
 	if (texture == ptr->textures[SOUTH] || texture == ptr->textures[WEST])
 		wall.x = (texture->width - 1) - wall.x;
+	if (wall.height > HEIGHT * 4)
+	{
+		wall.height = HEIGHT * 10;
+	}
 	increase_factor = (texture->height / wall.height) * 0.5;
 	y_minimum = (HEIGHT * 0.5) - wall.height;
 	y_maximum = (HEIGHT * 0.5) + wall.height;

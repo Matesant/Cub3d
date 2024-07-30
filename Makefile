@@ -1,6 +1,6 @@
 CC          := cc
 NAME        := cub3d
-CFLAGS      := -Wall -Werror -Wextra -O3
+CFLAGS      := -Wall -Werror -Wextra -O0 -g3
 LIBMLX      := MLX42
 MLX_REPO    := https://github.com/Matesant/MLX42
 MLX         := $(LIBMLX)/build/libmlx42.a
@@ -109,7 +109,7 @@ mlx:
 	@printf "$(BLUE)----------------------$(END)\n"
 	@printf "$(BLUE)--Building MLX...-$(END)\n"
 	@printf "$(BLUE)----------------------$(END)\n"
-	cd $(LIBMLX) && cmake -B build -DDEBUG=1
+	cd $(LIBMLX) && cmake -B build
 	cd $(LIBMLX) && cmake --build build -j4
 
 clean:

@@ -1,13 +1,23 @@
 #include "cub3d.h"
 
-char	*is_map_matrice(char *line)
+t_bool is_map_matrice(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
 	if (ft_isdigit(*line))
-		return (line);
+		return (TRUE);
 	else
-		return (NULL);
+		return (FALSE);
+}
+
+int get_matrice_lines_count(char **raw_data)
+{
+	int lines;
+
+	lines = 0;
+	while (raw_data[lines] && is_map_matrice(raw_data[lines]) == TRUE)
+		lines++;
+	return (lines);
 }
 
 int	count_lines(char **raw_data)
@@ -34,20 +44,23 @@ void	copy_map(t_game_essentials *game, char **raw_data)
 	game->map->map_matrice = map_matrice;
 }
 
-t_bool	validade_map_matrice(char **raw_data)
+t_bool	validade_map_matrice(char **map_matrice)
 {
-	int	line_index;
-	int	column_index;
+	int	line;
+	int lines;
+	int	column;
 
-	line_index = -1;
-	while (raw_data[++line_index])
+	line = 0;
+	lines = get_matrice_lines_count(map_matrice);
+	while (map_matrice[line] && line < lines)
 	{
-		column_index = -1;
-		while (raw_data[line_index][++column_index])
+		column = -1;
+		while (map_matrice[line][++column])
 		{
-			if (!ft_strchr(" 01NSEW", raw_data[line_index][column_index]))
+			if (!ft_strchr(" 01NSEW", map_matrice[line][column]))
 				return (FALSE);
 		}
+		line++;
 	}
 	return (TRUE);
 }
@@ -106,10 +119,30 @@ t_bool	check_closed_map(t_game_essentials *game)
 		while (matrice[line][++column])
 		{
 			if (is_open(game, matrice, line, column))
+			{
+				printf("line: %d, column: %d\n", line, column);
 				return (TRUE);
+			}
 		}
 	}
 	return (FALSE);
+}
+
+
+t_bool	check_map_is_last(char **raw_data)
+{
+	int	line;
+
+	line = 0;
+	while (raw_data[line] && is_map_matrice(raw_data[line]) == FALSE)
+		line++;
+	while (raw_data[line])
+	{
+		if (is_map_matrice(raw_data[line]) == FALSE && raw_data[line][0] != '\n')
+			return (FALSE);
+		line++;
+	}
+	return (TRUE);
 }
 
 void	get_map_matrice(t_game_essentials *game, char **raw_data)
@@ -125,9 +158,11 @@ void	get_map_matrice(t_game_essentials *game, char **raw_data)
 			break ;
 		}
 	}
-	get_matrice_dimensions(game->map);
 	if (game->map->map_matrice == NULL)
 		error(game, "Please provide a map matrice in your file\n");
+	get_matrice_dimensions(game->map);
+	if (!check_map_is_last(raw_data))
+		error(game, "Map is not last content\n");
 	if (!validade_map_matrice(game->map->map_matrice))
 		error(game, "Invalid chars in your map matrice\n");
 	if (check_closed_map(game))

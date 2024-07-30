@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 13:58:18 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:55:40 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_cast_rays(t_game_essentials *ptr, t_rays *rays)
 		rays->distance = rays->distance_vertical;
 		rays->axis = VERTICAL;
 	}
-	//ft_draw_ray(ptr, rays);
+	ft_draw_ray(ptr, rays);
 	angle_diff = cos(ptr->player->angle - rays->angle);
 	rays->distance *= angle_diff;
 }

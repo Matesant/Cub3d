@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 06:40:22 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 17:46:40 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,3 +127,30 @@ void	ft_draw_map(t_game_essentials *game, int block_size)
 		i++;
 	}
 }
+
+// void	ft_draw_map(t_game_essentials *game, int block_size)
+// {
+// 	int line;
+// 	int	column;
+// 	char **matrice;
+	
+// 	line = 0;
+// 	matrice = game->map->map_matrice;
+// 	while (matrice[line])
+// 	{
+// 		column = 0;
+// 		while (matrice[line][column])
+// 		{
+// 			game->map->block_x = (column * block_size);
+// 			game->map->block_y = (line * block_size);
+// 			if (matrice[line][column] == '1')
+// 				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
+// 					0x00FF00FF);
+// 			else
+// 				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
+// 					0x000000FF);
+// 			column++;
+// 		}
+// 		line++;
+// 	}
+// }
