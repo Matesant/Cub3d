@@ -1,6 +1,6 @@
 CC          := cc
 NAME        := cub3d
-CFLAGS      :=  -g3 -O0 -Wall -Werror -Wextra
+CFLAGS      := -Wall -Werror -Wextra -O3
 LIBMLX      := MLX42
 MLX_REPO    := https://github.com/Matesant/MLX42
 MLX         := $(LIBMLX)/build/libmlx42.a

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:23:25 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 19:24:55 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:52:03 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_game_essentials	ptr;
 
-	ptr = (t_game_essentials){0};
+	ft_bzero(&ptr, sizeof(t_game_essentials));
 	ft_pre_verifications(&ptr, argc, argv);
 	parse(&ptr, argv[1]);
 	ft_init_mlx(&ptr);

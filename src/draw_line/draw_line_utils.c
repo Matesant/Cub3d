@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:09:45 by almarcos          #+#    #+#             */
-/*   Updated: 2023/11/21 13:54:51 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:04:07 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color)
 {
-	if (x <= 0 || x >= WIDTH || y <= 0 || y >= HEIGHT)
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
 	mlx_put_pixel(img, x, y, color);
 }

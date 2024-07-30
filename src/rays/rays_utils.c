@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 19:24:15 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:58:18 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ void	ft_cast_rays(t_game_essentials *ptr, t_rays *rays)
 		rays->distance = rays->distance_vertical;
 		rays->axis = VERTICAL;
 	}
-	ft_draw_ray(ptr, rays);
-	rays->angle = rays->angle;
+	//ft_draw_ray(ptr, rays);
 	angle_diff = cos(ptr->player->angle - rays->angle);
 	rays->distance *= angle_diff;
 }
@@ -108,14 +107,16 @@ void	ft_make_game(t_game_essentials *ptr)
 {
 	int		x;
 	float	angle;
+	t_rays	rays;
 
+	ft_bzero(&rays, sizeof(t_rays));
 	x = 0;
 	angle = ptr->player->angle - RAD * 30;
 	while (x < WIDTH)
 	{
-		ptr->rays[x].angle = angle;
-		ft_cast_rays(ptr, &ptr->rays[x]);
-		ft_draw_wall(ptr, &ptr->rays[x], x);
+		rays.angle = angle;
+		ft_cast_rays(ptr, &rays);
+		ft_draw_wall(ptr, &rays, x);
 		angle += STEP;
 		x++;
 	}

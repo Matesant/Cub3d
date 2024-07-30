@@ -6,7 +6,7 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 06:51:00 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 13:38:47 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	calculate_coordinates(t_game_essentials *game, int key, int *mapX,
 	float	delta_x;
 	float	delta_y;
 
-	delta_x = game->player->delta_x * 7.2;
-	delta_y = game->player->delta_y * 7.2;
+	delta_x = game->player->delta_x * 8;
+	delta_y = game->player->delta_y * 8;
 	if (key == MLX_KEY_W)
 	{
 		*mapX = (int)(game->player->x + delta_x) / game->map->block_size;

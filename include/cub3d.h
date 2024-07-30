@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 19:21:42 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:11:59 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ typedef struct s_game_essentials
 	mlx_image_t		*walls;
 	mlx_image_t		*mini_map;
 	mlx_texture_t	*textures[4];
-	t_rays			rays[WIDTH];
 	t_player_pos	*player;
 	t_map			*map;
 	int				fd;

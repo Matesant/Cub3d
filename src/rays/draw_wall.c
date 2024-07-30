@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 04:01:23 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 19:24:29 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:10:22 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,15 @@ void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 {
 	double	increase_factor;
 	double	texture_y;
-	double	texture_offset;
 	int		y_minimum;
 	int		y_maximum;
 
 	if (texture == ptr->textures[SOUTH] || texture == ptr->textures[WEST])
 		wall.x = (texture->width - 1) - wall.x;
 	increase_factor = (texture->height / wall.height) * 0.5;
-	texture_offset = 0;
-	if (wall.height > HEIGHT)
-	{
-		texture_offset = (wall.height - HEIGHT) * 0.5;
-		wall.height = HEIGHT;
-	}
-	y_minimum = (HEIGHT / 2) - wall.height;
-	y_maximum = (HEIGHT / 2) + wall.height;
-	texture_y = texture_offset * increase_factor;
+	y_minimum = (HEIGHT * 0.5) - wall.height;
+	y_maximum = (HEIGHT * 0.5) + wall.height;
+	texture_y = 0;
 	while (y_minimum < y_maximum)
 	{
 		put_pixel(img, wall.y, y_minimum, get_rgb(texture, wall.x,
@@ -58,8 +51,6 @@ void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
 	texture = NULL;
 	wall.height = (ptr->map->block_size * (WIDTH * 0.5)) / ray->distance;
 	wall.y = x;
-	if (wall.height > HEIGHT)
-		wall.height = HEIGHT;
 	if (ray->axis == HORIZONTAL && ft_is_north(ray->angle))
 		texture = ptr->textures[NORTH];
 	else if (ray->axis == HORIZONTAL && ft_is_south(ray->angle))
