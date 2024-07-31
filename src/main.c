@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_game_essentials	ptr;
 
 	ft_bzero(&ptr, sizeof(t_game_essentials));
-	ft_pre_verifications(&ptr, argc, argv);
+	validade_argv(&ptr, argc, argv);
 	parse(&ptr, argv[1]);
 	ft_init_mlx(&ptr);
 	ft_player_configs(&ptr);

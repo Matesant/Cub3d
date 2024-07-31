@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	ft_pre_verifications(t_game_essentials *game, int argc, char **argv)
+void	validade_argv(t_game_essentials *game, int argc, char **argv)
 {
 	char	*dot_position;
 

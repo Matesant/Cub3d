@@ -155,7 +155,7 @@ typedef struct s_game_essentials
 	int				fd;
 }					t_game_essentials;
 
-void				ft_pre_verifications(t_game_essentials *game, int argc,
+void				validade_argv(t_game_essentials *game, int argc,
 						char **argv);
 t_bool				ft_set_game_configs(char *map, t_game_essentials *game);
 void				ft_color_background(t_game_essentials *ptr, int color);
