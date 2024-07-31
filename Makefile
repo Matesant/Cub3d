@@ -125,6 +125,9 @@ fclean: clean
 	@rm -rf $(NAME)
 	@printf "$(GREEN)All cleaned!$(END)\n"
 
+val:
+	valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=./sup.sup ./cub3d assets/maps/minecraft_lib.cub
+
 re: fclean all
 
 val:
