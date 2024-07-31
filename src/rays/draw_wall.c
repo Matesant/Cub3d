@@ -21,14 +21,14 @@ static uint32_t	get_rgb(mlx_texture_t *texture, int x, int y)
 }
 
 void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
-		t_game_essentials *ptr)
+		t_game_essentials *game)
 {
 	double	increase_factor;
 	double	texture_y;
 	int		y_minimum;
 	int		y_maximum;
 
-	if (texture == ptr->textures[SOUTH] || texture == ptr->textures[WEST])
+	if (texture == game->textures[SOUTH] || texture == game->textures[WEST])
 		wall.x = (texture->width - 1) - wall.x;
 	if (wall.height > HEIGHT * 4)
 	{
@@ -47,25 +47,25 @@ void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 	}
 }
 
-void	ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x)
+void	ft_draw_wall(t_game_essentials *game, t_rays *ray, int x)
 {
 	t_wall			wall;
 	mlx_texture_t	*texture;
 
 	texture = NULL;
-	wall.height = (ptr->map->block_size * (WIDTH * 0.5)) / ray->distance;
+	wall.height = (game->map->block_size * (WIDTH * 0.5)) / ray->distance;
 	wall.y = x;
 	if (ray->axis == HORIZONTAL && ft_is_north(ray->angle))
-		texture = ptr->textures[NORTH];
+		texture = game->textures[NORTH];
 	else if (ray->axis == HORIZONTAL && ft_is_south(ray->angle))
-		texture = ptr->textures[SOUTH];
+		texture = game->textures[SOUTH];
 	else if (ray->axis == VERTICAL && ft_is_east(ray->angle))
-		texture = ptr->textures[EAST];
+		texture = game->textures[EAST];
 	else if (ray->axis == VERTICAL && ft_is_west(ray->angle))
-		texture = ptr->textures[WEST];
+		texture = game->textures[WEST];
 	if (ray->axis == HORIZONTAL)
-		wall.x = (int)(ray->x * ptr->map->block_size / 4) % texture->width;
+		wall.x = (int)(ray->x * game->map->block_size / 4) % texture->width;
 	else
-		wall.x = (int)(ray->y * ptr->map->block_size / 4) % texture->width;
-	ft_put_texture(ptr->walls, wall, texture, ptr);
+		wall.x = (int)(ray->y * game->map->block_size / 4) % texture->width;
+	ft_put_texture(game->walls, wall, texture, game);
 }

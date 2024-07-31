@@ -12,14 +12,15 @@
 
 #include "cub3d.h"
 
-void	ft_init_mlx(t_game_essentials *ptr)
+void	ft_init_mlx(t_game_essentials *game)
 {
-	ptr->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", false);
-	ptr->walls = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
-	ptr->mini_map = mlx_new_image(ptr->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(ptr->mlx, ptr->walls, 0, 0);
-	mlx_image_to_window(ptr->mlx, ptr->mini_map, 0, 0);
-	ptr->mini_map->instances[0].z = 2;
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", false);
+	game->walls = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->mini_map = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(game->mlx, game->walls, 0, 0);
+	mlx_image_to_window(game->mlx, game->mini_map, 0, 0);
+	game->mini_map->enabled = false;
+	game->mini_map->instances[0].z = 2;
 }
 
 t_vector	get_start_position(t_game_essentials *game)
@@ -64,16 +65,16 @@ float	get_initial_angle(t_game_essentials *game)
 	return (angle);
 }
 
-void	ft_player_configs(t_game_essentials *ptr)
+void	ft_init_player(t_game_essentials *game)
 {
-	ptr->player = ft_calloc(1, sizeof(t_player_pos));
-	ptr->player->size = 16;
-	ptr->player->pos = get_start_position(ptr);
-	ptr->player->angle = get_initial_angle(ptr);
-	ptr->player->x = ptr->player->pos.x * ptr->map->block_size
-		+ ptr->map->block_size / 2;
-	ptr->player->y = ptr->player->pos.y * ptr->map->block_size
-		+ ptr->map->block_size / 2;
-	ptr->player->delta_x = cos(ptr->player->angle) * MOVE_SPEED;
-	ptr->player->delta_y = sin(ptr->player->angle) * MOVE_SPEED;
+	game->player = ft_calloc(1, sizeof(t_player_pos));
+	game->player->size = 16;
+	game->player->pos = get_start_position(game);
+	game->player->angle = get_initial_angle(game);
+	game->player->x = game->player->pos.x * game->map->block_size
+		+ game->map->block_size / 2;
+	game->player->y = game->player->pos.y * game->map->block_size
+		+ game->map->block_size / 2;
+	game->player->delta_x = cos(game->player->angle) * MOVE_SPEED;
+	game->player->delta_y = sin(game->player->angle) * MOVE_SPEED;
 }

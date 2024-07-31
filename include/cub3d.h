@@ -158,35 +158,35 @@ typedef struct s_game_essentials
 void				validade_argv(t_game_essentials *game, int argc,
 						char **argv);
 t_bool				ft_set_game_configs(char *map, t_game_essentials *game);
-void				ft_color_background(t_game_essentials *ptr, int color);
-void				ft_key_hooks(void *param);
-void				ft_hook(void *param);
+void				ft_color_background(t_game_essentials *game, int color);
+void				check_movement_keys(void *param);
+void				render_next_frame(void *param);
 void				ft_resize_hook(int width, int height, void *param);
-void				ft_color_background(t_game_essentials *ptr, int color);
+void				ft_color_background(t_game_essentials *game, int color);
 void				ft_put_player(mlx_image_t *img, t_player_pos *player);
 void				ft_draw_map(t_game_essentials *game, int block_size);
 void				ft_update_map(t_game_essentials *game, int block_size);
 int					ft_return_y(char character, t_map *map);
 int					ft_return_x(char character, t_map *map);
-void				ft_init_mlx(t_game_essentials *ptr);
-void				ft_player_configs(t_game_essentials *ptr);
+void				ft_init_mlx(t_game_essentials *game);
+void				ft_init_player(t_game_essentials *game);
 void				ft_draw_background(t_game_essentials *game,
 						mlx_image_t *img, int width, int height);
 void				ft_put_line(mlx_image_t *img, int endx, int endy,
 						t_player_pos *player);
 void				ft_initiate_rays(t_rays *rays);
 float				ft_normalize_angle(float angle);
-void				ft_cast_2d_horizontal_rays(t_game_essentials *ptr,
+void				ft_cast_2d_horizontal_rays(t_game_essentials *game,
 						t_rays *ray);
-void				ft_cast_2d_vertical_rays(t_game_essentials *ptr,
+void				ft_cast_2d_vertical_rays(t_game_essentials *game,
 						t_rays *ray);
 void				ft_set_ray_x_y_vertical(t_rays *ray,
-						t_game_essentials *ptr);
+						t_game_essentials *game);
 void				ft_set_ray_x_y_horizontal(t_rays *ray,
-						t_game_essentials *ptr);
+						t_game_essentials *game);
 float				calculate_distance_to_wall(float player_x, float player_y,
 						float wall_x, float wall_y);
-void				ft_make_game(t_game_essentials *ptr);
+void				ft_make_game(t_game_essentials *game);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
 void				error(t_game_essentials *game, char *error_msg);
@@ -210,9 +210,9 @@ void				ft_move_d(t_game_essentials *game);
 void				ft_move_a(t_game_essentials *game);
 void				ft_move_s(t_game_essentials *game);
 void				ft_move_w(t_game_essentials *game);
-void				ft_draw_wall(t_game_essentials *ptr, t_rays *ray, int x);
+void				ft_draw_wall(t_game_essentials *game, t_rays *ray, int x);
 void				ft_put_texture(mlx_image_t *img, t_wall wall,
-						mlx_texture_t *texture, t_game_essentials *ptr);
+						mlx_texture_t *texture, t_game_essentials *game);
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
 void				ft_init_cordinates(t_line *cordinates, int endx, int endy,
 						t_player_pos *player);

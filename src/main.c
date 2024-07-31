@@ -14,17 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_game_essentials	ptr;
+	t_game_essentials	game;
 
-	ft_bzero(&ptr, sizeof(t_game_essentials));
-	validade_argv(&ptr, argc, argv);
-	parse(&ptr, argv[1]);
-	ft_init_mlx(&ptr);
-	ft_player_configs(&ptr);
-	mlx_loop_hook(ptr.mlx, ft_hook, &ptr);
-	mlx_loop_hook(ptr.mlx, ft_key_hooks, &ptr);
-	mlx_key_hook(ptr.mlx, toggle_minimap, &ptr);
-	mlx_close_hook(ptr.mlx, close_hook, &ptr);
-	mlx_loop(ptr.mlx);
+	ft_bzero(&game, sizeof(t_game_essentials));
+	validade_argv(&game, argc, argv);
+	parse(&game, argv[1]);
+	ft_init_mlx(&game);
+	ft_init_player(&game);
+	mlx_loop_hook(game.mlx, render_next_frame, &game);
+	mlx_loop_hook(game.mlx, check_movement_keys, &game);
+	mlx_key_hook(game.mlx, toggle_minimap, &game);
+	mlx_close_hook(game.mlx, close_hook, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }

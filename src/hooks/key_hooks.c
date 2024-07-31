@@ -53,29 +53,29 @@ t_bool	is_wall(t_game_essentials *game, int key)
 	return (FALSE);
 }
 
-void	ft_key_hooks(void *param)
+void	check_movement_keys(void *param)
 {
-	t_game_essentials	*ptr;
+	t_game_essentials	*game;
 
-	ptr = (t_game_essentials *)param;
-	if (mlx_is_key_down(ptr->mlx, KEY_ESC))
+	game = (t_game_essentials *)param;
+	if (mlx_is_key_down(game->mlx, KEY_ESC))
 	{
-		mlx_terminate(ptr->mlx);
-		clear(ptr);
+		mlx_terminate(game->mlx);
+		clear(game);
 		exit(EXIT_SUCCESS);
 	}
-	if (mlx_is_key_down(ptr->mlx, KEY_W) && !is_wall(ptr, KEY_W))
-		ft_move_w(ptr);
-	if (mlx_is_key_down(ptr->mlx, KEY_S) && !is_wall(ptr, KEY_S))
-		ft_move_s(ptr);
-	if (mlx_is_key_down(ptr->mlx, KEY_A) && !is_wall(ptr, KEY_A))
-		ft_move_a(ptr);
-	if (mlx_is_key_down(ptr->mlx, KEY_D) && !is_wall(ptr, KEY_D))
-		ft_move_d(ptr);
-	if (mlx_is_key_down(ptr->mlx, MLX_KEY_LEFT))
-		ft_move_left(ptr);
-	if (mlx_is_key_down(ptr->mlx, MLX_KEY_RIGHT))
-		ft_move_right(ptr);
+	if (mlx_is_key_down(game->mlx, KEY_W) && !is_wall(game, KEY_W))
+		ft_move_w(game);
+	if (mlx_is_key_down(game->mlx, KEY_S) && !is_wall(game, KEY_S))
+		ft_move_s(game);
+	if (mlx_is_key_down(game->mlx, KEY_A) && !is_wall(game, KEY_A))
+		ft_move_a(game);
+	if (mlx_is_key_down(game->mlx, KEY_D) && !is_wall(game, KEY_D))
+		ft_move_d(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		ft_move_left(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		ft_move_right(game);
 }
 
 void	toggle_minimap(mlx_key_data_t keydata, void *param)
@@ -85,10 +85,10 @@ void	toggle_minimap(mlx_key_data_t keydata, void *param)
 	game = (t_game_essentials *)param;
 	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
 	{
-		if (game->mini_map->instances[0].enabled == false)
-			game->mini_map->instances[0].enabled = true;
+		if (game->mini_map->enabled == false)
+			game->mini_map->enabled = true;
 		else
-			game->mini_map->instances[0].enabled = false;
+			game->mini_map->enabled = false;
 	}
 }
 

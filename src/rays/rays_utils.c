@@ -12,21 +12,21 @@
 
 #include "cub3d.h"
 
-void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
+void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game)
 {
 	while (1)
 	{
-		ray->mapx = (int)(ray->x) / ptr->map->block_size;
-		ray->mapy = (int)(ray->y) / ptr->map->block_size;
-		if (ray->mapy >= 0 && ray->mapy < ptr->map->height && ray->mapx >= 0
-			&& ray->mapx < ptr->map->width)
+		ray->mapx = (int)(ray->x) / game->map->block_size;
+		ray->mapy = (int)(ray->y) / game->map->block_size;
+		if (ray->mapy >= 0 && ray->mapy < game->map->height && ray->mapx >= 0
+			&& ray->mapx < game->map->width)
 		{
-			if (ptr->map->map_matrice[ray->mapy][ray->mapx] == '1')
+			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
 			{
 				ray->distance_x_horizontal = ray->x;
 				ray->distance_y_horizontal = ray->y;
-				ray->distance_horizontal = hypot(ptr->player->x - ray->x,
-						ptr->player->y - ray->y);
+				ray->distance_horizontal = hypot(game->player->x - ray->x,
+						game->player->y - ray->y);
 				return ;
 			}
 			else
@@ -40,21 +40,21 @@ void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *ptr)
 	}
 }
 
-void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *ptr)
+void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *game)
 {
 	while (1)
 	{
-		ray->mapx = (int)(ray->x) / ptr->map->block_size;
-		ray->mapy = (int)(ray->y) / ptr->map->block_size;
-		if (ray->mapy >= 0 && ray->mapy < ptr->map->height && ray->mapx >= 0
-			&& ray->mapx < ptr->map->width)
+		ray->mapx = (int)(ray->x) / game->map->block_size;
+		ray->mapy = (int)(ray->y) / game->map->block_size;
+		if (ray->mapy >= 0 && ray->mapy < game->map->height && ray->mapx >= 0
+			&& ray->mapx < game->map->width)
 		{
-			if (ptr->map->map_matrice[ray->mapy][ray->mapx] == '1')
+			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
 			{
 				ray->distance_x_vertical = ray->x;
 				ray->distance_y_vertical = ray->y;
-				ray->distance_vertical = hypot(ptr->player->x - ray->x,
-						ptr->player->y - ray->y);
+				ray->distance_vertical = hypot(game->player->x - ray->x,
+						game->player->y - ray->y);
 				return ;
 			}
 			else
@@ -77,13 +77,13 @@ float	ft_normalize_angle(float angle)
 	return (angle);
 }
 
-void	ft_cast_rays(t_game_essentials *ptr, t_rays *rays)
+void	ft_cast_rays(t_game_essentials *game, t_rays *rays)
 {
 	float	angle_diff;
 
 	rays->angle = ft_normalize_angle(rays->angle);
-	ft_cast_2d_horizontal_rays(ptr, rays);
-	ft_cast_2d_vertical_rays(ptr, rays);
+	ft_cast_2d_horizontal_rays(game, rays);
+	ft_cast_2d_vertical_rays(game, rays);
 	if (rays->distance_horizontal < rays->distance_vertical)
 	{
 		rays->x = rays->distance_x_horizontal;
@@ -98,12 +98,12 @@ void	ft_cast_rays(t_game_essentials *ptr, t_rays *rays)
 		rays->distance = rays->distance_vertical;
 		rays->axis = VERTICAL;
 	}
-	ft_draw_ray(ptr, rays);
-	angle_diff = cos(ptr->player->angle - rays->angle);
+	ft_draw_ray(game, rays);
+	angle_diff = cos(game->player->angle - rays->angle);
 	rays->distance *= angle_diff;
 }
 
-void	ft_make_game(t_game_essentials *ptr)
+void	ft_make_game(t_game_essentials *game)
 {
 	int		x;
 	float	angle;
@@ -111,12 +111,12 @@ void	ft_make_game(t_game_essentials *ptr)
 
 	ft_bzero(&rays, sizeof(t_rays));
 	x = 0;
-	angle = ptr->player->angle - RAD * 30;
+	angle = game->player->angle - RAD * 30;
 	while (x < WIDTH)
 	{
 		rays.angle = angle;
-		ft_cast_rays(ptr, &rays);
-		ft_draw_wall(ptr, &rays, x);
+		ft_cast_rays(game, &rays);
+		ft_draw_wall(game, &rays, x);
 		angle += STEP;
 		x++;
 	}
