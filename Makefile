@@ -9,7 +9,7 @@ PRINTF      := ./libs/libft/Printf/libftprintf.a
 LIBFT       := ./libs/libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
 SOURCE      := main.c parse.c utils.c get_textures.c get_colors.c \
-				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c \
+				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c inits.c \
 				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
 				load_textures.c get_cardinal_direction.c key_utils.c movement_keys.c draw_wall.c \
 				get_map_matrice_utils.c replace_tabs.c
@@ -76,7 +76,7 @@ $(BIN)%.o: ./src/draw_line/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/setup_environment/%.c
+$(BIN)%.o: ./src/inits/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
