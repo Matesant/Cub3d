@@ -42,12 +42,15 @@ void	error(t_game_essentials *game, char *error_msg)
 void	validade_argv(t_game_essentials *game, int argc, char **argv)
 {
 	char	*dot_position;
+	int		fd;
 
 	if (argc != 2)
 		error(game, "Please provide only a map file\n");
 	dot_position = ft_strrchr(argv[1], '.');
-	if (dot_position != NULL && ft_strcmp(dot_position + 1, "cub") == 0)
-		return ;
-	else
+	if (dot_position != NULL && ft_strcmp(dot_position, ".cub") != 0)
 		error(game, "Invalid map extension\n");
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		error(game, "No read permition for map\n");
+	close(fd);
 }
