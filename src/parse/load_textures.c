@@ -24,6 +24,6 @@ void	load_textures(t_game_essentials *game)
 	while (++i < 4)
 	{
 		if (!game->textures[i])
-			error(game, "Texture not found or without read permission\n.");
+			error(game, "Texture not found or without read permission\n");
 	}
 }
