@@ -19,6 +19,7 @@ void	ft_draw_ray(t_game_essentials *game, t_rays *ray)
 
 	start.x = game->player->x;
 	start.y = game->player->y;
+	start.color = game->map->floor_color;
 	end.x = ray->x;
 	end.y = ray->y;
 	draw_line(game->mini_map, start, end);
