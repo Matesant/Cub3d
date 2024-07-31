@@ -1,12 +1,12 @@
 CC          := cc
 NAME        := cub3d
 CFLAGS      := -Wall -Werror -Wextra -O0 -g3
-MLX         := MLX42/build/libmlx42.a
+MLX         := ./libs/MLX42/build/libmlx42.a
 BIN         := ./bin/
-INCLUDES    := -I./include -I./MLX42/include
+INCLUDES    := -I./include -I./libs/MLX42/include
 MLX_LIBS        := $(MLX) -ldl -lglfw -pthread -lm
-PRINTF      := ./libft/Printf/libftprintf.a
-LIBFT       := ./libft/libft.a
+PRINTF      := ./libs/libft/Printf/libftprintf.a
+LIBFT       := ./libs/libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
 SOURCE      := main.c parse.c utils.c get_textures.c get_colors.c \
 				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c \
@@ -29,13 +29,13 @@ $(LIBFT):
 	@printf "$(BLUE)----------------------$(END)\n"
 	@printf "$(BLUE)--Compiling Libft...-$(END)\n"
 	@printf "$(BLUE)----------------------$(END)\n"
-	@make -C ./libft --no-print-directory
+	@make -C ./libs/libft --no-print-directory
 
 $(PRINTF):
 	@printf "$(BLUE)----------------------$(END)\n"
 	@printf "$(BLUE)-Compiling Printf...-$(END)\n"
 	@printf "$(BLUE)----------------------$(END)\n"
-	@make -C ./libft/Printf --no-print-directory
+	@make -C ./libs/libft/Printf --no-print-directory
 
 $(BIN):
 	@mkdir -p $(BIN)
@@ -98,19 +98,19 @@ $(NAME): $(OBJECTS)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 
 $(MLX):
-	@cmake ./MLX42/ -B ./MLX42/build/ && make -C MLX42/build -j4
+	@cmake ./libs/MLX42/ -B ./libs/MLX42/build/ && make -C ./libs/MLX42/build -j4
 
 clean:
 	@printf "$(RED)Cleaning...$(END)\n"
-	@make -C ./libft/Printf clean --no-print-directory
-	@make -C ./libft clean --no-print-directory
-	@rm -rf ./MLX42/build
+	@make -C ./libs/libft/Printf clean --no-print-directory
+	@make -C ./libs/libft clean --no-print-directory
+	@rm -rf ./libs/MLX42/build
 	@rm -rf $(BIN)
 
 fclean: clean
 	@printf "$(RED)Full cleaning...$(END)\n"
-	@make -C ./libft/Printf --no-print-directory fclean
-	@make -C ./libft --no-print-directory fclean
+	@make -C ./libs/libft/Printf --no-print-directory fclean
+	@make -C ./libs/libft --no-print-directory fclean
 	@rm -rf $(NAME)
 	@printf "$(GREEN)All cleaned!$(END)\n"
 
