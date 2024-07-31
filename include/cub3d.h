@@ -216,8 +216,6 @@ void				ft_put_texture(mlx_image_t *img, t_wall wall,
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
 void				ft_init_cordinates(t_line *cordinates, int endx, int endy,
 						t_player_pos *player);
-int					ft_return_y(char character, t_map *map);
-int					ft_return_x(char character, t_map *map);
 void				close_hook(void *param);
 
 #endif

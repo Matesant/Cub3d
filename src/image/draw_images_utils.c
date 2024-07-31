@@ -12,46 +12,6 @@
 
 #include "cub3d.h"
 
-int	ft_return_x(char character, t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->map_matrice[i][j] == character)
-				return (j * map->block_size);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
-}
-
-int	ft_return_y(char character, t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->map_matrice[i][j] == character)
-				return (i * map->block_size);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
-}
-
 void	ft_init_cordinates(t_line *cordinates, int endx, int endy,
 		t_player_pos *player)
 {
