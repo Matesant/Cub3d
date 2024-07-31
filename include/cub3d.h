@@ -214,7 +214,6 @@ void				ft_draw_wall(t_game_essentials *game, t_rays *ray, int x);
 void				ft_put_texture(mlx_image_t *img, t_wall wall,
 						mlx_texture_t *texture, t_game_essentials *game);
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
-void				ft_init_cordinates(t_line *cordinates, int endx, int endy,
 						t_player_pos *player);
 void				close_hook(void *param);
 
