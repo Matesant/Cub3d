@@ -40,6 +40,8 @@ void	get_map_matrice(t_game_essentials *game, char **raw_data)
 		error(game, "Invalid chars in your map matrice\n");
 	if (check_closed_map(game))
 		error(game, "Map is not closed\n");
+	if (!check_player_position(game->map->map_matrice))
+		error(game, "Invalid player position\n");
 }
 
 static void	crop_map(t_game_essentials *game, char **raw_data)

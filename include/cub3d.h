@@ -209,5 +209,6 @@ int					get_matrice_lines_count(char **raw_data);
 t_bool				is_map_matrice(char *line);
 t_bool				check_invalid_chars(char **map_matrice);
 void				replace_tabs_for_spaces(char *raw_data[]);
+t_bool				check_player_position(char **map_matrice);
 
 #endif

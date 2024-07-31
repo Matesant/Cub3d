@@ -70,3 +70,28 @@ t_bool	check_invalid_chars(char **map_matrice)
 	}
 	return (TRUE);
 }
+
+t_bool	check_player_position(char **map_matrice)
+{
+	int	player_count;
+	int	line;
+	int	column;
+
+	player_count = 0;
+	line = 0;
+	while (map_matrice[line])
+	{
+		column = 0;
+		while (map_matrice[line][column])
+		{
+			if (ft_strchr("NSEW", map_matrice[line][column]))
+				player_count++;
+			column++;
+		}
+		line++;
+	}
+	if (player_count != 1)
+		return (FALSE);
+	else
+		return (TRUE);
+}
