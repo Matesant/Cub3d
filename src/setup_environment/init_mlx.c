@@ -12,6 +12,9 @@
 
 #include "cub3d.h"
 
+static float	get_initial_angle(t_game_essentials *game);
+static t_vector	get_start_position(t_game_essentials *game);
+
 void	ft_init_mlx(t_game_essentials *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", false);
@@ -23,7 +26,21 @@ void	ft_init_mlx(t_game_essentials *game)
 	game->mini_map->instances[0].z = 2;
 }
 
-t_vector	get_start_position(t_game_essentials *game)
+void	ft_init_player(t_game_essentials *game)
+{
+	game->player = ft_calloc(1, sizeof(t_player_pos));
+	game->player->size = 16;
+	game->player->pos = get_start_position(game);
+	game->player->angle = get_initial_angle(game);
+	game->player->x = game->player->pos.x * game->map->block_size
+		+ game->map->block_size / 2;
+	game->player->y = game->player->pos.y * game->map->block_size
+		+ game->map->block_size / 2;
+	game->player->delta_x = cos(game->player->angle) * MOVE_SPEED;
+	game->player->delta_y = sin(game->player->angle) * MOVE_SPEED;
+}
+
+static t_vector	get_start_position(t_game_essentials *game)
 {
 	char	**matrice;
 	int		line;
@@ -43,7 +60,7 @@ t_vector	get_start_position(t_game_essentials *game)
 	return ((t_vector){0});
 }
 
-float	get_initial_angle(t_game_essentials *game)
+static float	get_initial_angle(t_game_essentials *game)
 {
 	float		angle;
 	char		**matrice;
@@ -63,18 +80,4 @@ float	get_initial_angle(t_game_essentials *game)
 	else if (c == 'S')
 		angle = (M_PI_2 * 3) * -1;
 	return (angle);
-}
-
-void	ft_init_player(t_game_essentials *game)
-{
-	game->player = ft_calloc(1, sizeof(t_player_pos));
-	game->player->size = 16;
-	game->player->pos = get_start_position(game);
-	game->player->angle = get_initial_angle(game);
-	game->player->x = game->player->pos.x * game->map->block_size
-		+ game->map->block_size / 2;
-	game->player->y = game->player->pos.y * game->map->block_size
-		+ game->map->block_size / 2;
-	game->player->delta_x = cos(game->player->angle) * MOVE_SPEED;
-	game->player->delta_y = sin(game->player->angle) * MOVE_SPEED;
 }
