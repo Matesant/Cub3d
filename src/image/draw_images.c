@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 17:46:40 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:22:59 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	ft_draw_map(t_game_essentials *game, int block_size)
 // 	int line;
 // 	int	column;
 // 	char **matrice;
-	
+
 // 	line = 0;
 // 	matrice = game->map->map_matrice;
 // 	while (matrice[line])

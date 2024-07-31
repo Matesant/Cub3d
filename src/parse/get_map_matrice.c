@@ -1,36 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_matrice.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 01:25:19 by almarcos          #+#    #+#             */
+/*   Updated: 2024/07/31 01:37:37 by almarcos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-t_bool is_map_matrice(char *line)
+static void		crop_map(t_game_essentials *game, char **raw_data);
+static t_bool	is_open(t_game_essentials *game, char **matrice, int line,
+					int column);
+static t_bool	check_closed_map(t_game_essentials *game);
+static t_bool	check_map_is_last(char **raw_data);
+
+void	get_map_matrice(t_game_essentials *game, char **raw_data)
 {
-	while (ft_isspace(*line))
-		line++;
-	if (ft_isdigit(*line))
-		return (TRUE);
-	else
-		return (FALSE);
+	int	line;
+
+	line = -1;
+	while (raw_data[++line])
+	{
+		if (is_map_matrice(raw_data[line]))
+		{
+			crop_map(game, raw_data + line);
+			break ;
+		}
+	}
+	if (game->map->map_matrice == NULL)
+		error(game, "Please provide a map matrice in your file\n");
+	get_matrice_dimensions(game->map);
+	if (!check_map_is_last(raw_data))
+		error(game, "Map is not last content\n");
+	if (!check_invalid_chars(game->map->map_matrice))
+		error(game, "Invalid chars in your map matrice\n");
+	if (check_closed_map(game))
+		error(game, "Map is not closed\n");
 }
 
-int get_matrice_lines_count(char **raw_data)
-{
-	int lines;
-
-	lines = 0;
-	while (raw_data[lines] && is_map_matrice(raw_data[lines]) == TRUE)
-		lines++;
-	return (lines);
-}
-
-int	count_lines(char **raw_data)
-{
-	int	lines;
-
-	lines = -1;
-	while (raw_data[++lines])
-		;
-	return (lines);
-}
-
-void	copy_map(t_game_essentials *game, char **raw_data)
+static void	crop_map(t_game_essentials *game, char **raw_data)
 {
 	char	**map_matrice;
 	int		line_index;
@@ -44,46 +56,8 @@ void	copy_map(t_game_essentials *game, char **raw_data)
 	game->map->map_matrice = map_matrice;
 }
 
-t_bool	validade_map_matrice(char **map_matrice)
-{
-	int	line;
-	int lines;
-	int	column;
-
-	line = 0;
-	lines = get_matrice_lines_count(map_matrice);
-	while (map_matrice[line] && line < lines)
-	{
-		column = -1;
-		while (map_matrice[line][++column])
-		{
-			if (!ft_strchr(" 01NSEW", map_matrice[line][column]))
-				return (FALSE);
-		}
-		line++;
-	}
-	return (TRUE);
-}
-
-void	get_matrice_dimensions(t_map *map)
-{
-	char	**matrice;
-	int		width;
-	int		height;
-
-	width = -1;
-	height = -1;
-	matrice = map->map_matrice;
-	while (matrice[++height])
-	{
-		if ((int)ft_strlen(matrice[height]) > width)
-			width = ft_strlen(matrice[height]);
-	}
-	map->height = height;
-	map->width = width;
-}
-
-t_bool	is_open(t_game_essentials *game, char **matrice, int line, int column)
+static t_bool	is_open(t_game_essentials *game, char **matrice, int line,
+		int column)
 {
 	if (matrice[line][column] == '0' || ft_strchr("NSEW",
 			matrice[line][column]))
@@ -105,7 +79,7 @@ t_bool	is_open(t_game_essentials *game, char **matrice, int line, int column)
 	return (FALSE);
 }
 
-t_bool	check_closed_map(t_game_essentials *game)
+static t_bool	check_closed_map(t_game_essentials *game)
 {
 	int		line;
 	int		column;
@@ -119,17 +93,13 @@ t_bool	check_closed_map(t_game_essentials *game)
 		while (matrice[line][++column])
 		{
 			if (is_open(game, matrice, line, column))
-			{
-				printf("line: %d, column: %d\n", line, column);
 				return (TRUE);
-			}
 		}
 	}
 	return (FALSE);
 }
 
-
-t_bool	check_map_is_last(char **raw_data)
+static t_bool	check_map_is_last(char **raw_data)
 {
 	int	line;
 
@@ -138,33 +108,10 @@ t_bool	check_map_is_last(char **raw_data)
 		line++;
 	while (raw_data[line])
 	{
-		if (is_map_matrice(raw_data[line]) == FALSE && raw_data[line][0] != '\n')
+		if (is_map_matrice(raw_data[line]) == FALSE
+			&& raw_data[line][0] != '\n')
 			return (FALSE);
 		line++;
 	}
 	return (TRUE);
-}
-
-void	get_map_matrice(t_game_essentials *game, char **raw_data)
-{
-	int	line;
-
-	line = -1;
-	while (raw_data[++line])
-	{
-		if (is_map_matrice(raw_data[line]))
-		{
-			copy_map(game, raw_data + line);
-			break ;
-		}
-	}
-	if (game->map->map_matrice == NULL)
-		error(game, "Please provide a map matrice in your file\n");
-	get_matrice_dimensions(game->map);
-	if (!check_map_is_last(raw_data))
-		error(game, "Map is not last content\n");
-	if (!validade_map_matrice(game->map->map_matrice))
-		error(game, "Invalid chars in your map matrice\n");
-	if (check_closed_map(game))
-		error(game, "Map is not closed\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 14:23:43 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:39:22 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,11 @@ void				ft_put_texture(mlx_image_t *img, t_wall wall,
 						mlx_texture_t *texture, t_game_essentials *game);
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
 void				close_hook(void *param);
+
+void				get_matrice_dimensions(t_map *map);
+int					get_matrice_lines_count(char **raw_data);
+t_bool				is_map_matrice(char *line);
+t_bool				check_invalid_chars(char **map_matrice);
+int					count_lines(char **raw_data);
 
 #endif

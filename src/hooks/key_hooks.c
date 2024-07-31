@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 14:27:32 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/31 01:24:54 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	calculate_coordinates(t_game_essentials *game, int key, int *mapX,
 
 t_bool	is_wall(t_game_essentials *game, int key)
 {
-	int	mapX;
-	int	mapY;
+	int	map_x;
+	int	map_y;
 
-	calculate_coordinates(game, key, &mapX, &mapY);
-	if (game->map->map_matrice[mapY][mapX] == '1')
+	calculate_coordinates(game, key, &map_x, &map_y);
+	if (game->map->map_matrice[map_y][map_x] == '1')
 		return (TRUE);
 	return (FALSE);
 }
@@ -96,7 +96,7 @@ void	close_hook(void *param)
 {
 	t_game_essentials	*game;
 
-	game = (t_game_essentials *) param;
+	game = (t_game_essentials *)param;
 	clear(game);
 	mlx_terminate(game->mlx);
 	exit(EXIT_SUCCESS);

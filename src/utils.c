@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 01:21:58 by almarcos          #+#    #+#             */
+/*   Updated: 2024/07/31 01:22:07 by almarcos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	free_map(t_map *map)
@@ -16,7 +28,7 @@ void	clear(t_game_essentials *game)
 	if (game->map)
 		free_map(game->map);
 	if (game->player)
-		free(game->player);	
+		free(game->player);
 }
 
 void	error(t_game_essentials *game, char *error_msg)
@@ -39,4 +51,3 @@ void	validade_argv(t_game_essentials *game, int argc, char **argv)
 	else
 		error(game, "Invalid map extension\n");
 }
-
