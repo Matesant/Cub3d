@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:21:58 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 01:22:07 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/07/31 02:38:29 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	clear(t_game_essentials *game)
 
 void	error(t_game_essentials *game, char *error_msg)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(error_msg, 2);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
+	ft_putstr_fd(error_msg, STDERR_FILENO);
 	clear(game);
 	exit(EXIT_FAILURE);
 }
