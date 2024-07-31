@@ -1,5 +1,6 @@
 bin
-MLX42
+build
+*.o
 cub3d
 obj
 *.a
