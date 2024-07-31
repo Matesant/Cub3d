@@ -1,12 +1,10 @@
 CC          := cc
 NAME        := cub3d
 CFLAGS      := -Wall -Werror -Wextra -O0 -g3
-LIBMLX      := MLX42
-MLX_REPO    := https://github.com/Matesant/MLX42
-MLX         := $(LIBMLX)/build/libmlx42.a
+MLX         := MLX42/build/libmlx42.a
 BIN         := ./bin/
-INCLUDES    := -I./include -I$(LIBMLX)/include
-LIBS        := $(MLX) -ldl -lglfw -pthread -lm
+INCLUDES    := -I./include -I./MLX42/include
+MLX_LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libft/Printf/libftprintf.a
 LIBFT       := ./libft/libft.a
 42LIBS      := $(PRINTF) $(LIBFT)
@@ -25,7 +23,7 @@ END         := \033[0m
 
 .PHONY: all clean fclean re val
 
-all: $(42LIBS) $(BIN) $(NAME)
+all: $(LIBFT) $(PRINTF) $(MLX) $(BIN) $(NAME)
 
 $(LIBFT):
 	@printf "$(BLUE)----------------------$(END)\n"
@@ -94,32 +92,23 @@ $(NAME): $(OBJECTS)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $(NAME)...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
-	@$(CC) $(CFLAGS) $(OBJECTS) $(42LIBS) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(42LIBS) $(MLX_LIBS) -o $(NAME)
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(GREEN)--$(NAME) compiled!-$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 
-mlx:
-	@if [ -d "$(LIBMLX)" ]; then \
-		echo "O diretório $(LIBMLX) já existe."; \
-	else \
-		echo "Clonando repositório..."; \
-		git clone $(MLX_REPO) $(LIBMLX); \
-	fi
-	@printf "$(BLUE)----------------------$(END)\n"
-	@printf "$(BLUE)--Building MLX...-$(END)\n"
-	@printf "$(BLUE)----------------------$(END)\n"
-	cd $(LIBMLX) && cmake -B build
-	cd $(LIBMLX) && cmake --build build -j4
+$(MLX):
+	@cmake ./MLX42/ -B ./MLX42/build/ && make -C MLX42/build -j4
 
 clean:
 	@printf "$(RED)Cleaning...$(END)\n"
 	@make -C ./libft/Printf clean --no-print-directory
 	@make -C ./libft clean --no-print-directory
+	@rm -rf ./MLX42/build
 	@rm -rf $(BIN)
 
 fclean: clean
-	@printf "$(RED)Cleaning...$(END)\n"
+	@printf "$(RED)Full cleaning...$(END)\n"
 	@make -C ./libft/Printf --no-print-directory fclean
 	@make -C ./libft --no-print-directory fclean
 	@rm -rf $(NAME)
