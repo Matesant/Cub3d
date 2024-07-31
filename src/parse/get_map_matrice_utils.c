@@ -30,16 +30,6 @@ void	get_matrice_dimensions(t_map *map)
 	map->width = width;
 }
 
-int	count_lines(char **raw_data)
-{
-	int	lines;
-
-	lines = -1;
-	while (raw_data[++lines])
-		;
-	return (lines);
-}
-
 int	get_matrice_lines_count(char **raw_data)
 {
 	int	lines;

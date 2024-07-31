@@ -14,7 +14,7 @@ SOURCE      := main.c parse.c utils.c get_textures.c get_colors.c \
 				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c init_mlx.c \
 				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
 				load_textures.c get_cardinal_direction.c key_utils.c movement_keys.c draw_wall.c \
-				get_map_matrice_utils.c
+				get_map_matrice_utils.c replace_tabs.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 

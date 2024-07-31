@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 18:07:00 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 18:07:01 by matesant         ###   ########.fr       */
+/*   Updated: 2024/07/31 02:34:19 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	*replace(char *line);
-static int	count_tabs(char *line);
 static char	**read_map(char *map);
 static int	count_lines(char *map);
-static void	replace_tabs_for_spaces(char *raw_data[]);
 
 void	parse(t_game_essentials *game, char *map)
 {
@@ -77,62 +74,4 @@ static char	**read_map(char *map)
 	close(fd);
 	get_next_line(CLEAR_STATIC);
 	return (matrice);
-}
-
-static int	count_tabs(char *line)
-{
-	int	count;
-
-	count = 0;
-	while (*line)
-	{
-		if (*line == '\t')
-			count++;
-		line++;
-	}
-	return (count);
-}
-
-static void	replace_tabs_for_spaces(char *raw_data[])
-{
-	int		line;
-	char	*to_free;
-
-	line = -1;
-	while (raw_data[++line])
-	{
-		if (count_tabs(raw_data[line]) > 0)
-		{
-			to_free = raw_data[line];
-			raw_data[line] = replace(raw_data[line]);
-			free(to_free);
-		}
-	}
-}
-
-static char	*replace(char *line)
-{
-	int		replaced_len;
-	char	*replaced;
-	int		i;
-	int		j;
-
-	replaced_len = ft_strlen(line) + (count_tabs(line) * 4);
-	replaced = ft_calloc(replaced_len, sizeof(char *));
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if (line[i] == '\t')
-		{
-			ft_memset(replaced + j, ' ', 4);
-			j += 4;
-			i++;
-			continue ;
-		}
-		replaced[j] = line[i];
-		i++;
-		j++;
-	}
-	return (replaced);
 }

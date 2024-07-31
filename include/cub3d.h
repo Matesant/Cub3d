@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/31 01:39:22 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/07/31 02:32:01 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,6 @@ void				get_matrice_dimensions(t_map *map);
 int					get_matrice_lines_count(char **raw_data);
 t_bool				is_map_matrice(char *line);
 t_bool				check_invalid_chars(char **map_matrice);
-int					count_lines(char **raw_data);
+void				replace_tabs_for_spaces(char *raw_data[]);
 
 #endif

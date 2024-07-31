@@ -6,7 +6,7 @@
 /*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:25:19 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 01:37:37 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/07/31 02:00:53 by almarcos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	get_map_matrice(t_game_essentials *game, char **raw_data)
 static void	crop_map(t_game_essentials *game, char **raw_data)
 {
 	char	**map_matrice;
-	int		line_index;
+	int		line;
 	int		lines_count;
 
-	lines_count = count_lines(raw_data);
+	lines_count = get_matrice_lines_count(raw_data);
 	map_matrice = ft_calloc(lines_count + 1, sizeof(char *));
-	line_index = -1;
-	while (raw_data[++line_index])
-		map_matrice[line_index] = ft_strdup(raw_data[line_index]);
+	line = -1;
+	while (++line < lines_count)
+		map_matrice[line] = ft_strdup(raw_data[line]);
 	game->map->map_matrice = map_matrice;
 }
 
