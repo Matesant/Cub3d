@@ -113,7 +113,7 @@ void	ft_draw_map(t_game_essentials *game, int block_size)
 	while (i < game->map->height)
 	{
 		j = 0;
-		while (j < game->map->width)
+		while (game->map->map_matrice[i][j])
 		{
 			game->map->block_x = (j * block_size);
 			game->map->block_y = (i * block_size);

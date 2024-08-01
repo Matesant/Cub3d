@@ -12,14 +12,26 @@
 
 #include "cub3d.h"
 
+t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray)
+{
+	int	len;
+
+	ray->mapx = (int)((ray->x) / game->map->block_size);
+	ray->mapy = (int)((ray->y) / game->map->block_size);
+	if (ray->mapy >=0 && ray->mapy < game->map->height)
+		len = ft_strlen(game->map->map_matrice[ray->mapy]);
+	if (ray->mapy >= 0 && ray->mapy < game->map->height && ray->mapx >= 0
+		&& ray->mapx < len)
+		return (TRUE);
+	return (FALSE);
+
+}
+
 void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game)
 {
 	while (1)
 	{
-		ray->mapx = (int)(ray->x) / game->map->block_size;
-		ray->mapy = (int)(ray->y) / game->map->block_size;
-		if (ray->mapy >= 0 && ray->mapy < game->map->height && ray->mapx >= 0
-			&& ray->mapx < game->map->width)
+		if (fits_in_matrix(game, ray))
 		{
 			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
 			{
@@ -46,8 +58,7 @@ void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *game)
 	{
 		ray->mapx = (int)(ray->x) / game->map->block_size;
 		ray->mapy = (int)(ray->y) / game->map->block_size;
-		if (ray->mapy >= 0 && ray->mapy < game->map->height && ray->mapx >= 0
-			&& ray->mapx < game->map->width)
+		if (fits_in_matrix(game, ray))
 		{
 			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
 			{
