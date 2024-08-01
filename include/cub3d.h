@@ -174,7 +174,7 @@ void				ft_set_ray_x_y_vertical(t_rays *ray,
 						t_game_essentials *game);
 void				ft_set_ray_x_y_horizontal(t_rays *ray,
 						t_game_essentials *game);
-void				ft_make_game(t_game_essentials *game);
+void				ft_ray_cast(t_game_essentials *game);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
 void				error(t_game_essentials *game, char *error_msg);

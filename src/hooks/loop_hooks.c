@@ -20,5 +20,5 @@ void	render_next_frame(void *param)
 	ft_draw_background(game, game->walls, WIDTH, HEIGHT);
 	ft_draw_map(game, game->map->block_size);
 	ft_put_player(game->mini_map, game->player);
-	ft_make_game(game);
+	ft_ray_cast(game);
 }

@@ -103,7 +103,7 @@ void	ft_cast_rays(t_game_essentials *game, t_rays *rays)
 	rays->distance *= angle_diff;
 }
 
-void	ft_make_game(t_game_essentials *game)
+void	ft_ray_cast(t_game_essentials *game)
 {
 	int		x;
 	float	angle;
