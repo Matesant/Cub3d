@@ -165,15 +165,10 @@ void				ft_init_mlx(t_game_essentials *game);
 void				ft_init_player(t_game_essentials *game);
 void				ft_draw_background(t_game_essentials *game,
 						mlx_image_t *img, int width, int height);
-float				ft_normalize_angle(float angle);
 void				ft_cast_2d_horizontal_rays(t_game_essentials *game,
 						t_rays *ray);
 void				ft_cast_2d_vertical_rays(t_game_essentials *game,
 						t_rays *ray);
-void				ft_set_ray_x_y_vertical(t_rays *ray,
-						t_game_essentials *game);
-void				ft_set_ray_x_y_horizontal(t_rays *ray,
-						t_game_essentials *game);
 void				ft_ray_cast(t_game_essentials *game);
 void				parse(t_game_essentials *game, char *map);
 void				get_textures(t_game_essentials *game, char **raw_data);
@@ -199,8 +194,6 @@ void				ft_move_a(t_game_essentials *game);
 void				ft_move_s(t_game_essentials *game);
 void				ft_move_w(t_game_essentials *game);
 void				ft_draw_wall(t_game_essentials *game, t_rays *ray, int x);
-void				ft_put_texture(mlx_image_t *img, t_wall wall,
-						mlx_texture_t *texture, t_game_essentials *game);
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
 void				close_hook(void *param);
 
@@ -210,5 +203,7 @@ t_bool				is_map_matrice(char *line);
 t_bool				check_invalid_chars(char **map_matrice);
 void				replace_tabs_for_spaces(char *raw_data[]);
 t_bool				check_player_position(char **map_matrice);
+t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray);
+
 
 #endif

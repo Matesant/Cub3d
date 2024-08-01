@@ -12,6 +12,28 @@
 
 #include "cub3d.h"
 
+static float	ft_normalize_angle(float angle);
+static void	ft_get_ray_distance(t_game_essentials *game, t_rays *rays);
+
+void	ft_ray_cast(t_game_essentials *game)
+{
+	int		x;
+	float	angle;
+	t_rays	rays;
+
+	ft_bzero(&rays, sizeof(t_rays));
+	x = 0;
+	angle = game->player->angle - RAD * 30;
+	while (x < WIDTH)
+	{
+		rays.angle = angle;
+		ft_get_ray_distance(game, &rays);
+		ft_draw_wall(game, &rays, x);
+		angle += STEP;
+		x++;
+	}
+}
+
 t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray)
 {
 	int	len;
@@ -27,11 +49,7 @@ t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray)
 
 }
 
-
-
-
-
-float	ft_normalize_angle(float angle)
+static float	ft_normalize_angle(float angle)
 {
 	while (angle < 0)
 		angle += 2 * PI;
@@ -40,7 +58,7 @@ float	ft_normalize_angle(float angle)
 	return (angle);
 }
 
-void	ft_cast_rays(t_game_essentials *game, t_rays *rays)
+static void	ft_get_ray_distance(t_game_essentials *game, t_rays *rays)
 {
 	float	angle_diff;
 
@@ -64,23 +82,4 @@ void	ft_cast_rays(t_game_essentials *game, t_rays *rays)
 	ft_draw_ray(game, rays);
 	angle_diff = cos(game->player->angle - rays->angle);
 	rays->distance *= angle_diff;
-}
-
-void	ft_ray_cast(t_game_essentials *game)
-{
-	int		x;
-	float	angle;
-	t_rays	rays;
-
-	ft_bzero(&rays, sizeof(t_rays));
-	x = 0;
-	angle = game->player->angle - RAD * 30;
-	while (x < WIDTH)
-	{
-		rays.angle = angle;
-		ft_cast_rays(game, &rays);
-		ft_draw_wall(game, &rays, x);
-		angle += STEP;
-		x++;
-	}
 }

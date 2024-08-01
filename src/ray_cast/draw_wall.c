@@ -12,6 +12,33 @@
 
 #include "cub3d.h"
 
+static uint32_t	get_rgb(mlx_texture_t *texture, int x, int y);
+static void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
+		t_game_essentials *game);
+
+void	ft_draw_wall(t_game_essentials *game, t_rays *ray, int x)
+{
+	t_wall			wall;
+	mlx_texture_t	*texture;
+
+	texture = NULL;
+	wall.height = (game->map->block_size * (WIDTH * 0.5)) / ray->distance;
+	wall.y = x;
+	if (ray->axis == HORIZONTAL && ft_is_north(ray->angle))
+		texture = game->textures[NORTH];
+	else if (ray->axis == HORIZONTAL && ft_is_south(ray->angle))
+		texture = game->textures[SOUTH];
+	else if (ray->axis == VERTICAL && ft_is_east(ray->angle))
+		texture = game->textures[EAST];
+	else if (ray->axis == VERTICAL && ft_is_west(ray->angle))
+		texture = game->textures[WEST];
+	if (ray->axis == HORIZONTAL)
+		wall.x = (int)(ray->x * game->map->block_size / 4) % texture->width;
+	else
+		wall.x = (int)(ray->y * game->map->block_size / 4) % texture->width;
+	ft_put_texture(game->walls, wall, texture, game);
+}
+
 static uint32_t	get_rgb(mlx_texture_t *texture, int x, int y)
 {
 	uint8_t	*rgb;
@@ -20,7 +47,7 @@ static uint32_t	get_rgb(mlx_texture_t *texture, int x, int y)
 	return (rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | rgb[3]);
 }
 
-void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
+static void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 		t_game_essentials *game)
 {
 	double	increase_factor;
@@ -47,25 +74,4 @@ void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
 	}
 }
 
-void	ft_draw_wall(t_game_essentials *game, t_rays *ray, int x)
-{
-	t_wall			wall;
-	mlx_texture_t	*texture;
 
-	texture = NULL;
-	wall.height = (game->map->block_size * (WIDTH * 0.5)) / ray->distance;
-	wall.y = x;
-	if (ray->axis == HORIZONTAL && ft_is_north(ray->angle))
-		texture = game->textures[NORTH];
-	else if (ray->axis == HORIZONTAL && ft_is_south(ray->angle))
-		texture = game->textures[SOUTH];
-	else if (ray->axis == VERTICAL && ft_is_east(ray->angle))
-		texture = game->textures[EAST];
-	else if (ray->axis == VERTICAL && ft_is_west(ray->angle))
-		texture = game->textures[WEST];
-	if (ray->axis == HORIZONTAL)
-		wall.x = (int)(ray->x * game->map->block_size / 4) % texture->width;
-	else
-		wall.x = (int)(ray->y * game->map->block_size / 4) % texture->width;
-	ft_put_texture(game->walls, wall, texture, game);
-}
