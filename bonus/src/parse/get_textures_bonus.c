@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_textures.c                                     :+:      :+:    :+:   */
+/*   get_textures_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 02:03:38 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 02:03:39 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:07 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	get_texture(t_game_essentials *game, char *line, char **dest_to_put)
 {

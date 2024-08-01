@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line_utils.c                                  :+:      :+:    :+:   */
+/*   draw_line_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:09:45 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 02:34:52 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:31:57 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color)
 {

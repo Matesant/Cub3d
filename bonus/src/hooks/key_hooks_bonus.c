@@ -6,11 +6,11 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:36:49 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/01 16:11:42 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:43:33 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	calculate_coordinates(t_game_essentials *game, int key, int *mapX,
 		int *mapY)

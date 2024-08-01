@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rays_utils.c                                       :+:      :+:    :+:   */
+/*   rays_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/01 15:07:10 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:27 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static float	ft_normalize_angle(float angle);
 static void		ft_get_ray_distance(t_game_essentials *game, t_rays *rays);

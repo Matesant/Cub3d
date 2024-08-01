@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cardinal_direction.c                           :+:      :+:    :+:   */
+/*   get_cardinal_direction_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:33:48 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 19:24:08 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:21 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 t_bool	ft_is_south(float angle)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_matrice.c                                  :+:      :+:    :+:   */
+/*   get_map_matrice_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:25:19 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 02:00:53 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:03 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void		crop_map(t_game_essentials *game, char **raw_data);
 static t_bool	is_open(t_game_essentials *game, char **matrice, int line,

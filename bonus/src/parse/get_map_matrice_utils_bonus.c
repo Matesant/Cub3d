@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_matrice_utils.c                            :+:      :+:    :+:   */
+/*   get_map_matrice_utils_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:27:58 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 01:37:47 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:05 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	get_matrice_dimensions(t_map *map)
 {

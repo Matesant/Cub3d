@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertical_rays.c                                    :+:      :+:    :+:   */
+/*   vertical_rays_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:30:55 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/01 15:07:52 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:29 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *game);
 static void	ft_set_if_angle_is_looking_right(t_rays *ray,

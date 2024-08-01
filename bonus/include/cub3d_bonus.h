@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/01 15:56:48 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:41:09 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
-# include "./libs/MLX42/include/MLX42/MLX42.h"
-# include "./libs/libft/libft.h"
+# include "../../libs/MLX42/include/MLX42/MLX42.h"
+# include "../../libs/libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -28,7 +28,9 @@
 # define KEY_S MLX_KEY_S
 # define KEY_D MLX_KEY_D
 # define HEIGHT 720
+# define HEIGHT2 360
 # define WIDTH 1080
+# define WIDTH2 540
 # define MOVE_SPEED 3.0
 # define FOV 0
 # define PI 3.14159265359
@@ -199,6 +201,7 @@ void				ft_move_d(t_game_essentials *game);
 void				ft_move_a(t_game_essentials *game);
 void				ft_move_s(t_game_essentials *game);
 void				ft_move_w(t_game_essentials *game);
+void				mouse_hook(double x, double y, void *param);
 /*-----------------------------------------------*/
 
 /*----------------------RAYCAST------------------*/

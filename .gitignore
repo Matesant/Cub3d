@@ -2,6 +2,7 @@ bin
 build
 *.o
 cub3d
+cub3d_bonus
 obj
 *.a
 libftprintf.a

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_colors.c                                       :+:      :+:    :+:   */
+/*   get_colors_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 01:43:17 by almarcos          #+#    #+#             */
-/*   Updated: 2024/07/31 02:25:09 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:18:01 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static uint32_t	get_rgb(char **rgb);
 static t_bool	is_color(char *line);
