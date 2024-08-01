@@ -6,15 +6,15 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/08/01 15:56:48 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:58:03 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "./libs/MLX42/include/MLX42/MLX42.h"
-# include "./libs/libft/libft.h"
+# include "../../libs/MLX42/include/MLX42/MLX42.h"
+# include "../../libs/libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>

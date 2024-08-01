@@ -1,9 +1,10 @@
 CC          := cc
 NAME        := cub3d
+NAME_BONUS  := cub3d_bonus
 CFLAGS      := -Wall -Werror -Wextra -O0 -g3
 MLX         := ./libs/MLX42/build/libmlx42.a
 BIN         := ./bin/
-INCLUDES    := -I./include -I./libs/MLX42/include
+INCLUDES    := -I./mandatory/include -I./libs/MLX42/include
 MLX_LIBS        := $(MLX) -ldl -lglfw -pthread -lm
 PRINTF      := ./libs/libft/Printf/libftprintf.a
 LIBFT       := ./libs/libft/libft.a
@@ -13,7 +14,16 @@ SOURCE      := main.c parse.c utils.c get_textures.c get_colors.c \
 				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
 				load_textures.c get_cardinal_direction.c key_hooks_utils.c movement_keys.c draw_wall.c \
 				get_map_matrice_utils.c replace_tabs.c
+
+SOURCE_BONUS      := main.c parse.c utils.c get_textures.c get_colors.c \
+				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c inits.c \
+				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
+				load_textures.c get_cardinal_direction.c key_hooks_utils.c movement_keys.c draw_wall.c \
+				get_map_matrice_utils.c replace_tabs.c
+
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
+
+OBJECTS_BONUS     := $(addprefix $(BIN),$(SOURCE_BONUS:.c=.o))
 
 BLUE        := \033[1;34m
 RED         := \033[0;31m
@@ -39,49 +49,49 @@ $(PRINTF):
 $(BIN):
 	@mkdir -p $(BIN)
 
-$(BIN)%.o: ./src/%.c
+$(BIN)%.o: ./mandatory/src/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/verifications/%.c
+$(BIN)%.o: ./mandatory/src/verifications/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/parse/%.c
+$(BIN)%.o: ./mandatory/src/parse/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/hooks/%.c
+$(BIN)%.o: ./mandatory/src/hooks/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/image/%.c
+$(BIN)%.o: ./mandatory/src/image/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/draw_line/%.c
+$(BIN)%.o: ./mandatory/src/draw_line/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/inits/%.c
+$(BIN)%.o: ./mandatory/src/inits/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/ray_cast/%.c
+$(BIN)%.o: ./mandatory/src/ray_cast/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
@@ -96,8 +106,67 @@ $(NAME): $(OBJECTS)
 	@printf "$(GREEN)--$(NAME) compiled!-$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 
+$(BIN)%.o: ./bonus/src/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/verifications/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/parse/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/hooks/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/image/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/draw_line/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/inits/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(BIN)%.o: ./bonus/src/ray_cast/%.c
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $<...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(NAME_BONUS): $(OBJECTS_BONUS)
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(BLUE)Compiling $(NAME_BONUS)...$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(42LIBS) $(MLX_LIBS) -o $(NAME_BONUS)
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+	@printf "$(GREEN)--$(NAME_BONUS) compiled!-$(END)\n"
+	@printf "$(BLUE)-----------------------------------------------$(END)\n"
+
 $(MLX):
 	@cmake ./libs/MLX42/ -B ./libs/MLX42/build/ && make -C ./libs/MLX42/build -j4
+
+bonus: $(LIBFT) $(PRINTF) $(MLX) $(BIN) $(NAME_BONUS)
 
 clean:
 	@printf "$(RED)Cleaning...$(END)\n"
@@ -111,6 +180,7 @@ fclean: clean
 	@make -C ./libs/libft/Printf --no-print-directory fclean
 	@make -C ./libs/libft --no-print-directory fclean
 	@rm -rf $(NAME)
+	@rm -rf $(NAME_BONUS)
 	@printf "$(GREEN)All cleaned!$(END)\n"
 
 val:
