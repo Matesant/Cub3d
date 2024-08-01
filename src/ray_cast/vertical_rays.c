@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   vertical_rays.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matesant <matesant@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:30:55 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/26 19:24:23 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:07:52 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *game);
-static void	ft_set_if_angle_is_looking_right(t_rays *ray, t_game_essentials *game,
-		float n_tan);
-static void	ft_set_if_angle_is_looking_left(t_rays *ray, t_game_essentials *game,
-		float n_tan);
+static void	ft_set_if_angle_is_looking_right(t_rays *ray,
+				t_game_essentials *game, float n_tan);
+static void	ft_set_if_angle_is_looking_left(t_rays *ray,
+				t_game_essentials *game, float n_tan);
 
 void	ft_cast_2d_vertical_rays(t_game_essentials *game, t_rays *ray)
 {
@@ -36,8 +36,8 @@ void	ft_cast_2d_vertical_rays(t_game_essentials *game, t_rays *ray)
 	ft_set_ray_x_y_vertical(ray, game);
 }
 
-static void	ft_set_if_angle_is_looking_left(t_rays *ray, t_game_essentials *game,
-		float n_tan)
+static void	ft_set_if_angle_is_looking_left(t_rays *ray,
+		t_game_essentials *game, float n_tan)
 {
 	if (ray->angle > P2 && ray->angle < P3)
 	{
@@ -49,8 +49,8 @@ static void	ft_set_if_angle_is_looking_left(t_rays *ray, t_game_essentials *game
 	}
 }
 
-static void	ft_set_if_angle_is_looking_right(t_rays *ray, t_game_essentials *game,
-		float n_tan)
+static void	ft_set_if_angle_is_looking_right(t_rays *ray,
+		t_game_essentials *game, float n_tan)
 {
 	if (ray->angle < P2 || ray->angle > P3)
 	{
@@ -88,5 +88,3 @@ static void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *game)
 			break ;
 	}
 }
-
-

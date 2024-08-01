@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:39:08 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/31 01:22:59 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:15:45 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,30 +128,3 @@ void	ft_draw_map(t_game_essentials *game, int block_size)
 		i++;
 	}
 }
-
-// void	ft_draw_map(t_game_essentials *game, int block_size)
-// {
-// 	int line;
-// 	int	column;
-// 	char **matrice;
-
-// 	line = 0;
-// 	matrice = game->map->map_matrice;
-// 	while (matrice[line])
-// 	{
-// 		column = 0;
-// 		while (matrice[line][column])
-// 		{
-// 			game->map->block_x = (column * block_size);
-// 			game->map->block_y = (line * block_size);
-// 			if (matrice[line][column] == '1')
-// 				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
-// 					0x00FF00FF);
-// 			else
-// 				ft_put_rectangle(game, game->map->block_x, game->map->block_y,
-// 					0x000000FF);
-// 			column++;
-// 		}
-// 		line++;
-// 	}
-// }

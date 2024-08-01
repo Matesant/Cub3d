@@ -13,7 +13,6 @@ SOURCE      := main.c parse.c utils.c get_textures.c get_colors.c \
 				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
 				load_textures.c get_cardinal_direction.c key_hooks_utils.c movement_keys.c draw_wall.c \
 				get_map_matrice_utils.c replace_tabs.c
-
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 
 BLUE        := \033[1;34m
@@ -104,7 +103,7 @@ clean:
 	@printf "$(RED)Cleaning...$(END)\n"
 	@make -C ./libs/libft/Printf clean --no-print-directory
 	@make -C ./libs/libft clean --no-print-directory
-	#@rm -rf ./libs/MLX42/build
+	@rm -rf ./libs/MLX42/build
 	@rm -rf $(BIN)
 
 fclean: clean

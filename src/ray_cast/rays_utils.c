@@ -6,14 +6,14 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:31:54 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 14:55:40 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:07:10 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static float	ft_normalize_angle(float angle);
-static void	ft_get_ray_distance(t_game_essentials *game, t_rays *rays);
+static void		ft_get_ray_distance(t_game_essentials *game, t_rays *rays);
 
 void	ft_ray_cast(t_game_essentials *game)
 {
@@ -34,19 +34,18 @@ void	ft_ray_cast(t_game_essentials *game)
 	}
 }
 
-t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray)
+t_bool	fits_in_matrix(t_game_essentials *game, t_rays *ray)
 {
 	int	len;
 
 	ray->mapx = (int)((ray->x) / game->map->block_size);
 	ray->mapy = (int)((ray->y) / game->map->block_size);
-	if (ray->mapy >=0 && ray->mapy < game->map->height)
+	if (ray->mapy >= 0 && ray->mapy < game->map->height)
 		len = ft_strlen(game->map->map_matrice[ray->mapy]);
 	if (ray->mapy >= 0 && ray->mapy < game->map->height && ray->mapx >= 0
 		&& ray->mapx < len)
 		return (TRUE);
 	return (FALSE);
-
 }
 
 static float	ft_normalize_angle(float angle)

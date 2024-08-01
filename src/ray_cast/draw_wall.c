@@ -6,15 +6,15 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 04:01:23 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/30 15:01:08 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:06:45 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static uint32_t	get_rgb(mlx_texture_t *texture, int x, int y);
-static void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
-		t_game_essentials *game);
+static void		ft_put_texture(mlx_image_t *img, t_wall wall,
+					mlx_texture_t *texture, t_game_essentials *game);
 
 void	ft_draw_wall(t_game_essentials *game, t_rays *ray, int x)
 {
@@ -47,8 +47,8 @@ static uint32_t	get_rgb(mlx_texture_t *texture, int x, int y)
 	return (rgb[0] << 24 | rgb[1] << 16 | rgb[2] << 8 | rgb[3]);
 }
 
-static void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture,
-		t_game_essentials *game)
+static void	ft_put_texture(mlx_image_t *img, t_wall wall,
+		mlx_texture_t *texture, t_game_essentials *game)
 {
 	double	increase_factor;
 	double	texture_y;
@@ -73,5 +73,3 @@ static void	ft_put_texture(mlx_image_t *img, t_wall wall, mlx_texture_t *texture
 		y_minimum++;
 	}
 }
-
-

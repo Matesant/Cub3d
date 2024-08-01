@@ -6,16 +6,16 @@
 /*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:11:36 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/25 17:24:56 by matesant         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:06:26 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	ft_set_if_angle_is_looking_up(t_rays *ray, t_game_essentials *game,
-		float a_tan);
-static void	ft_set_if_angle_is_looking_down(t_rays *ray, t_game_essentials *game,
-		float a_tan);
+				float a_tan);
+static void	ft_set_if_angle_is_looking_down(t_rays *ray,
+				t_game_essentials *game, float a_tan);
 static void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game);
 
 void	ft_cast_2d_horizontal_rays(t_game_essentials *game, t_rays *ray)
@@ -48,8 +48,8 @@ static void	ft_set_if_angle_is_looking_up(t_rays *ray, t_game_essentials *game,
 	}
 }
 
-static void	ft_set_if_angle_is_looking_down(t_rays *ray, t_game_essentials *game,
-		float a_tan)
+static void	ft_set_if_angle_is_looking_down(t_rays *ray,
+		t_game_essentials *game, float a_tan)
 {
 	if (ray->angle < PI)
 	{
@@ -84,5 +84,3 @@ static void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game)
 			break ;
 	}
 }
-
-

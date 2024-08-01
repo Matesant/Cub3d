@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almarcos <almarcos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matesant <matesant@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 21:10:01 by matesant          #+#    #+#             */
-/*   Updated: 2024/07/31 03:33:01 by almarcos         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:16:24 by matesant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,34 +155,40 @@ typedef struct s_game_essentials
 	int				fd;
 }					t_game_essentials;
 
+/*-----------------------PARSE------------------*/
 void				validade_argv(t_game_essentials *game, int argc,
 						char **argv);
-void				check_movement_keys(void *param);
-void				render_next_frame(void *param);
-void				ft_put_player(mlx_image_t *img, t_player_pos *player);
-void				ft_draw_map(t_game_essentials *game, int block_size);
-void				ft_init_mlx(t_game_essentials *game);
+void				get_textures(t_game_essentials *game, char **raw_data);
+void				get_map_matrice(t_game_essentials *game, char **raw_data);
+void				replace_tabs_for_spaces(char *raw_data[]);
+void				get_matrice_dimensions(t_map *map);
+int					get_matrice_lines_count(char **raw_data);
+t_bool				is_map_matrice(char *line);
+t_bool				check_invalid_chars(char **map_matrice);
+t_bool				check_player_position(char **map_matrice);
+void				load_textures(t_game_essentials *game);
+void				get_colors(t_game_essentials *game, char **raw_data);
+void				parse(t_game_essentials *game, char *map);
+t_bool				is_wall(t_game_essentials *game, int key);
 void				ft_init_player(t_game_essentials *game);
+void				ft_init_mlx(t_game_essentials *game);
+/*-----------------------------------------------*/
+
+/*----------------------RENDER-------------------*/
+void				ft_draw_map(t_game_essentials *game, int block_size);
+void				ft_put_player(mlx_image_t *img, t_player_pos *player);
+void				render_next_frame(void *param);
 void				ft_draw_background(t_game_essentials *game,
 						mlx_image_t *img, int width, int height);
-void				ft_cast_2d_horizontal_rays(t_game_essentials *game,
-						t_rays *ray);
-void				ft_cast_2d_vertical_rays(t_game_essentials *game,
-						t_rays *ray);
-void				ft_ray_cast(t_game_essentials *game);
-void				parse(t_game_essentials *game, char *map);
-void				get_textures(t_game_essentials *game, char **raw_data);
-void				error(t_game_essentials *game, char *error_msg);
-void				get_colors(t_game_essentials *game, char **raw_data);
-void				get_map_matrice(t_game_essentials *game, char **raw_data);
-void				clear(t_game_essentials *game);
-void				draw_line(mlx_image_t *img, t_point start, t_point end);
-void				put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
 void				new_line_data(t_line_drawing_data *line_data, t_point start,
 						t_point end);
-t_bool				is_wall(t_game_essentials *game, int key);
+void				draw_line(mlx_image_t *img, t_point start, t_point end);
+void				put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
+/*-----------------------------------------------*/
+
+/*--------------------MOVEMENTS------------------*/
+void				check_movement_keys(void *param);
 void				toggle_minimap(mlx_key_data_t keydata, void *param);
-void				load_textures(t_game_essentials *game);
 t_bool				ft_is_north(float angle);
 t_bool				ft_is_south(float angle);
 t_bool				ft_is_west(float angle);
@@ -193,17 +199,23 @@ void				ft_move_d(t_game_essentials *game);
 void				ft_move_a(t_game_essentials *game);
 void				ft_move_s(t_game_essentials *game);
 void				ft_move_w(t_game_essentials *game);
+/*-----------------------------------------------*/
+
+/*----------------------RAYCAST------------------*/
+void				ft_cast_2d_horizontal_rays(t_game_essentials *game,
+						t_rays *ray);
+void				ft_cast_2d_vertical_rays(t_game_essentials *game,
+						t_rays *ray);
+void				ft_ray_cast(t_game_essentials *game);
+t_bool				fits_in_matrix(t_game_essentials *game, t_rays *ray);
 void				ft_draw_wall(t_game_essentials *game, t_rays *ray, int x);
 void				ft_draw_ray(t_game_essentials *game, t_rays *ray);
+/*-----------------------------------------------*/
+
+/*----------------------UTILS-------------------*/
+void				error(t_game_essentials *game, char *error_msg);
+void				clear(t_game_essentials *game);
 void				close_hook(void *param);
-
-void				get_matrice_dimensions(t_map *map);
-int					get_matrice_lines_count(char **raw_data);
-t_bool				is_map_matrice(char *line);
-t_bool				check_invalid_chars(char **map_matrice);
-void				replace_tabs_for_spaces(char *raw_data[]);
-t_bool				check_player_position(char **map_matrice);
-t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray);
-
+/*----------------------------------------------*/
 
 #endif
