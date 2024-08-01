@@ -25,10 +25,16 @@ void	free_map(t_map *map)
 
 void	clear(t_game_essentials *game)
 {
+	int		i;
+
+	i = 0;
 	if (game->map)
 		free_map(game->map);
 	if (game->player)
 		free(game->player);
+	i = -1;
+	while (++i < 4)
+		mlx_delete_texture(game->textures[i]);
 }
 
 void	error(t_game_essentials *game, char *error_msg)
