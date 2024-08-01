@@ -12,29 +12,11 @@
 
 #include "cub3d.h"
 
-void	ft_set_if_angle_is_looking_up(t_rays *ray, t_game_essentials *game,
-		float a_tan)
-{
-	if (ray->angle > PI)
-	{
-		ray->y = (((int)game->player->y >> 4) << 4) - 0.0001;
-		ray->x = (game->player->y - ray->y) * a_tan + game->player->x;
-		ray->yoffset = -game->map->block_size;
-		ray->xoffset = -ray->yoffset * a_tan;
-	}
-}
-
-void	ft_set_if_angle_is_looking_down(t_rays *ray, t_game_essentials *game,
-		float a_tan)
-{
-	if (ray->angle < PI)
-	{
-		ray->y = (((int)game->player->y >> 4) << 4) + game->map->block_size;
-		ray->x = (game->player->y - ray->y) * a_tan + game->player->x;
-		ray->yoffset = game->map->block_size;
-		ray->xoffset = -ray->yoffset * a_tan;
-	}
-}
+static void	ft_set_if_angle_is_looking_up(t_rays *ray, t_game_essentials *game,
+		float a_tan);
+static void	ft_set_if_angle_is_looking_down(t_rays *ray, t_game_essentials *game,
+		float a_tan);
+static void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game);
 
 void	ft_cast_2d_horizontal_rays(t_game_essentials *game, t_rays *ray)
 {
@@ -53,3 +35,54 @@ void	ft_cast_2d_horizontal_rays(t_game_essentials *game, t_rays *ray)
 	}
 	ft_set_ray_x_y_horizontal(ray, game);
 }
+
+static void	ft_set_if_angle_is_looking_up(t_rays *ray, t_game_essentials *game,
+		float a_tan)
+{
+	if (ray->angle > PI)
+	{
+		ray->y = (((int)game->player->y >> 4) << 4) - 0.0001;
+		ray->x = (game->player->y - ray->y) * a_tan + game->player->x;
+		ray->yoffset = -game->map->block_size;
+		ray->xoffset = -ray->yoffset * a_tan;
+	}
+}
+
+static void	ft_set_if_angle_is_looking_down(t_rays *ray, t_game_essentials *game,
+		float a_tan)
+{
+	if (ray->angle < PI)
+	{
+		ray->y = (((int)game->player->y >> 4) << 4) + game->map->block_size;
+		ray->x = (game->player->y - ray->y) * a_tan + game->player->x;
+		ray->yoffset = game->map->block_size;
+		ray->xoffset = -ray->yoffset * a_tan;
+	}
+}
+
+static void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game)
+{
+	while (1)
+	{
+		if (fits_in_matrix(game, ray))
+		{
+			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
+			{
+				ray->distance_x_horizontal = ray->x;
+				ray->distance_y_horizontal = ray->y;
+				ray->distance_horizontal = hypot(game->player->x - ray->x,
+						game->player->y - ray->y);
+				return ;
+			}
+			else
+			{
+				ray->x += ray->xoffset;
+				ray->y += ray->yoffset;
+			}
+		}
+		else
+			break ;
+	}
+}
+
+

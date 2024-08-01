@@ -82,7 +82,7 @@ $(BIN)%.o: ./src/inits/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(BIN)%.o: ./src/rays/%.c
+$(BIN)%.o: ./src/ray_cast/%.c
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
 	@printf "$(BLUE)Compiling $<...$(END)\n"
 	@printf "$(BLUE)-----------------------------------------------$(END)\n"
@@ -104,7 +104,7 @@ clean:
 	@printf "$(RED)Cleaning...$(END)\n"
 	@make -C ./libs/libft/Printf clean --no-print-directory
 	@make -C ./libs/libft clean --no-print-directory
-	@rm -rf ./libs/MLX42/build
+	#@rm -rf ./libs/MLX42/build
 	@rm -rf $(BIN)
 
 fclean: clean

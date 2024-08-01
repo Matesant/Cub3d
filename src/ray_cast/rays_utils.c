@@ -27,57 +27,9 @@ t_bool		fits_in_matrix(t_game_essentials *game, t_rays *ray)
 
 }
 
-void	ft_set_ray_x_y_horizontal(t_rays *ray, t_game_essentials *game)
-{
-	while (1)
-	{
-		if (fits_in_matrix(game, ray))
-		{
-			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
-			{
-				ray->distance_x_horizontal = ray->x;
-				ray->distance_y_horizontal = ray->y;
-				ray->distance_horizontal = hypot(game->player->x - ray->x,
-						game->player->y - ray->y);
-				return ;
-			}
-			else
-			{
-				ray->x += ray->xoffset;
-				ray->y += ray->yoffset;
-			}
-		}
-		else
-			break ;
-	}
-}
 
-void	ft_set_ray_x_y_vertical(t_rays *ray, t_game_essentials *game)
-{
-	while (1)
-	{
-		ray->mapx = (int)(ray->x) / game->map->block_size;
-		ray->mapy = (int)(ray->y) / game->map->block_size;
-		if (fits_in_matrix(game, ray))
-		{
-			if (game->map->map_matrice[ray->mapy][ray->mapx] == '1')
-			{
-				ray->distance_x_vertical = ray->x;
-				ray->distance_y_vertical = ray->y;
-				ray->distance_vertical = hypot(game->player->x - ray->x,
-						game->player->y - ray->y);
-				return ;
-			}
-			else
-			{
-				ray->x += ray->xoffset;
-				ray->y += ray->yoffset;
-			}
-		}
-		else
-			break ;
-	}
-}
+
+
 
 float	ft_normalize_angle(float angle)
 {
