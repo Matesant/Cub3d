@@ -15,11 +15,11 @@ SOURCE      := main.c parse.c utils.c get_textures.c get_colors.c \
 				load_textures.c get_cardinal_direction.c key_hooks_utils.c movement_keys.c draw_wall.c \
 				get_map_matrice_utils.c replace_tabs.c
 
-SOURCE_BONUS      := main.c parse.c utils.c get_textures.c get_colors.c \
-				get_map_matrice.c key_hooks.c loop_hooks.c draw_images.c inits.c \
-				draw_line.c draw_line_utils.c horizontal_rays.c vertical_rays.c rays_utils.c \
-				load_textures.c get_cardinal_direction.c key_hooks_utils.c movement_keys.c draw_wall.c \
-				get_map_matrice_utils.c replace_tabs.c
+SOURCE_BONUS := main_bonus.c parse_bonus.c utils_bonus.c get_textures_bonus.c get_colors_bonus.c \
+				get_map_matrice_bonus.c key_hooks_bonus.c loop_hooks_bonus.c draw_images_bonus.c inits_bonus.c \
+				draw_line_bonus.c draw_line_utils_bonus.c horizontal_rays_bonus.c vertical_rays_bonus.c rays_utils_bonus.c \
+				load_textures_bonus.c get_cardinal_direction_bonus.c key_hooks_utils_bonus.c movement_keys_bonus.c draw_wall_bonus.c \
+				get_map_matrice_utils_bonus.c replace_tabs_bonus.c
 
 OBJECTS     := $(addprefix $(BIN),$(SOURCE:.c=.o))
 
