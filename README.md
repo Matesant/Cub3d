@@ -57,7 +57,7 @@ $ make fclean
 - after compiling, run:
 
 ```shell
-$ ./cub3d assets/maps/minecrat.cub
+$ ./cub3d assets/maps/minecrat_lib.cub
 ```
 
 ### Maps
