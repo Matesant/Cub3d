@@ -66,7 +66,7 @@ You can create your oun maps!
 
 #### to do so, you will need:
 
--A Closed Environment: The program will generate an error if the map is open (i.e., if it lacks boundaries).
+- A Closed Environment: The program will generate an error if the map is open (i.e., if it lacks boundaries).
 - Textures: Provide textures of your choice. In the map archive, specify SO, NO, WE, and EA with the paths to PNG texture files.
 - Floor and Ceiling Colors: Define the colors for the floor and ceiling. Use F for the floor color and C for the ceiling color, with values ranging from 0 to 255.
 - Character Conventions: Adhere to the following map characters:
